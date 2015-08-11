@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/linearLayout"
+    android:orientation="vertical">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/system_list"
+        android:name="biz.no_ip.rastilion.ascenteval.SystemListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".SystemListActivity"
+        tools:layout="@android:layout/expandable_list_content"
+        android:layout_marginBottom="52dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_system"
+        android:id="@+id/addSys"
+        android:clickable="true"
+        android:enabled="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/searchSys"
+        android:layout_toStartOf="@+id/searchSys"
+        android:onClick="selectSystem" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_system"
+        android:id="@+id/searchSys"
+        android:clickable="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+</RelativeLayout>
+
