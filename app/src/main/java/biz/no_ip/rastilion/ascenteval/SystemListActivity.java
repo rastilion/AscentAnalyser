@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import biz.no_ip.rastilion.ascenteval.DumpImporter.DumpImport;
+
 
 /**
  * An activity representing a list of Systems. This activity
@@ -98,7 +100,6 @@ public class SystemListActivity extends FragmentActivity
     public synchronized void onActivityResult(final int requestCode,
                                                int resultCode, final Intent data) {
 
-        List<String> planets = new ArrayList<String>();
         if (resultCode == Activity.RESULT_OK) {
 
             if (requestCode == REQUEST_SAVE) {
@@ -107,23 +108,11 @@ public class SystemListActivity extends FragmentActivity
                 System.out.println("Loading...");
                 String filePath = data.getStringExtra(FileDialog.RESULT_PATH);
                 toImport = new File(filePath);
+                DumpImport.parseFile(toImport);
             }
 
         } else if (resultCode == Activity.RESULT_CANCELED) {
-            Toast.makeText(getBaseContext(),"No file loaded",Toast.LENGTH_LONG);
-        }
-        if (toImport != null) {
-            try {
-                BufferedReader br = new BufferedReader(new FileReader(toImport));
-                String line;
-                while ((line = br.readLine()) != null) {
-                    planets = Arrays.asList(line.split(";"));
-                }
-                br.close();
-            } catch (Exception e) {
-                System.out.println("Error: " + e);
-            }
-            Toast.makeText(getBaseContext(), planets.toString(), Toast.LENGTH_LONG);
+            Toast.makeText(getBaseContext(), "No file loaded", Toast.LENGTH_LONG).show();
         }
     }
 
