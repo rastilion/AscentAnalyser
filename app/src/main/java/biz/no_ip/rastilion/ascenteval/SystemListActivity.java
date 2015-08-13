@@ -117,9 +117,8 @@ public class SystemListActivity extends FragmentActivity
     }
 
     public void selectSystem(View view){
-        System.out.println("Click");
         Intent intent = new Intent(getBaseContext(), FileDialog.class);
-        intent.putExtra(FileDialog.START_PATH, "/sdcard1");
+        intent.putExtra(FileDialog.START_PATH, "/sdcard");
 
         //can user select directories or not
         intent.putExtra(FileDialog.CAN_SELECT_DIR, false);
