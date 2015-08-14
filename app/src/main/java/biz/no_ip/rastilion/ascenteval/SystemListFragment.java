@@ -1,13 +1,16 @@
 package biz.no_ip.rastilion.ascenteval;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
 import biz.no_ip.rastilion.ascenteval.dummy.DummyContent;
+import biz.no_ip.rastilion.ascenteval.helper.SQLHelper;
 
 /**
  * A list fragment representing a list of Systems. This fragment
@@ -49,6 +52,8 @@ public class SystemListFragment extends ListFragment {
         public void onItemSelected(String id);
     }
 
+    public Context ctx = this.getActivity();
+    SQLHelper hlp = new SQLHelper(ctx);
     /**
      * A dummy implementation of the {@link Callbacks} interface that does
      * nothing. Used only when this fragment is not attached to an activity.
@@ -71,11 +76,11 @@ public class SystemListFragment extends ListFragment {
         super.onCreate(savedInstanceState);
 
         // TODO: replace with a real list adapter.
-        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(
+        setListAdapter(new ArrayAdapter<Sys>(
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
-                DummyContent.ITEMS));
+                hlp.getAllSystems()));
     }
 
     @Override

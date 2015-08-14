@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Created by tgruetzmacher on 13.08.15.
+ * Planets template
  */
 public class Planet {
     private String name;

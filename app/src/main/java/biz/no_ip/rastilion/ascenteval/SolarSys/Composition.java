@@ -2,6 +2,7 @@ package biz.no_ip.rastilion.ascenteval.SolarSys;
 
 /**
  * Created by tgruetzmacher on 13.08.15.
+ * Planetary composition class
  */
 public class Composition {
     public Composition(int planetId, float al, float carb, float fe, float si, float ti, int geo, int grain, int fruit, int veg, int meat, int tob, int gems, int atmo) {

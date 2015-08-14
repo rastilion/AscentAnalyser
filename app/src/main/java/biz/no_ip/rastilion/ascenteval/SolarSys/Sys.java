@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Created by tgruetzmacher on 13.08.15.
+ * Planetary system class
  */
 public class Sys {
     private String Name;
