@@ -2,6 +2,7 @@ package biz.no_ip.rastilion.ascenteval;
 
 import android.app.Activity;
 import android.app.DownloadManager;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -20,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import biz.no_ip.rastilion.ascenteval.DumpImporter.DumpImport;
+import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
 
 
 /**
@@ -108,7 +110,9 @@ public class SystemListActivity extends FragmentActivity
                 System.out.println("Loading...");
                 String filePath = data.getStringExtra(FileDialog.RESULT_PATH);
                 toImport = new File(filePath);
-                DumpImport.parseFile(toImport);
+                List<Sys> systems = DumpImport.parseFile(toImport);
+                View list = findViewById(R.id.system_list);
+
             }
 
         } else if (resultCode == Activity.RESULT_CANCELED) {

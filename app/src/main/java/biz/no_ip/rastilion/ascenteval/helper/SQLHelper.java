@@ -133,9 +133,11 @@ public class SQLHelper extends SQLiteOpenHelper {
         values.put(KEY_PLANET_NAME, planet.getName()); // get title
 
         // 3. insert
-        db.insert(TABLE_PLANETS, // table
+        db.insert(
+                TABLE_PLANETS, // table
                 null, //nullColumnHack
-                values); // key/value -> keys = column names/ values = column values
+                values
+        ); // key/value -> keys = column names/ values = column values
 
         // 4. close
         db.close();
@@ -162,9 +164,11 @@ public class SQLHelper extends SQLiteOpenHelper {
         values.put(KEY_MATERIAL_NAME, "Gems");
 
         // 3. insert
-        db.insert(TABLE_MATERIALS, // table
+        db.insert(
+                TABLE_MATERIALS, // table
                 null, //nullColumnHack
-                values); // key/value -> keys = column names/ values = column values
+                values
+        ); // key/value -> keys = column names/ values = column values
 
         // 4. close
         db.close();
@@ -176,6 +180,7 @@ public class SQLHelper extends SQLiteOpenHelper {
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
+        values.put(KEY_COMPOSITION_PLANET, pid); // get system id
         values.put(KEY_COMPOSITION_PLANET, pid); // get system id
         //values.put(KEY_PLANET_NAME, planet.getName()); // get title
 
@@ -235,6 +240,13 @@ public class SQLHelper extends SQLiteOpenHelper {
         // return syss
         return syss;
     }
+/*
+    public Composition getComposition(int pid) {
+        Composition result;
+
+        return result;
+    }
+    */
 /*
     public sys getsys(int id){
 

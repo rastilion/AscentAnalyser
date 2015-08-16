@@ -5,6 +5,22 @@ package biz.no_ip.rastilion.ascenteval.SolarSys;
  * Planetary composition class
  */
 public class Composition {
+
+    private int planetId;
+    private float al;
+    private float carb;
+    private float fe;
+    private float si;
+    private float ti;
+    private int geo=0;
+    private int grain=0;
+    private int fruit=0;
+    private int veg=0;
+    private int meat=0;
+    private int tob=0;
+    private int gems=0;
+    private int atmo=0;
+
     public Composition(int planetId, float al, float carb, float fe, float si, float ti, int geo, int grain, int fruit, int veg, int meat, int tob, int gems, int atmo) {
         this.planetId = planetId;
         this.al = al;
@@ -22,20 +38,7 @@ public class Composition {
         this.atmo = atmo;
     }
 
-    private int planetId;
-    private float al;
-    private float carb;
-    private float fe;
-    private float si;
-    private float ti;
-    private int geo;
-    private int grain;
-    private int fruit;
-    private int veg;
-    private int meat;
-    private int tob;
-    private int gems;
-    private int atmo;
+    public Composition(){};
 
     public int getPlanetId() {
         return planetId;
