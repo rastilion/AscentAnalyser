@@ -1,11 +1,6 @@
 package biz.no_ip.rastilion.ascenteval.DumpImporter;
 
-import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.provider.Settings;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,16 +12,12 @@ import java.util.List;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Composition;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Planet;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
-import biz.no_ip.rastilion.ascenteval.helper.SQLHelper;
 
 /**
  * Created by tgruetzmacher on 03.08.15.
  * Import class for soilsampledump-<id>.txt files
  */
 public class DumpImport extends Application {
-//    private Context ctx = this.getApplicationContext();
-//    SQLHelper hlp = new SQLHelper(ctx);
-
     public static List<Sys> parseFile(File inFile) {
         List<String> result = new ArrayList<String>();
         List<String> planets = new ArrayList<String>();
@@ -38,16 +29,17 @@ public class DumpImport extends Application {
                 planets = Arrays.asList(line.split(";"));
             }
             br.close();
-            planets.set(0, planets.get(0).substring(3));
+            planets.set(0, planets.get(0).substring(2));
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
         for (String line : planets) {
             result.addAll(Arrays.asList(line.split("\\-")));
         }
-        for (int i = 0; i < result.size() - 1; i++) {
+        for (int i = 0; i < result.size(); i++) {
+            //System.out.println(i);
             if (i % 2 == 0) {
-                system.add(new ArrayList<String>(Arrays.asList(result.get(i).substring(0, result.get(i).indexOf(" ")).trim(), result.get(i).substring(result.get(i).indexOf(" ") + 1).trim())));
+                system.add(new ArrayList<String>(Arrays.asList(result.get(i).substring(0, result.get(i).indexOf(" ")), result.get(i).substring(result.get(i).indexOf(" ") + 1))));
             }
             else {
                 system.get(system.size() - 1).addAll(Arrays.asList(result.get(i).split(" |\\|")));
@@ -58,22 +50,21 @@ public class DumpImport extends Application {
     }
 
     private static List<Sys> BuildSys(ArrayList<ArrayList<String>> sys) {
-        String oldName = "";
+        String oldSysName = "";
         List<Sys> parsed = new ArrayList<>();
         Sys s = null;
         Planet p;
         for (ArrayList<String> l : sys) {
-            String name = l.get(0);
-            if (!name.equalsIgnoreCase(oldName)) {
-                oldName = name;
+            String sysName = l.get(0);
+            if (!oldSysName.equals(sysName)) {
+                oldSysName = sysName;
                 if (s!=null){
                     parsed.add(s);
                 }
-                s = new Sys(name);
+                s = new Sys(sysName);
             }
             if (s != null) {
-                int pid = s.getPlanets().size();
-                p = new Planet(l.get(1), pid);
+                p = new Planet(l.get(1));
                 Composition cmp =new Composition();
                 cmp.setAl(Float.parseFloat(l.get(3)));
                 cmp.setSi(Float.parseFloat(l.get(5)));

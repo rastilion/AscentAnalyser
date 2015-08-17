@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 
 import biz.no_ip.rastilion.ascenteval.DumpImporter.DumpImport;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
+import biz.no_ip.rastilion.ascenteval.dummy.DummyContent;
 
 
 /**
@@ -50,6 +51,7 @@ public class SystemListActivity extends FragmentActivity
     private boolean mTwoPane;
     public final int REQUEST_SAVE=1, REQUEST_LOAD=0;
     public File toImport=null;
+    List<Sys> systems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +101,7 @@ public class SystemListActivity extends FragmentActivity
             startActivity(detailIntent);
         }
     }
+
     public synchronized void onActivityResult(final int requestCode,
                                                int resultCode, final Intent data) {
 
@@ -110,9 +113,12 @@ public class SystemListActivity extends FragmentActivity
                 System.out.println("Loading...");
                 String filePath = data.getStringExtra(FileDialog.RESULT_PATH);
                 toImport = new File(filePath);
-                List<Sys> systems = DumpImport.parseFile(toImport);
-                View list = findViewById(R.id.system_list);
-
+                systems = DumpImport.parseFile(toImport);
+                DummyContent.resetMap();
+                for (int i =0 ; i < systems.size()-1;i++){
+                    DummyContent.addItem(new DummyContent.DummyItem(String.valueOf(i),systems.get(i)));
+                }
+                SystemListFragment.refreshList();
             }
 
         } else if (resultCode == Activity.RESULT_CANCELED) {

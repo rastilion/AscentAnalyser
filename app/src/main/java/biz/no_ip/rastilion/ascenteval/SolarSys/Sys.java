@@ -43,4 +43,7 @@ public class Sys {
     public void addPlanet(Planet p){
         planets.add(p);
     }
+    public int getPlanetCount(){
+        return planets.size();
+    }
 }

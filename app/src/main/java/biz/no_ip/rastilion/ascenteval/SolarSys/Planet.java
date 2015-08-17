@@ -1,7 +1,5 @@
 package biz.no_ip.rastilion.ascenteval.SolarSys;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by tgruetzmacher on 13.08.15.
@@ -9,12 +7,10 @@ import java.util.List;
  */
 public class Planet {
     private String name;
-    private int system;
     private Composition composition;
 
-    public Planet(String name, int system, Composition composition) {
+    public Planet(String name, Composition composition) {
         this.name = name;
-        this.system = system;
         this.composition = composition;
     }
 
@@ -26,14 +22,10 @@ public class Planet {
         this.composition = composition;
     }
 
-    public Planet(String name, int system) {
+    public Planet(String name) {
         this.name = name;
-        this.system = system;
     }
 
-    public void setSystem(int system) {
-        this.system = system;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -43,7 +35,4 @@ public class Planet {
         return name;
     }
 
-    public int getSystem() {
-        return system;
-    }
 }

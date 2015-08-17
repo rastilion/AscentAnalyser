@@ -1,9 +1,14 @@
 package biz.no_ip.rastilion.ascenteval.dummy;
 
+import android.widget.ListAdapter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import biz.no_ip.rastilion.ascenteval.SolarSys.Planet;
+import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
 
 /**
  * Helper class for providing sample content for user interfaces created by
@@ -23,16 +28,23 @@ public class DummyContent {
      */
     public static Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
 
+    public static ListAdapter adapt;
+
     static {
         // Add 3 sample items.
-        addItem(new DummyItem("1", "Item 1"));
-        addItem(new DummyItem("2", "Item 2"));
-        addItem(new DummyItem("3", "Item 3"));
+        Sys dummy = new Sys("Apollo");
+        dummy.addPlanet(new Planet("Dummy Planet"));
+        addItem(new DummyItem("1", dummy));
     }
 
-    private static void addItem(DummyItem item) {
+    public static void addItem(DummyItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
+    }
+
+    public static void resetMap(){
+        ITEMS.clear();
+        ITEM_MAP.clear();
     }
 
     /**
@@ -40,16 +52,16 @@ public class DummyContent {
      */
     public static class DummyItem {
         public String id;
-        public String content;
+        public Sys content;
 
-        public DummyItem(String id, String content) {
+        public DummyItem(String id, Sys content) {
             this.id = id;
             this.content = content;
         }
 
         @Override
         public String toString() {
-            return content;
+            return content.getName();
         }
     }
 }
