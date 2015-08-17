@@ -1,9 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp" android:baselineAligned="false"
-    android:divider="?android:attr/dividerHorizontal" android:orientation="horizontal"
-    android:showDividers="middle" tools:context=".SystemListActivity">
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            tools:context=".SystemListActivity">
 
     <!--
     This layout is a two-pane layout for the Systems
@@ -16,13 +16,38 @@
     For more on layout aliases, see:
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     -->
+    <LinearLayout android:orientation="vertical"
+        android:layout_weight="0.7"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+        <fragment android:id="@+id/system_list"
+              android:name="biz.no_ip.rastilion.ascenteval.SystemListFragment"
+              android:layout_height="match_parent"
+              android:layout_width="wrap_content"
+                  android:layout_weight="1"
+              tools:layout="@android:layout/list_content"
+                  android:layout_gravity="top"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:text="@string/add_system"
+            android:onClick="selectSystem"
+            android:layout_gravity="center"/>
 
-    <fragment android:id="@+id/system_list"
-        android:name="biz.no_ip.rastilion.ascenteval.SystemListFragment" android:layout_width="0dp"
-        android:layout_height="match_parent" android:layout_weight="1"
-        tools:layout="@android:layout/list_content" />
-
-    <FrameLayout android:id="@+id/system_detail_container" android:layout_width="0dp"
-        android:layout_height="match_parent" android:layout_weight="3" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical"
+        android:layout_weight="0.3"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+    <FrameLayout android:id="@+id/system_detail_container"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_margin="0px"
+                 android:layout_marginLeft="0px"
+                 android:layout_marginTop="0px"
+                 android:layout_marginRight="0px"
+                 android:layout_marginBottom="0px"/>
+    </LinearLayout>
 
 </LinearLayout>

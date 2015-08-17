@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Ascent System Evaluator</string>
     <string name="title_system_detail">System Detail</string>
-    <string name="add_system">System hinzufügen</string>
-    <string name="search_system">Systeme durchsuchen</string>
+    <string name="add_system">Add Systemdump</string>
+    <string name="search_system">Search Systems</string>
     <string name="location">Location</string>
     <string name="cant_read_folder">folder can\'t be read!</string>
     <string name="nnew">New</string>
