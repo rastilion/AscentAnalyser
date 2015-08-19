@@ -1,10 +1,12 @@
 package biz.no_ip.rastilion.ascenteval.SolarSys;
 
+import java.io.Serializable;
+
 /**
  * Created by tgruetzmacher on 13.08.15.
  * Planetary composition class
  */
-public class Composition {
+public class Composition implements Serializable {
 
     private int planetId;
     private float al;

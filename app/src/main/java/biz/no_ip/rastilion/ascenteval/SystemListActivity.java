@@ -3,6 +3,7 @@ package biz.no_ip.rastilion.ascenteval;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -57,6 +58,7 @@ public class SystemListActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_list);
+        StaticContext.setContext(getApplicationContext());
 
         if (findViewById(R.id.system_detail_container) != null) {
             // The detail container view will be present only in the
@@ -127,7 +129,7 @@ public class SystemListActivity extends FragmentActivity
     }
 
     public void selectSystem(View view){
-        Intent intent = new Intent(getBaseContext(), FileDialog.class);
+        Intent intent = new Intent(getApplicationContext(), FileDialog.class);
         intent.putExtra(FileDialog.START_PATH, "/sdcard");
 
         //can user select directories or not

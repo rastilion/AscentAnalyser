@@ -1,5 +1,6 @@
 package biz.no_ip.rastilion.ascenteval.SolarSys;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by tgruetzmacher on 13.08.15.
  * Planetary system class
  */
-public class Sys {
+public class Sys implements Serializable{
     private String Name;
     private List<Planet> planets= new ArrayList<>();
 

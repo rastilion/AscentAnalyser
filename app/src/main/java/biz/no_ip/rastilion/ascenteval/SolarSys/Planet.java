@@ -1,11 +1,13 @@
 package biz.no_ip.rastilion.ascenteval.SolarSys;
 
 
+import java.io.Serializable;
+
 /**
  * Created by tgruetzmacher on 13.08.15.
  * Planets template
  */
-public class Planet {
+public class Planet implements Serializable {
     private String name;
     private Composition composition;
 
