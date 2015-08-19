@@ -59,7 +59,19 @@ public class SystemListActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_list);
         StaticContext.setContext(getApplicationContext());
+        List<Sys> sysImport = new ArrayList<>();
+        try{
+            sysImport = (ArrayList) FileManipulator.getReadStream(getApplicationContext()).readObject();
+        }
+        catch (Exception e){
 
+        }
+        if (sysImport.size()>0){
+            DummyContent.resetMap();
+            for (int i =0 ; i < sysImport.size()-1;i++){
+                DummyContent.addItem(new DummyContent.DummyItem(String.valueOf(i),sysImport.get(i)));
+            }
+        }
         if (findViewById(R.id.system_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-large and
