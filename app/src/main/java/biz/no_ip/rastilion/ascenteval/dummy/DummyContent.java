@@ -34,12 +34,15 @@ public class DummyContent {
         // Add 3 sample items.
         Sys dummy = new Sys("Apollo");
         dummy.addPlanet(new Planet("Dummy Planet"));
-        addItem(new DummyItem("1", dummy));
+        addItem(new DummyItem(dummy.getName(), dummy));
     }
 
     public static void addItem(DummyItem item) {
-        ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
+        if(!ITEM_MAP.containsKey(item.id)) {
+            ITEMS.add(item);
+            ITEM_MAP.put(item.id, item);
+            System.out.println("New System: " + item.content.getName());
+        }
     }
 
     public static void resetMap(){

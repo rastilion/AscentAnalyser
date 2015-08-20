@@ -25,9 +25,10 @@ import biz.no_ip.rastilion.ascenteval.StaticContext;
  */
 public class DumpImport extends Application {
     static Context ctx = StaticContext.getCustomAppContext();
+    static ObjectInputStream ois = FileManipulator.getReadStream(ctx.getApplicationContext());
+    static ObjectOutputStream oos = FileManipulator.getWriteStream(ctx.getApplicationContext());
 
     public static List<Sys> parseFile(File inFile) {
-        ObjectOutputStream oos = FileManipulator.getWriteStream(ctx.getApplicationContext());
         List<String> result = new ArrayList<String>();
         List<String> planets = new ArrayList<String>();
         List<Sys> returnValue;
@@ -69,7 +70,6 @@ public class DumpImport extends Application {
 
     private static List<Sys> BuildSys(ArrayList<ArrayList<String>> sys) {
         boolean found = false;
-        ObjectInputStream ois = FileManipulator.getReadStream(ctx.getApplicationContext());
         String oldSysName = "";
         List<Sys> parsed = null;
 
@@ -97,7 +97,6 @@ public class DumpImport extends Application {
                     }
                 }
                 if(!found && s!=null){
-                    System.out.println("New System: " + s.getName());
                     parsed.add(s);
                 }
 
@@ -111,7 +110,7 @@ public class DumpImport extends Application {
             if (s != null) {
                 if (s.getPlanetCount()>0){
                     for (int i=0;i<s.getPlanetCount()-1;i++){
-                        if (s.getPlanet(i).getName().equals(l.get(i))){
+                        if (s.getPlanet(i).getName().equals(l.get(1))){
                             System.out.println("Planet vorhanden: " + s.getPlanet(i).getName());
                             break;
                         }

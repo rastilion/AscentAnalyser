@@ -69,7 +69,8 @@ public class SystemListActivity extends FragmentActivity
         if (sysImport.size()>0){
             DummyContent.resetMap();
             for (int i =0 ; i < sysImport.size()-1;i++){
-                DummyContent.addItem(new DummyContent.DummyItem(String.valueOf(i),sysImport.get(i)));
+                System.out.println(sysImport.get(i).getPlanetCount());
+                DummyContent.addItem(new DummyContent.DummyItem(sysImport.get(i).getName(),sysImport.get(i)));
             }
         }
         if (findViewById(R.id.system_detail_container) != null) {
@@ -128,9 +129,9 @@ public class SystemListActivity extends FragmentActivity
                 String filePath = data.getStringExtra(FileDialog.RESULT_PATH);
                 toImport = new File(filePath);
                 systems = DumpImport.parseFile(toImport);
-                DummyContent.resetMap();
+                if (DummyContent.ITEMS.size()<2) DummyContent.resetMap();
                 for (int i =0 ; i < systems.size()-1;i++){
-                    DummyContent.addItem(new DummyContent.DummyItem(String.valueOf(i),systems.get(i)));
+                    DummyContent.addItem(new DummyContent.DummyItem(systems.get(i).getName(),systems.get(i)));
                 }
                 SystemListFragment.refreshList();
             }
