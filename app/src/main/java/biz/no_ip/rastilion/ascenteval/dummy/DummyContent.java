@@ -41,13 +41,20 @@ public class DummyContent {
         if(!ITEM_MAP.containsKey(item.id)) {
             ITEMS.add(item);
             ITEM_MAP.put(item.id, item);
-            System.out.println("New System: " + item.content.getName());
         }
     }
 
     public static void resetMap(){
         ITEMS.clear();
         ITEM_MAP.clear();
+    }
+
+    public static List<Sys> getAllSystems(){
+        List<Sys> systemList = new ArrayList<>();
+        for (int i=0; i < ITEMS.size()-1;i++){
+            systemList.add(ITEMS.get(i).content);
+        }
+        return systemList;
     }
 
     /**

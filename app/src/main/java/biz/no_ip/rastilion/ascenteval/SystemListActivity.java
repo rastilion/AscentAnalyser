@@ -68,8 +68,7 @@ public class SystemListActivity extends FragmentActivity
         }
         if (sysImport.size()>0){
             DummyContent.resetMap();
-            for (int i =0 ; i < sysImport.size()-1;i++){
-                System.out.println(sysImport.get(i).getPlanetCount());
+            for (int i =0 ; i < sysImport.size();i++){
                 DummyContent.addItem(new DummyContent.DummyItem(sysImport.get(i).getName(),sysImport.get(i)));
             }
         }
@@ -121,16 +120,12 @@ public class SystemListActivity extends FragmentActivity
                                                int resultCode, final Intent data) {
 
         if (resultCode == Activity.RESULT_OK) {
-
-            if (requestCode == REQUEST_SAVE) {
-                System.out.println("Saving...");
-            } else if (requestCode == REQUEST_LOAD) {
-                System.out.println("Loading...");
+            if (requestCode == REQUEST_LOAD) {
                 String filePath = data.getStringExtra(FileDialog.RESULT_PATH);
                 toImport = new File(filePath);
                 systems = DumpImport.parseFile(toImport);
                 if (DummyContent.ITEMS.size()<2) DummyContent.resetMap();
-                for (int i =0 ; i < systems.size()-1;i++){
+                for (int i =0 ; i < systems.size();i++){
                     DummyContent.addItem(new DummyContent.DummyItem(systems.get(i).getName(),systems.get(i)));
                 }
                 SystemListFragment.refreshList();

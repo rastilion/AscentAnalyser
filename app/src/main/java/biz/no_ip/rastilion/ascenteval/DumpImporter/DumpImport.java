@@ -18,6 +18,7 @@ import biz.no_ip.rastilion.ascenteval.SolarSys.Composition;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Planet;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
 import biz.no_ip.rastilion.ascenteval.StaticContext;
+import biz.no_ip.rastilion.ascenteval.dummy.DummyContent;
 
 /**
  * Created by tgruetzmacher on 03.08.15.
@@ -63,7 +64,7 @@ public class DumpImport extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        FileManipulator.close();
+        //FileManipulator.close();
 
         return returnValue;
     }
@@ -71,52 +72,40 @@ public class DumpImport extends Application {
     private static List<Sys> BuildSys(ArrayList<ArrayList<String>> sys) {
         boolean found = false;
         String oldSysName = "";
-        List<Sys> parsed = null;
-
-        try {
-            parsed = (ArrayList<Sys>) ois.readObject();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (parsed == null){
-            parsed = new ArrayList<Sys>();
-        }
+        List<Sys> parsed = new ArrayList<Sys>();
         Sys s = null;
         Planet p;
+        System.out.println("Systemzahl: " + DummyContent.ITEMS.size());
+
+        try {
+            parsed = DummyContent.getAllSystems();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         for (ArrayList<String> l : sys) {
             String sysName = l.get(0);
-            if (!oldSysName.equals(sysName)) {
-                oldSysName = sysName;
-                if (s != null) {
-                    for (int i =0; i< parsed.size()-1;i++) {
-                        if (parsed.get(i).equals(s)) {
-                            found = true;
-                        }
-                    }
-                }
-                if(!found && s!=null){
-                    parsed.add(s);
-                }
 
-                s = new Sys(sysName);
-                for (int i=0;i<parsed.size()-1;i++){
-                    if (parsed.get(i).getName().equals(sysName)){
-                        s = parsed.get(i);
-                    }
+            s = new Sys(sysName);
+            for (int i=0;i<parsed.size();i++){
+                if (s.getName().equals(parsed.get(i).getName())){
+                    s = parsed.get(i);
+                    break;
                 }
             }
+            if (!oldSysName.equals(sysName)) {
+                oldSysName = sysName;
+            }
             if (s != null) {
-                if (s.getPlanetCount()>0){
-                    for (int i=0;i<s.getPlanetCount()-1;i++){
-                        if (s.getPlanet(i).getName().equals(l.get(1))){
-                            System.out.println("Planet vorhanden: " + s.getPlanet(i).getName());
+                boolean pfound = false;
+                if (s.getPlanetCount() > 0) {
+                    for (int i = 0; i < s.getPlanetCount(); i++) {
+                        if (l.get(1).equals(s.getPlanet(i).getName())) {
+                            pfound=true;
                             break;
                         }
                     }
                 }
-                else {
+                if(!pfound) {
                     p = new Planet(l.get(1));
                     if (l.size() == 21) {
                         Composition cmp = new Composition();
@@ -153,6 +142,7 @@ public class DumpImport extends Application {
                         p.setComposition(cmp);
                         s.addPlanet(p);
                     }
+                    parsed.add(s);
                 }
             }
         }
