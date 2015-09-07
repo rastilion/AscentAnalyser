@@ -17,6 +17,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -128,6 +130,12 @@ public class SystemListActivity extends FragmentActivity
                 for (int i =0 ; i < systems.size();i++){
                     DummyContent.addItem(new DummyContent.DummyItem(systems.get(i).getName(),systems.get(i)));
                 }
+                Collections.sort(DummyContent.ITEMS, new Comparator<DummyContent.DummyItem>() {
+                    @Override
+                    public int compare(DummyContent.DummyItem lhs, DummyContent.DummyItem rhs) {
+                        return lhs.content.getName().compareToIgnoreCase(rhs.content.getName());
+                    }
+                });
                 SystemListFragment.refreshList();
             }
 

@@ -41,7 +41,7 @@ public class DumpImport extends Application {
                 planets = Arrays.asList(line.split(";"));
             }
             br.close();
-            planets.set(0, planets.get(0).substring(3));
+            planets.set(0,planets.get(0).replaceAll("[^ -~]", ""));
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
