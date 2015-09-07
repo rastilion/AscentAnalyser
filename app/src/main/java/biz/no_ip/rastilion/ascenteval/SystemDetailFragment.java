@@ -2,6 +2,7 @@ package biz.no_ip.rastilion.ascenteval;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,26 +55,26 @@ public class SystemDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            String text = mItem.content.getName()+"\n\nPlanets:\n";
+            String text = mItem.content.getName()+"<br /><br />Planets:<br />";
             for (Planet p : mItem.content.getPlanets()){
-                text+=p.getName()+"\n\n";
-                text+="\tStatistics:\n";
-                text+="\tGeo: "+p.getComposition().getGeo()+"\n";
-                text+="\tHas Atmo "+(p.getComposition().getAtmo()==1?"Yes":"No")+"\n";
-                text+="\tAlu: "+p.getComposition().getAl()* 100+"%\n";
-                text+="\tCarb: "+p.getComposition().getCarb() *100+"%\n";
-                text+="\tIron: "+p.getComposition().getFe()*100+"%\n";
-                text+="\tSil: "+p.getComposition().getSi() *100+"%\n";
-                text+="\tTita: "+p.getComposition().getTi()*100+"%\n";
-                text+="\tHas Gems "+(p.getComposition().getGems()==1?"Yes":"No")+"\n";
-                text+="\tFertilities\n";
-                text+="\tGrain: "+(p.getComposition().getGrain()==0?"None":(p.getComposition().getGrain()==1?"Poor":"Fertile"))+"\n";
-                text+="\tFruit: "+(p.getComposition().getFruit()==0?"None":(p.getComposition().getFruit()==1?"Poor":"Fertile"))+"\n";
-                text+="\tVegetables: "+(p.getComposition().getVeg()==0?"None":(p.getComposition().getVeg()==1?"Poor":"Fertile"))+"\n";
-                text+="\tMeat: "+(p.getComposition().getMeat()==0?"None":(p.getComposition().getMeat()==1?"Poor":"Fertile"))+"\n";
-                text+="\tTobacco: "+(p.getComposition().getTob()==0?"None":(p.getComposition().getTob()==1?"Poor":"Fertile"))+"\n\n\n";
+                text+=p.getName()+"<br /><br />";
+                text+="\tStatistics:<br />";
+                text+="\tGeo: "+(p.getComposition().getGeo()>3?"<font color='#00d600'>"+p.getComposition().getGeo()+"</font>":"<font color='#EE0000'>"+p.getComposition().getGeo()+"</font>")+"<br />";
+                text+="\tHas Atmo "+(p.getComposition().getAtmo()==1?"<font color='#00d600'>Yes</font>":"<font color='#EE0000'>No</font>")+"<br />";
+                text+="\tAlu: "+p.getComposition().getAl()* 100+"%<br />";
+                text+="\tCarb: "+p.getComposition().getCarb() *100+"%<br />";
+                text+="\tIron: "+p.getComposition().getFe()*100+"%<br />";
+                text+="\tSil: "+p.getComposition().getSi() *100+"%<br />";
+                text+="\tTita: "+p.getComposition().getTi()*100+"%<br />";
+                text+="\tHas Gems "+(p.getComposition().getGems()==1?"<font color='#00d600'>Yes</font>":"<font color='#EE0000'>No</font>")+"<br />";
+                text+="\tFertilities<br />";
+                text+="\tGrain: "+(p.getComposition().getGrain()==0?"<font color='#EE0000'>None</font>":(p.getComposition().getGrain()==1?"<font color='#ffff00'>Poor</font>":"<font color='#00d600'>Fertile</font>"))+"<br />";
+                text+="\tFruit: "+(p.getComposition().getFruit()==0?"<font color='#EE0000'>None</font>":(p.getComposition().getFruit()==1?"<font color='#ffff00'>Poor</font>":"<font color='#00d600'>Fertile</font>"))+"<br />";
+                text+="\tVegetables: "+(p.getComposition().getVeg()==0?"<font color='#EE0000'>None</font>":(p.getComposition().getVeg()==1?"<font color='#ffff00'>Poor</font>":"<font color='#00d600'>Fertile</font>"))+"<br />";
+                text+="\tMeat: "+(p.getComposition().getMeat()==0?"<font color='#EE0000'>None</font>":(p.getComposition().getMeat()==1?"<font color='#ffff00'>Poor</font>":"<font color='#00d600'>Fertile</font>"))+"<br />";
+                text+="\tTobacco: "+(p.getComposition().getTob()==0?"<font color='#EE0000'>None</font>":(p.getComposition().getTob()==1?"<font color='#ffff00'>Poor</font>":"<font color='#00d600'>Fertile</font>"))+"<br /><br /><br />";
             }
-            ((TextView) rootView.findViewById(R.id.system_detail)).setText(text);
+            ((TextView) rootView.findViewById(R.id.system_detail)).setText(Html.fromHtml(text));
         }
 
         return rootView;
