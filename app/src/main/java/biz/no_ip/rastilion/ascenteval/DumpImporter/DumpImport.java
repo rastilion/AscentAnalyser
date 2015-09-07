@@ -11,6 +11,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import biz.no_ip.rastilion.ascenteval.FileManipulator;
@@ -145,6 +147,23 @@ public class DumpImport extends Application {
                     parsed.add(s);
                 }
             }
+            Collections.sort(s.getPlanets(), new Comparator<Planet>() {
+                @Override
+                public int compare(Planet lhs, Planet rhs) {
+                    if (0==extractInt(lhs.getName())){
+                        return lhs.getName().compareToIgnoreCase(rhs.getName());
+                    }
+                    else {
+                        return extractInt(lhs.getName()) - extractInt(rhs.getName());
+                    }
+                }
+
+                int extractInt(String s) {
+                    String num = s.replaceAll("\\D", "");
+                    // return 0 if no digits found
+                    return num.isEmpty() ? 0 : Integer.parseInt(num);
+                }
+            });
         }
 
         return parsed;
