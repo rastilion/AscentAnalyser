@@ -74,6 +74,12 @@ public class SystemListActivity extends FragmentActivity
                 DummyContent.addItem(new DummyContent.DummyItem(sysImport.get(i).getName(),sysImport.get(i)));
             }
         }
+        Collections.sort(DummyContent.ITEMS, new Comparator<DummyContent.DummyItem>() {
+            @Override
+            public int compare(DummyContent.DummyItem lhs, DummyContent.DummyItem rhs) {
+                return lhs.content.getName().compareToIgnoreCase(rhs.content.getName());
+            }
+        });
         if (findViewById(R.id.system_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-large and

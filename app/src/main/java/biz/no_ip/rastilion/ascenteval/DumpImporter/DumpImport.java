@@ -62,7 +62,7 @@ public class DumpImport extends Application {
         returnValue = BuildSys(system);
         try {
             oos.writeObject(returnValue);
-            System.out.println("Written");
+            oos.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
