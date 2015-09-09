@@ -132,7 +132,7 @@ public class SystemListActivity extends FragmentActivity
                 String filePath = data.getStringExtra(FileDialog.RESULT_PATH);
                 toImport = new File(filePath);
                 systems = DumpImport.parseFile(toImport);
-                if (DummyContent.ITEMS.size()<2) DummyContent.resetMap();
+                if (DummyContent.ITEMS.get(0).content.getName().equalsIgnoreCase("Apollo")) DummyContent.resetMap();
                 for (int i =0 ; i < systems.size();i++){
                     DummyContent.addItem(new DummyContent.DummyItem(systems.get(i).getName(),systems.get(i)));
                 }

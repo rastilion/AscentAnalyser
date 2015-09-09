@@ -16,40 +16,27 @@ import java.io.ObjectOutputStream;
  */
 public class FileManipulator extends Application{
     private static String FILENAME="SysStore";
-    private static FileOutputStream fos;
     private static ObjectOutputStream oos;
-    private static FileInputStream fis;
     private static ObjectInputStream ois;
 
     public static ObjectOutputStream getWriteStream(Context ctx){
         try {
-            fos = ctx.openFileOutput(FILENAME,MODE_PRIVATE);
+            FileOutputStream fos = ctx.openFileOutput(FILENAME, MODE_PRIVATE);
             oos = new ObjectOutputStream(fos);
         }
         catch(Exception e){
-            Log.i("FNF","File not found");
+            Log.i("FNF","File not found for writing");
         }
         return oos;
     }
     public static ObjectInputStream getReadStream(Context ctx){
         try {
-            fis = ctx.openFileInput(FILENAME);
+            FileInputStream fis = ctx.openFileInput(FILENAME);
             ois = new ObjectInputStream(fis);
         }
         catch(Exception e){
-            Log.i("FNF","File not found");
+            Log.i("FNF", "File not found for reading");
         }
         return ois;
-    }
-
-    public static void close(){
-        try {
-            oos.close();
-            ois.close();
-            fos.close();
-            fis.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

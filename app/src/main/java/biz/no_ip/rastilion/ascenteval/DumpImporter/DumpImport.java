@@ -2,6 +2,7 @@ package biz.no_ip.rastilion.ascenteval.DumpImporter;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -28,10 +29,9 @@ import biz.no_ip.rastilion.ascenteval.dummy.DummyContent;
  */
 public class DumpImport extends Application {
     static Context ctx = StaticContext.getCustomAppContext();
-    static ObjectInputStream ois = FileManipulator.getReadStream(ctx.getApplicationContext());
-    static ObjectOutputStream oos = FileManipulator.getWriteStream(ctx.getApplicationContext());
 
     public static List<Sys> parseFile(File inFile) {
+        ObjectOutputStream oos = FileManipulator.getWriteStream(ctx.getApplicationContext());
         List<String> result = new ArrayList<String>();
         List<String> planets = new ArrayList<String>();
         List<Sys> returnValue;
@@ -63,21 +63,19 @@ public class DumpImport extends Application {
         try {
             oos.writeObject(returnValue);
             oos.flush();
-        } catch (IOException e) {
+            oos.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        //FileManipulator.close();
 
         return returnValue;
     }
 
     private static List<Sys> BuildSys(ArrayList<ArrayList<String>> sys) {
-        boolean found = false;
         String oldSysName = "";
         List<Sys> parsed = new ArrayList<Sys>();
         Sys s = null;
         Planet p;
-        System.out.println("Systemzahl: " + DummyContent.ITEMS.size());
 
         try {
             parsed = DummyContent.getAllSystems();
