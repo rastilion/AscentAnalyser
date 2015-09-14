@@ -95,11 +95,16 @@ public class DumpImport extends Application {
         }
         for (int i = 0; i < system.size(); i++){
             if (system.get(i).get(0).equals("")){
-                if (result.get(i).equals(system.get(i+1).get(0))){
-                    system.get(i).set(0, result.get(i));
+                try {
+                    if (result.get(i).equals(system.get(i + 1).get(0))) {
+                        system.get(i).set(0, result.get(i));
+                    } else if (result.get(i).equals(system.get(i - 1).get(0))) {
+                        system.get(i).set(0, result.get(i));
+                    }
                 }
-                else if (result.get(i).equals(system.get(i-1).get(0))){
-                    system.get(i).set(0, result.get(i));
+                catch (Exception e){
+                    system.get(i).set(0,system.get(i).get(1).substring(0,system.get(i).get(1).indexOf(" ",system.get(i).get(1).indexOf(" ")+1)));
+                    system.get(i).set(1,system.get(i).get(1).substring(system.get(i).get(1).indexOf(" ",system.get(i).get(1).indexOf(" ")+1)+1));
                 }
             }
         }
