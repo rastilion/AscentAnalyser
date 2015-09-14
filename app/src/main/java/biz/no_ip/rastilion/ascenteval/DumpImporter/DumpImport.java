@@ -60,7 +60,7 @@ public class DumpImport extends Application {
                     name = result.get(i).indexOf(" Moon");
                     sysinfo = result.get(i).indexOf(" Moon")+1;
                 }
-                else {
+                else if (result.get(i).split(" ").length>2){
                     if (result.size()>=3){
                         boolean found=false;
                         for (int j = 0; j < result.get(i).length(); j++){
@@ -80,6 +80,10 @@ public class DumpImport extends Application {
                             }
                         }
                     }
+                }
+                else {
+                    name = result.get(i).indexOf(" ");
+                    sysinfo = name+1;
                 }
                 sysName =result.get(i).substring(0, name);
                 sysComp = result.get(i).substring(sysinfo);
