@@ -52,11 +52,55 @@ public class DumpImport extends Application {
         }
         for (int i = 0; i < result.size(); i++) {
             if (i % 2 == 0) {
-                system.add(new ArrayList<String>(Arrays.asList(result.get(i).substring(0, result.get(i).indexOf(" ")), result.get(i).substring(result.get(i).indexOf(" ") + 1))));
+                int name = 0, sysinfo = 0;
+                String sysName;
+                String sysComp;
+                if (result.get(i).contains("Rocky Planet")){
+                    name = result.get(i).indexOf(" Rocky Planet");
+                    sysinfo = result.get(i).indexOf(" Rocky Planet")+1;
+                }
+                else if (result.get(i).contains("Moon")){
+                    name = result.get(i).indexOf(" Moon");
+                    sysinfo = result.get(i).indexOf(" Moon")+1;
+                }
+                else {
+                    if (result.size()>=3){
+                        boolean found=false;
+                        for (int j = 0; j < result.get(i).length(); j++){
+                            if ((i-2)>=0 && !found && result.get(i).charAt(0)==result.get(i-2).charAt(0)){
+                                if ((result.get(i).charAt(j) != result.get(i-2).charAt(j))) {
+                                    name = j-1;
+                                    sysinfo = j;
+                                    found = true;
+                                }
+                            }
+                            else if ((i+2)<result.size() && !found && result.get(i).charAt(0)==result.get(i+2).charAt(0)){
+                                if ((result.get(i).charAt(j) != result.get(i+2).charAt(j))) {
+                                    name = j-1;
+                                    sysinfo = j;
+                                    found = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                sysName =result.get(i).substring(0, name);
+                sysComp = result.get(i).substring(sysinfo);
+                system.add(new ArrayList<String>(Arrays.asList(sysName,sysComp)));
             }
             else {
                 system.get(system.size() - 1).addAll(Arrays.asList(result.get(i).split(" |\\|")));
                 system.get(system.size() - 1).remove(2);
+            }
+        }
+        for (int i = 0; i < system.size(); i++){
+            if (system.get(i).get(0).equals("")){
+                if (result.get(i).equals(system.get(i+1).get(0))){
+                    system.get(i).set(0, result.get(i));
+                }
+                else if (result.get(i).equals(system.get(i-1).get(0))){
+                    system.get(i).set(0, result.get(i));
+                }
             }
         }
         returnValue = BuildSys(system);
