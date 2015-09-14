@@ -1,4 +1,4 @@
-package biz.no_ip.rastilion.ascenteval.helper;
+package biz.no_ip.rastilion.ascenteval.Helper;
 
 import android.app.Application;
 import android.content.Context;

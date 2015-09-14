@@ -1,4 +1,4 @@
-package biz.no_ip.rastilion.ascenteval.helper;
+package biz.no_ip.rastilion.ascenteval.Helper;
 
 import android.app.Application;
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.util.Log;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 

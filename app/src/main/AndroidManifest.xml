@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".helper.FileDialog"
+            android:name=".Helper.FileDialog"
             android:label="@string/app_name" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

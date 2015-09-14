@@ -16,10 +16,10 @@ import java.util.List;
 import biz.no_ip.rastilion.ascenteval.DumpImporter.DumpImport;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
 import biz.no_ip.rastilion.ascenteval.dummy.DummyContent;
-import biz.no_ip.rastilion.ascenteval.helper.FileDialog;
-import biz.no_ip.rastilion.ascenteval.helper.FileManipulator;
-import biz.no_ip.rastilion.ascenteval.helper.SelectionMode;
-import biz.no_ip.rastilion.ascenteval.helper.StaticContext;
+import biz.no_ip.rastilion.ascenteval.Helper.FileDialog;
+import biz.no_ip.rastilion.ascenteval.Helper.FileManipulator;
+import biz.no_ip.rastilion.ascenteval.Helper.SelectionMode;
+import biz.no_ip.rastilion.ascenteval.Helper.StaticContext;
 
 
 /**
