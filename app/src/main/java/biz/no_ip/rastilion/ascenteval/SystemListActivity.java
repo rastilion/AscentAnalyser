@@ -1,31 +1,25 @@
 package biz.no_ip.rastilion.ascenteval;
 
 import android.app.Activity;
-import android.app.DownloadManager;
-import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.Console;
 import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import biz.no_ip.rastilion.ascenteval.DumpImporter.DumpImport;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
 import biz.no_ip.rastilion.ascenteval.dummy.DummyContent;
+import biz.no_ip.rastilion.ascenteval.helper.FileDialog;
+import biz.no_ip.rastilion.ascenteval.helper.FileManipulator;
+import biz.no_ip.rastilion.ascenteval.helper.SelectionMode;
+import biz.no_ip.rastilion.ascenteval.helper.StaticContext;
 
 
 /**

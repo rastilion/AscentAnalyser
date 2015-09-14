@@ -1,4 +1,4 @@
-package biz.no_ip.rastilion.ascenteval;
+package biz.no_ip.rastilion.ascenteval.helper;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
+
+import biz.no_ip.rastilion.ascenteval.R;
 
 /**
  * Activity para escolha de arquivos/diretorios.

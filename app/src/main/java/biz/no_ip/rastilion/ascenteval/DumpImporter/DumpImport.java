@@ -2,13 +2,10 @@ package biz.no_ip.rastilion.ascenteval.DumpImporter;
 
 import android.app.Application;
 import android.content.Context;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,11 +13,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import biz.no_ip.rastilion.ascenteval.FileManipulator;
+import biz.no_ip.rastilion.ascenteval.helper.FileManipulator;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Composition;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Planet;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
-import biz.no_ip.rastilion.ascenteval.StaticContext;
+import biz.no_ip.rastilion.ascenteval.helper.StaticContext;
 import biz.no_ip.rastilion.ascenteval.dummy.DummyContent;
 
 /**

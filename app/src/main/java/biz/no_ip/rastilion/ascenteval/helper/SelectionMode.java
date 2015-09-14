@@ -1,4 +1,4 @@
-package biz.no_ip.rastilion.ascenteval;
+package biz.no_ip.rastilion.ascenteval.helper;
 
 public class SelectionMode {
 	public static final int MODE_CREATE = 0;
