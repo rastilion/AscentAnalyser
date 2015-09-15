@@ -1,6 +1,5 @@
 package biz.no_ip.rastilion.ascenteval.Helper;
 
-import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
@@ -13,14 +12,14 @@ import java.io.ObjectOutputStream;
  * Created by tgruetzmacher on 19.08.15.
  * Filewriter for internal use
  */
-public class FileManipulator extends Application{
+public class FileManipulator{
     private static String FILENAME="SysStore";
     private static ObjectOutputStream oos;
     private static ObjectInputStream ois;
 
     public static ObjectOutputStream getWriteStream(Context ctx){
         try {
-            FileOutputStream fos = ctx.openFileOutput(FILENAME, MODE_PRIVATE);
+            FileOutputStream fos = ctx.openFileOutput(FILENAME, ctx.MODE_PRIVATE);
             oos = new ObjectOutputStream(fos);
         }
         catch(Exception e){

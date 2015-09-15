@@ -3,6 +3,7 @@ package biz.no_ip.rastilion.ascenteval;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Toast;
@@ -46,7 +47,7 @@ public class SystemListActivity extends FragmentActivity
      * device.
      */
     private boolean mTwoPane;
-    public final int REQUEST_SAVE=1, REQUEST_LOAD=0;
+    public final int REQUEST_LOAD=0;
     public File toImport=null;
     List<Sys> systems;
 
@@ -60,7 +61,7 @@ public class SystemListActivity extends FragmentActivity
             sysImport = (ArrayList) FileManipulator.getReadStream(getApplicationContext()).readObject();
         }
         catch (Exception e){
-
+            e.printStackTrace();
         }
         if (sysImport.size()>0){
             DummyContent.resetMap();
@@ -88,7 +89,6 @@ public class SystemListActivity extends FragmentActivity
                     .setActivateOnItemClick(true);
         }
 
-        // TODO: If exposing deep links into your app, handle intents here.
     }
 
     /**
@@ -146,7 +146,7 @@ public class SystemListActivity extends FragmentActivity
 
     public void selectSystem(View view){
         Intent intent = new Intent(getApplicationContext(), FileDialog.class);
-        intent.putExtra(FileDialog.START_PATH, "/sdcard");
+        intent.putExtra(FileDialog.START_PATH, Environment.getExternalStorageDirectory().getPath());
 
         //can user select directories or not
         intent.putExtra(FileDialog.CAN_SELECT_DIR, false);
