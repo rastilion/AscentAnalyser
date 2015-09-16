@@ -78,6 +78,17 @@ public class DumpImport extends Application {
                                     found = true;
                                 }
                             }
+                            else {
+                                String systemName = result.get(i);
+                                ArrayList<Integer> positions = new ArrayList<>();
+                                for (int c=0; c < systemName.length(); c++){
+                                    if (systemName.charAt(c) == ' '){
+                                        positions.add(c);
+                                    }
+                                }
+                                name = positions.get(positions.size()/2);
+                                sysinfo = name + 1;
+                            }
                         }
                     }
                 }
