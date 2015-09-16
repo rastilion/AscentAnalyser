@@ -60,19 +60,19 @@ public class SystemDetailFragment extends Fragment {
                 text+=p.getName()+"<br /><br />";
                 text+="\tStatistics:<br />";
                 text+="\tGeo: "+(p.getComposition().getGeo()>3?"<font color='#00d600'>"+p.getComposition().getGeo()+"</font>":"<font color='#EE0000'>"+p.getComposition().getGeo()+"</font>")+"<br />";
-                text+="\tHas Atmo "+(p.getComposition().getAtmo()==1?"<font color='#00d600'>Yes</font>":"<font color='#EE0000'>No</font>")+"<br />";
+                text+="\tHas Atmo "+(p.getComposition().getAtmo()==1?"<font color='#00d600'>Yes</font>":(p.getComposition().getAtmo()==0?"<font color='#EE0000'>No</font>":"<font color='#ffcc00'>Unknown</font>"))+"<br />";
                 text+="\tAlu: "+p.getComposition().getAl()* 100+"%<br />";
                 text+="\tCarb: "+p.getComposition().getCarb() *100+"%<br />";
                 text+="\tIron: "+p.getComposition().getFe()*100+"%<br />";
                 text+="\tSil: "+((p.getComposition().getSi() *100>10)?"<font color='#EE0000'>"+p.getComposition().getSi() *100+"</font>":((p.getComposition().getSi() *100>5)?"<font color='#ffcc00'>"+p.getComposition().getSi() *100+"</font>":"<font color='#00d600'>"+p.getComposition().getSi() *100+"</font>"))+"%<br />";
                 text+="\tTita: "+p.getComposition().getTi()*100+"%<br />";
-                text+="\tHas Gems "+(p.getComposition().getGems()==1?"<font color='#00d600'>Yes</font>":"<font color='#EE0000'>No</font>")+"<br />";
+                text+="\tHas Gems "+(p.getComposition().getGems()==1?"<font color='#00d600'>Yes</font>":(p.getComposition().getGems()==0?"<font color='#EE0000'>No</font>":"<font color='#ffcc00'>Unknown</font>"))+"<br />";
                 text+="\tFertilities<br />";
                 text+="\tGrain: "+(p.getComposition().getGrain()==0?"<font color='#EE0000'>None</font>":(p.getComposition().getGrain()==1?"<font color='#ffcc00'>Poor</font>":"<font color='#00d600'>Fertile</font>"))+"<br />";
                 text+="\tFruit: "+(p.getComposition().getFruit()==0?"<font color='#EE0000'>None</font>":(p.getComposition().getFruit()==1?"<font color='#ffcc00'>Poor</font>":"<font color='#00d600'>Fertile</font>"))+"<br />";
                 text+="\tVegetables: "+(p.getComposition().getVeg()==0?"<font color='#EE0000'>None</font>":(p.getComposition().getVeg()==1?"<font color='#ffcc00'>Poor</font>":"<font color='#00d600'>Fertile</font>"))+"<br />";
                 text+="\tMeat: "+(p.getComposition().getMeat()==0?"<font color='#EE0000'>None</font>":(p.getComposition().getMeat()==1?"<font color='#ffcc00'>Poor</font>":"<font color='#00d600'>Fertile</font>"))+"<br />";
-                text+="\tTobacco: "+(p.getComposition().getTob()==0?"<font color='#EE0000'>None</font>":(p.getComposition().getTob()==1?"<font color='#ffcc00'>Poor</font>":"<font color='#00d600'>Fertile</font>"))+"<br /><br /><br />";
+                text+="\tTobacco: "+(p.getComposition().getTob()==0?"<font color='#EE0000'>None</font>":(p.getComposition().getTob()==1?"<font color='#ffcc00'>Poor</font>":(p.getComposition().getTob()==2?"<font color='#00d600'>Fertile</font>":"<font color='#ffcc00'>Unknown</font>")))+"<br /><br /><br />";
             }
             ((TextView) rootView.findViewById(R.id.system_detail)).setText(Html.fromHtml(text));
         }
