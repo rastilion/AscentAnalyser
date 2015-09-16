@@ -157,60 +157,56 @@ public class DumpImport extends Application {
                 }
                 if(!pfound) {
                     p = new Planet(l.get(1));
-                    if (l.size() == 21) {
-                        Composition cmp = new Composition();
-                        cmp.setAl(Float.parseFloat(l.get(3)));
-                        cmp.setSi(Float.parseFloat(l.get(5)));
-                        cmp.setGeo(Integer.parseInt(l.get(7)));
-                        cmp.setCarb(Float.parseFloat(l.get(9)));
-                        cmp.setFe(Float.parseFloat(l.get(11)));
-                        cmp.setTi(Float.parseFloat(l.get(13)));
-                        cmp.setGrain(Integer.parseInt(l.get(14)));
-                        cmp.setFruit(Integer.parseInt(l.get(15)));
-                        cmp.setVeg(Integer.parseInt(l.get(16)));
-                        cmp.setMeat(Integer.parseInt(l.get(17)));
-                        cmp.setTob(Integer.parseInt(l.get(18)));
-                        cmp.setGems(Integer.parseInt(l.get(19)));
-                        cmp.setAtmo(Integer.parseInt(l.get(20)));
-                        p.setComposition(cmp);
-                        s.addPlanet(p);
+                    Composition cmp = new Composition();
+                    switch (l.size()){
+                        case 18:
+                            cmp.setAl(Float.parseFloat(l.get(3)));
+                            cmp.setSi(Float.parseFloat(l.get(5)));
+                            cmp.setGeo(Integer.parseInt(l.get(7)));
+                            cmp.setCarb(Float.parseFloat(l.get(9)));
+                            cmp.setFe(Float.parseFloat(l.get(11)));
+                            cmp.setTi(Float.parseFloat(l.get(13)));
+                            cmp.setGrain(Integer.parseInt(l.get(14)));
+                            cmp.setFruit(Integer.parseInt(l.get(15)));
+                            cmp.setVeg(Integer.parseInt(l.get(16)));
+                            cmp.setMeat(Integer.parseInt(l.get(17)));
+                            cmp.setTob(3);
+                            cmp.setGems(2);
+                            cmp.setAtmo(2);
+                            break;
+                        case 19:
+                            cmp.setAl(Float.parseFloat(l.get(3)));
+                            cmp.setSi(Float.parseFloat(l.get(5)));
+                            cmp.setGeo(Integer.parseInt(l.get(7)));
+                            cmp.setCarb(Float.parseFloat(l.get(9)));
+                            cmp.setFe(Float.parseFloat(l.get(11)));
+                            cmp.setTi(Float.parseFloat(l.get(13)));
+                            cmp.setGrain(Integer.parseInt(l.get(14)));
+                            cmp.setFruit(Integer.parseInt(l.get(15)));
+                            cmp.setVeg(Integer.parseInt(l.get(16)));
+                            cmp.setMeat(Integer.parseInt(l.get(17)));
+                            cmp.setTob(Integer.parseInt(l.get(18)));
+                            cmp.setGems(2);
+                            cmp.setAtmo(2);
+                            break;
+                        case 21:
+                            cmp.setAl(Float.parseFloat(l.get(3)));
+                            cmp.setSi(Float.parseFloat(l.get(5)));
+                            cmp.setGeo(Integer.parseInt(l.get(7)));
+                            cmp.setCarb(Float.parseFloat(l.get(9)));
+                            cmp.setFe(Float.parseFloat(l.get(11)));
+                            cmp.setTi(Float.parseFloat(l.get(13)));
+                            cmp.setGrain(Integer.parseInt(l.get(14)));
+                            cmp.setFruit(Integer.parseInt(l.get(15)));
+                            cmp.setVeg(Integer.parseInt(l.get(16)));
+                            cmp.setMeat(Integer.parseInt(l.get(17)));
+                            cmp.setTob(Integer.parseInt(l.get(18)));
+                            cmp.setGems(Integer.parseInt(l.get(19)));
+                            cmp.setAtmo(Integer.parseInt(l.get(20)));
+                            break;
                     }
-                    else if (l.size() == 18) {
-                        Composition cmp = new Composition();
-                        cmp.setAl(Float.parseFloat(l.get(3)));
-                        cmp.setSi(Float.parseFloat(l.get(5)));
-                        cmp.setGeo(Integer.parseInt(l.get(7)));
-                        cmp.setCarb(Float.parseFloat(l.get(9)));
-                        cmp.setFe(Float.parseFloat(l.get(11)));
-                        cmp.setTi(Float.parseFloat(l.get(13)));
-                        cmp.setGrain(Integer.parseInt(l.get(14)));
-                        cmp.setFruit(Integer.parseInt(l.get(15)));
-                        cmp.setVeg(Integer.parseInt(l.get(16)));
-                        cmp.setMeat(Integer.parseInt(l.get(17)));
-                        cmp.setTob(3);
-                        cmp.setGems(2);
-                        cmp.setAtmo(2);
-                        p.setComposition(cmp);
-                        s.addPlanet(p);
-                    }
-                    else if (l.size() == 19) {
-                        Composition cmp = new Composition();
-                        cmp.setAl(Float.parseFloat(l.get(3)));
-                        cmp.setSi(Float.parseFloat(l.get(5)));
-                        cmp.setGeo(Integer.parseInt(l.get(7)));
-                        cmp.setCarb(Float.parseFloat(l.get(9)));
-                        cmp.setFe(Float.parseFloat(l.get(11)));
-                        cmp.setTi(Float.parseFloat(l.get(13)));
-                        cmp.setGrain(Integer.parseInt(l.get(14)));
-                        cmp.setFruit(Integer.parseInt(l.get(15)));
-                        cmp.setVeg(Integer.parseInt(l.get(16)));
-                        cmp.setMeat(Integer.parseInt(l.get(17)));
-                        cmp.setTob(Integer.parseInt(l.get(18)));
-                        cmp.setGems(2);
-                        cmp.setAtmo(2);
-                        p.setComposition(cmp);
-                        s.addPlanet(p);
-                    }
+                    p.setComposition(cmp);
+                    s.addPlanet(p);
                     parsed.add(s);
                 }
             }
