@@ -158,7 +158,15 @@ public class DumpImport extends Application {
                 if(!pfound) {
                     p = new Planet(l.get(1));
                     Composition cmp = new Composition();
+                    cmp.setTob(3);
+                    cmp.setGems(2);
+                    cmp.setAtmo(2);
                     switch (l.size()){
+                        case 21:
+                            cmp.setGems(Integer.parseInt(l.get(19)));
+                            cmp.setAtmo(Integer.parseInt(l.get(20)));
+                        case 19:
+                            cmp.setTob(Integer.parseInt(l.get(18)));
                         case 18:
                             cmp.setAl(Float.parseFloat(l.get(3)));
                             cmp.setSi(Float.parseFloat(l.get(5)));
@@ -170,39 +178,6 @@ public class DumpImport extends Application {
                             cmp.setFruit(Integer.parseInt(l.get(15)));
                             cmp.setVeg(Integer.parseInt(l.get(16)));
                             cmp.setMeat(Integer.parseInt(l.get(17)));
-                            cmp.setTob(3);
-                            cmp.setGems(2);
-                            cmp.setAtmo(2);
-                            break;
-                        case 19:
-                            cmp.setAl(Float.parseFloat(l.get(3)));
-                            cmp.setSi(Float.parseFloat(l.get(5)));
-                            cmp.setGeo(Integer.parseInt(l.get(7)));
-                            cmp.setCarb(Float.parseFloat(l.get(9)));
-                            cmp.setFe(Float.parseFloat(l.get(11)));
-                            cmp.setTi(Float.parseFloat(l.get(13)));
-                            cmp.setGrain(Integer.parseInt(l.get(14)));
-                            cmp.setFruit(Integer.parseInt(l.get(15)));
-                            cmp.setVeg(Integer.parseInt(l.get(16)));
-                            cmp.setMeat(Integer.parseInt(l.get(17)));
-                            cmp.setTob(Integer.parseInt(l.get(18)));
-                            cmp.setGems(2);
-                            cmp.setAtmo(2);
-                            break;
-                        case 21:
-                            cmp.setAl(Float.parseFloat(l.get(3)));
-                            cmp.setSi(Float.parseFloat(l.get(5)));
-                            cmp.setGeo(Integer.parseInt(l.get(7)));
-                            cmp.setCarb(Float.parseFloat(l.get(9)));
-                            cmp.setFe(Float.parseFloat(l.get(11)));
-                            cmp.setTi(Float.parseFloat(l.get(13)));
-                            cmp.setGrain(Integer.parseInt(l.get(14)));
-                            cmp.setFruit(Integer.parseInt(l.get(15)));
-                            cmp.setVeg(Integer.parseInt(l.get(16)));
-                            cmp.setMeat(Integer.parseInt(l.get(17)));
-                            cmp.setTob(Integer.parseInt(l.get(18)));
-                            cmp.setGems(Integer.parseInt(l.get(19)));
-                            cmp.setAtmo(Integer.parseInt(l.get(20)));
                             break;
                     }
                     p.setComposition(cmp);
