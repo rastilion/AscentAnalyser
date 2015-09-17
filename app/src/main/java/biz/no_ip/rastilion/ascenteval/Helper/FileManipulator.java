@@ -17,6 +17,7 @@ public class FileManipulator{
     private static ObjectOutputStream oos;
     private static ObjectInputStream ois;
 
+    // get a writing stream to the data directory
     public static ObjectOutputStream getWriteStream(Context ctx){
         try {
             FileOutputStream fos = ctx.openFileOutput(FILENAME, ctx.MODE_PRIVATE);
@@ -27,6 +28,7 @@ public class FileManipulator{
         }
         return oos;
     }
+    // get a reading stream from the data directory
     public static ObjectInputStream getReadStream(Context ctx){
         try {
             FileInputStream fis = ctx.openFileInput(FILENAME);

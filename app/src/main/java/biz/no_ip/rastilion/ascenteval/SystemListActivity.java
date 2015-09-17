@@ -57,6 +57,7 @@ public class SystemListActivity extends FragmentActivity
         setContentView(R.layout.activity_system_list);
         StaticContext.setContext(getApplicationContext());
         List<Sys> sysImport = new ArrayList<>();
+        // load saved data at app start
         try{
             sysImport = (ArrayList) FileManipulator.getReadStream(getApplicationContext()).readObject();
         }
@@ -126,6 +127,7 @@ public class SystemListActivity extends FragmentActivity
                 String filePath = data.getStringExtra(FileDialog.RESULT_PATH);
                 toImport = new File(filePath);
                 systems = DumpImport.parseFile(toImport);
+                // Reset itemlist if dummyitem present
                 if (DummyContent.ITEMS.get(0).content.getName().equalsIgnoreCase("Apollo")) DummyContent.resetMap();
                 for (int i =0 ; i < systems.size();i++){
                     DummyContent.addItem(new DummyContent.DummyItem(systems.get(i).getName(),systems.get(i)));

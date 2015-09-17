@@ -5,6 +5,7 @@ import android.content.Context;
 
 /**
  * Created by tgruetzmacher on 19.08.15.
+ * provides the app context for static methods
  */
 public class StaticContext extends Application {
     private static Context ctx;

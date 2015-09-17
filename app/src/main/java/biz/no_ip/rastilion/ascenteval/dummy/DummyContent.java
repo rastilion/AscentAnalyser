@@ -31,12 +31,13 @@ public class DummyContent {
     public static ListAdapter adapt;
 
     static {
-        // Add 3 sample items.
+        // a sample item.
         Sys dummy = new Sys("Apollo");
         dummy.addPlanet(new Planet("Dummy Planet"));
         addItem(new DummyItem(dummy.getName(), dummy));
     }
 
+    // add an item to the list
     public static void addItem(DummyItem item) {
         if(!ITEM_MAP.containsKey(item.id)) {
             ITEMS.add(item);
@@ -44,11 +45,13 @@ public class DummyContent {
         }
     }
 
+    // reset list
     public static void resetMap(){
         ITEMS.clear();
         ITEM_MAP.clear();
     }
 
+    // return all items in the list as new list
     public static List<Sys> getAllSystems(){
         List<Sys> systemList = new ArrayList<>();
         for (int i=0; i < ITEMS.size()-1;i++){
