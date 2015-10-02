@@ -176,9 +176,11 @@ public class DumpImport extends Application {
             //Look for planet in existing data
             if (s != null) {
                 boolean pfound = false;
+                int planet =0;
                 if (s.getPlanetCount() > 0) {
                     for (int i = 0; i < s.getPlanetCount(); i++) {
                         if (l.get(1).equals(s.getPlanet(i).getName())) {
+                            planet =i;
                             pfound=true;
                             break;
                         }
@@ -220,6 +222,18 @@ public class DumpImport extends Application {
                     s.addPlanet(p);
                     //Add systems to list
                     parsed.add(s);
+                }
+                else {
+                    Planet pl = s.getPlanet(planet);
+                    if(pl.getComposition().getAtmo() == 2){
+                        if (l.size() == 21){
+                            pl.getComposition().setGems(Integer.parseInt(l.get(19)));
+                            pl.getComposition().setAtmo(Integer.parseInt(l.get(20)));
+                            if (pl.getComposition().getTob() == 3){
+                                pl.getComposition().setAtmo(Integer.parseInt(l.get(28)));
+                            }
+                        }
+                    }
                 }
             }
             //Sort Systems
