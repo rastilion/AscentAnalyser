@@ -230,7 +230,7 @@ public class DumpImport extends Application {
                             pl.getComposition().setGems(Integer.parseInt(l.get(19)));
                             pl.getComposition().setAtmo(Integer.parseInt(l.get(20)));
                             if (pl.getComposition().getTob() == 3){
-                                pl.getComposition().setAtmo(Integer.parseInt(l.get(28)));
+                                pl.getComposition().setTob(Integer.parseInt(l.get(18)));
                             }
                         }
                     }
