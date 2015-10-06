@@ -1,8 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/linearLayout"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#0dffffff">
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -12,34 +13,43 @@
         android:layout_height="wrap_content"
         tools:context=".SystemListActivity"
         tools:layout="@android:layout/expandable_list_content"
-              android:layout_alignParentEnd="false"
-              android:layout_above="@+id/addSys"/>
+        android:layout_gravity="top"
+        android:layout_weight="0.1" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_system"
-        android:id="@+id/addSys"
-        android:clickable="true"
-        android:enabled="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
-        android:layout_toLeftOf="@+id/searchSys"
-        android:layout_toStartOf="@+id/searchSys"
-        android:onClick="selectSystem"
-        android:layout_alignParentEnd="false"/>
+        android:weightSum="1"
+        android:layout_gravity="bottom">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/search_system"
-        android:id="@+id/searchSys"
-        android:clickable="false"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="false"
-        android:visibility="invisible"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_system"
+            android:id="@+id/addSys"
+            android:clickable="true"
+            android:enabled="true"
+            android:onClick="selectSystem"
+            android:textColor="#ffffff"
+            android:background="#47000000"
+            android:layout_margin="2dp"
+            android:layout_weight="0.5" />
 
-</RelativeLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_system"
+            android:id="@+id/searchSys"
+            android:clickable="true"
+            android:enabled="true"
+            android:textColor="#ffffff"
+            android:background="#47000000"
+            android:onClick="clear"
+            android:layout_margin="2dp"
+            android:layout_weight="0.5" />
+
+    </LinearLayout>
+
+</LinearLayout>
 

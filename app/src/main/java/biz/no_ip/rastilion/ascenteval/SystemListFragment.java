@@ -1,6 +1,7 @@
 package biz.no_ip.rastilion.ascenteval;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
@@ -80,6 +81,7 @@ public class SystemListFragment extends ListFragment {
                 android.R.id.text1,
                 DummyContent.ITEMS);
         adapt.setNotifyOnChange(true);
+
         DummyContent.adapt=adapt;
         // TODO: replace with a real list adapter.
         setListAdapter(adapt);
@@ -94,6 +96,7 @@ public class SystemListFragment extends ListFragment {
                 && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
             setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
         }
+
     }
 
     @Override
@@ -156,5 +159,9 @@ public class SystemListFragment extends ListFragment {
         }
 
         mActivatedPosition = position;
+    }
+
+    public void updateList(){
+        adapt.notifyDataSetChanged();
     }
 }

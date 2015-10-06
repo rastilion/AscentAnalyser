@@ -4,17 +4,24 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import biz.no_ip.rastilion.ascenteval.DumpImporter.DumpImport;
+import biz.no_ip.rastilion.ascenteval.SolarSys.Composition;
+import biz.no_ip.rastilion.ascenteval.SolarSys.Planet;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
 import biz.no_ip.rastilion.ascenteval.dummy.DummyContent;
 import biz.no_ip.rastilion.ascenteval.Helper.FileDialog;
@@ -106,6 +113,7 @@ public class SystemListActivity extends FragmentActivity
             arguments.putString(SystemDetailFragment.ARG_ITEM_ID, id);
             SystemDetailFragment fragment = new SystemDetailFragment();
             fragment.setArguments(arguments);
+
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.system_detail_container, fragment)
                     .commit();
@@ -161,5 +169,19 @@ public class SystemListActivity extends FragmentActivity
 
         startActivityForResult(intent, REQUEST_LOAD);
 
+    }
+    public void clear(View v){
+        DummyContent.resetMap();
+        Sys dummy = new Sys("Apollo");
+        dummy.addPlanet(new Planet("Dummy Planet"));
+        dummy.getPlanet(0).setComposition(new Composition(0, 0f, 0f, 0f, 0f, 0f, 0, 0, 0, 0, 0, 0, 0, 0));
+        try {
+            FileManipulator.getWriteStream(getApplicationContext()).writeObject("");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        DummyContent.addItem(new DummyContent.DummyItem(dummy.getName(),dummy));
+                ((SystemListFragment) getSupportFragmentManager()
+                        .findFragmentById(R.id.system_list)).updateList();
     }
 }

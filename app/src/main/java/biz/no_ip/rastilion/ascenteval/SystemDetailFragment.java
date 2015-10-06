@@ -1,5 +1,6 @@
 package biz.no_ip.rastilion.ascenteval;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -29,6 +30,7 @@ public class SystemDetailFragment extends Fragment {
      */
     private DummyContent.DummyItem mItem;
 
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -52,6 +54,9 @@ public class SystemDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_system_detail, container, false);
+        TextView tv = (TextView) rootView.findViewById(R.id.system_detail);
+        tv.setBackgroundColor(Color.DKGRAY);
+        tv.setTextColor(Color.WHITE);
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
@@ -74,7 +79,7 @@ public class SystemDetailFragment extends Fragment {
                 text+="\tMeat: "+(p.getComposition().getMeat()==0?"<font color='#EE0000'>None</font>":(p.getComposition().getMeat()==1?"<font color='#ffcc00'>Poor</font>":"<font color='#00d600'>Fertile</font>"))+"<br />";
                 text+="\tTobacco: "+(p.getComposition().getTob()==0?"<font color='#EE0000'>None</font>":(p.getComposition().getTob()==1?"<font color='#ffcc00'>Poor</font>":(p.getComposition().getTob()==2?"<font color='#00d600'>Fertile</font>":"<font color='#ffcc00'>Unknown</font>")))+"<br /><br /><br />";
             }
-            ((TextView) rootView.findViewById(R.id.system_detail)).setText(Html.fromHtml(text));
+            tv.setText(Html.fromHtml(text));
         }
 
         return rootView;
