@@ -7,7 +7,7 @@
 
     <style name="BlackFont" parent ="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:textColor">#CCCCCC</item>
-        <item name="android:background">#000000</item>
+        <item name="android:background">#ff444444</item>
         <item name="android:textSize">24sp</item>
         <item name="android:buttonStyle">@style/Widget.AppCompat.Button</item>
     </style>

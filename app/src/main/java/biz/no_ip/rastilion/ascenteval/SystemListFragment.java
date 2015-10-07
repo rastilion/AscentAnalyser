@@ -2,6 +2,7 @@ package biz.no_ip.rastilion.ascenteval;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
@@ -96,7 +97,8 @@ public class SystemListFragment extends ListFragment {
                 && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
             setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
         }
-
+        getListView().setDivider(new ColorDrawable(Color.BLACK));
+        getListView().setDividerHeight(2);
     }
 
     @Override
