@@ -78,7 +78,7 @@ public class SystemListFragment extends ListFragment {
 
         adapt = new ArrayAdapter<>(
                 getActivity(),
-                android.R.layout.simple_list_item_activated_1,
+                R.layout.centerlist,
                 android.R.id.text1,
                 DummyContent.ITEMS);
         adapt.setNotifyOnChange(true);

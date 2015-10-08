@@ -84,24 +84,24 @@ public class SystemDetailFragment extends Fragment {
                     Planet p = mItem.content.getPlanet(i);
                     List<String> data = new ArrayList<>();
                     groups.add(p.getName());
-                    data.add("\tStatistics:");
-                    data.add("\t\tGeologic rating:\t"+(p.getComposition().getGeo()>3?"<font color='#00d600'>"+p.getComposition().getGeo()+"</font>":"<font color='#EE0000'>"+p.getComposition().getGeo()+"</font>"));
-                    data.add("\t\tAtmosphere:\t\t"+(p.getComposition().getAtmo()==1?getString(R.string.present):(p.getComposition().getAtmo()==0?getString(R.string.none):getString(R.string.unknown))));
-                    data.add("\t\tGems:\t\t\t\t\t"+(p.getComposition().getGems()==1?getString(R.string.present):(p.getComposition().getGems()==0?getString(R.string.none):getString(R.string.unknown))));
+                    data.add("Statistics: ");
+                    data.add("Geologic rating: "+(p.getComposition().getGeo()>3?"<font color='#00d600'>"+p.getComposition().getGeo()+"</font>":"<font color='#EE0000'>"+p.getComposition().getGeo()+"</font>"));
+                    data.add("Atmosphere: "+(p.getComposition().getAtmo()==1?getString(R.string.present):(p.getComposition().getAtmo()==0?getString(R.string.none):getString(R.string.unknown))));
+                    data.add("Gems: "+(p.getComposition().getGems()==1?getString(R.string.present):(p.getComposition().getGems()==0?getString(R.string.none):getString(R.string.unknown))));
                     data.add("");
-                    data.add("\t\tComposition:");
-                    data.add("\t\tAl:\t\t\t\t\t\t"+p.getComposition().getAl()* 100 + "%");
-                    data.add("\t\tC :\t\t\t\t\t\t"+p.getComposition().getCarb() *100 + "%");
-                    data.add("\t\tFe:\t\t\t\t\t\t"+p.getComposition().getFe()*100 + "%");
-                    data.add("\t\tSi:\t\t\t\t\t\t\t"+((p.getComposition().getSi() *100>10)?"<font color='#EE0000'>"+p.getComposition().getSi() *100+"%</font>":((p.getComposition().getSi() *100>5)?"<font color='#ffcc00'>"+p.getComposition().getSi() *100+"%</font>":"<font color='#00d600'>"+p.getComposition().getSi() *100+"%</font>")));
-                    data.add("\t\tTi:\t\t\t\t\t\t\t"+p.getComposition().getTi()*100 + "%");
+                    data.add("Composition: ");
+                    data.add("Al: "+p.getComposition().getAl()* 100 + "%");
+                    data.add("C : "+p.getComposition().getCarb() *100 + "%");
+                    data.add("Fe: "+p.getComposition().getFe()*100 + "%");
+                    data.add("Si: "+((p.getComposition().getSi() *100>10)?"<font color='#EE0000'>"+p.getComposition().getSi() *100+"%</font>":((p.getComposition().getSi() *100>5)?"<font color='#ffcc00'>"+p.getComposition().getSi() *100+"%</font>":"<font color='#00d600'>"+p.getComposition().getSi() *100+"%</font>")));
+                    data.add("Ti: "+p.getComposition().getTi()*100 + "%");
                     data.add("");
-                    data.add("\t\tFertilities");
-                    data.add("\t\tGrain:\t\t\t\t\t"+(p.getComposition().getGrain()==0?getString(R.string.none):(p.getComposition().getGrain()==1?getString(R.string.poor):getString(R.string.fertile))));
-                    data.add("\t\tFruit:\t\t\t\t\t"+(p.getComposition().getFruit()==0?getString(R.string.none):(p.getComposition().getFruit()==1?getString(R.string.poor):getString(R.string.fertile))));
-                    data.add("\t\tVegetables:\t\t\t"+(p.getComposition().getVeg()==0?getString(R.string.none):(p.getComposition().getVeg()==1?getString(R.string.poor):getString(R.string.fertile))));
-                    data.add("\t\tMeat:\t\t\t\t\t"+(p.getComposition().getMeat()==0?getString(R.string.none):(p.getComposition().getMeat()==1?getString(R.string.poor):getString(R.string.fertile))));
-                    data.add("\t\tTobacco:\t\t\t\t"+(p.getComposition().getTob()==0?getString(R.string.none):(p.getComposition().getTob()==1?getString(R.string.poor):(p.getComposition().getTob()==2?getString(R.string.fertile):getString(R.string.unknown)))));
+                    data.add("Fertilities:");
+                    data.add("Grain: "+(p.getComposition().getGrain()==0?getString(R.string.none):(p.getComposition().getGrain()==1?getString(R.string.poor):getString(R.string.fertile))));
+                    data.add("Fruit: "+(p.getComposition().getFruit()==0?getString(R.string.none):(p.getComposition().getFruit()==1?getString(R.string.poor):getString(R.string.fertile))));
+                    data.add("Vegetables: "+(p.getComposition().getVeg()==0?getString(R.string.none):(p.getComposition().getVeg()==1?getString(R.string.poor):getString(R.string.fertile))));
+                    data.add("Meat: "+(p.getComposition().getMeat()==0?getString(R.string.none):(p.getComposition().getMeat()==1?getString(R.string.poor):getString(R.string.fertile))));
+                    data.add("Tobacco: "+(p.getComposition().getTob()==0?getString(R.string.none):(p.getComposition().getTob()==1?getString(R.string.poor):(p.getComposition().getTob()==2?getString(R.string.fertile):getString(R.string.unknown)))));
                     //data.add(text);
                     children.add(data);
                 }
@@ -147,6 +147,7 @@ public class SystemDetailFragment extends Fragment {
                 TextView textView = new TextView(SystemDetailFragment.this.getActivity());
                 textView.setPadding(0, 10, 0, 10);
                 textView.setTextSize(24);
+                textView.setGravity(Gravity.CENTER_HORIZONTAL);
                 textView.setTextColor(Color.parseColor("#CCCCCC"));
                 textView.setText(getGroup(i).toString());
                 return textView;
@@ -156,9 +157,8 @@ public class SystemDetailFragment extends Fragment {
             public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
                 TextView textView = new TextView(SystemDetailFragment.this.getActivity());
                 textView.setTextColor(Color.parseColor("#CCCCCC"));
-                textView.setTextSize(18);
-                textView.setMinWidth(300);
-                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                textView.setTextSize(14);
+                textView.setGravity(Gravity.CENTER_HORIZONTAL);
                 textView.setText(Html.fromHtml((String)getChild(i, i1)));
                 return textView;
             }

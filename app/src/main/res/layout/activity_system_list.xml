@@ -1,9 +1,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/linearLayout"
     android:orientation="vertical"
-    android:background="#0dffffff">
+    android:background="#0dffffff"
+    android:gravity="center"
+    android:weightSum="1">
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -12,9 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".SystemListActivity"
-        tools:layout="@android:layout/expandable_list_content"
-        android:layout_gravity="top"
-        android:layout_weight="0.1" />
+        tools:layout="@layout/centerlist"
+        android:layout_weight="1" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -36,7 +38,7 @@
             android:layout_margin="2dp"
             android:layout_weight="0.5"
             style="@style/AppTheme"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <Button
             android:layout_width="wrap_content"
@@ -51,7 +53,7 @@
             android:layout_margin="2dp"
             android:layout_weight="0.5"
             style="@style/AppTheme"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
