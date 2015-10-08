@@ -13,4 +13,9 @@
     <string name="no_data">No Data</string>
     <color name="gray">#ffff0000</color>
     <string name="err">Error</string>
+    <string name="none"><![CDATA[<font color=\'#EE0000\'>None</font>]]></string>
+    <string name="poor"><![CDATA[<font color=\'#ffcc00\'>Poor</font>]]></string>
+    <string name="fertile"><![CDATA[<font color=\'#00d600\'>Fertile</font>]]></string>
+    <string name="present"><![CDATA[<font color=\'#00d600\'>Present</font>]]></string>
+    <string name="unknown"><![CDATA[<font color=\'#ffcc00\'>Unknown</font>]]></string>
 </resources>
