@@ -7,11 +7,13 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -92,9 +94,10 @@ public class SystemListActivity extends FragmentActivity
 
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.
-            ((SystemListFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.system_list))
-                    .setActivateOnItemClick(true);
+            final SystemListFragment list = ((SystemListFragment) getSupportFragmentManager()
+                            .findFragmentById(R.id.system_list)
+            );
+            list.setActivateOnItemClick(true);
         }
 
     }
@@ -173,6 +176,7 @@ public class SystemListActivity extends FragmentActivity
     public void clear(View v){
         DummyContent.resetMap();
         Sys dummy = new Sys("Apollo");
+        dummy.setRoidField(BitSet.valueOf(new long[]{255}));
         dummy.addPlanet(new Planet("Dummy Planet"));
         dummy.getPlanet(0).setComposition(new Composition(0, 0f, 0f, 0f, 0f, 0f, 0, 0, 0, 0, 0, 0, 0, 0));
         try {

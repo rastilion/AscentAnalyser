@@ -2,11 +2,14 @@ package biz.no_ip.rastilion.ascenteval.dummy;
 
 import android.widget.ListAdapter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import biz.no_ip.rastilion.ascenteval.Helper.FileManipulator;
+import biz.no_ip.rastilion.ascenteval.Helper.StaticContext;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Planet;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
 
@@ -58,6 +61,14 @@ public class DummyContent {
             systemList.add(ITEMS.get(i).content);
         }
         return systemList;
+    }
+
+    public static void saveItems(){
+        try {
+            FileManipulator.getWriteStream(StaticContext.getCustomAppContext()).writeObject(getAllSystems());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

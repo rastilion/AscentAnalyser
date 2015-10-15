@@ -12,7 +12,8 @@ import java.util.List;
 public class Sys implements Serializable{
     private String Name;
     private List<Planet> planets= new ArrayList<>();
-    private BitSet roidField = new BitSet(8);
+    public enum roidTypes {Angrite,Autunite,Chrondrite,Colombite,Kamacite,Neurocrystallite,Siderolite,Ureilite};
+    private BitSet roidField = new BitSet(roidTypes.values().length);
 
     public Sys(String name) {
         Name = name;

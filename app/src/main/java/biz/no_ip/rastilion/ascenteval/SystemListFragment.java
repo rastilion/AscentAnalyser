@@ -1,13 +1,31 @@
 package biz.no_ip.rastilion.ascenteval;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.text.Layout;
+import android.text.TextPaint;
+import android.view.ContextMenu;
+import android.view.Gravity;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.List;
+
+import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
 import biz.no_ip.rastilion.ascenteval.dummy.DummyContent;
 
 /**
@@ -86,19 +104,68 @@ public class SystemListFragment extends ListFragment {
         DummyContent.adapt=adapt;
         // TODO: replace with a real list adapter.
         setListAdapter(adapt);
+
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        ListView lv =getListView();
+
         // Restore the previously serialized activated item position.
         if (savedInstanceState != null
                 && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
             setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
         }
-        getListView().setDivider(new ColorDrawable(Color.BLACK));
-        getListView().setDividerHeight(2);
+        lv.setDivider(new ColorDrawable(Color.BLACK));
+        lv.setDividerHeight(2);
+        lv.setOnItemLongClickListener(
+            new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                    final Dialog astroSelect = new Dialog(view.getContext());
+                    LinearLayout mlv = new LinearLayout(view.getContext());
+                    mlv.setOrientation(LinearLayout.VERTICAL);
+                    final List<CheckBox> cbl = new ArrayList<CheckBox>();
+                    for (int i = 0; i < Sys.roidTypes.values().length; i++) {
+                        CheckBox cb = new CheckBox(view.getContext());
+                        cb.setText(Sys.roidTypes.values()[i].name());
+                        cbl.add(cb);
+                        mlv.addView(cb);
+                    }
+                    Button btn = new Button(view.getContext());
+                    btn.setTextSize(14);
+                    btn.setGravity(Gravity.CENTER);
+                    btn.setText("Add");
+                    btn.setBackgroundColor(Color.DKGRAY);
+                    btn.setTextColor(Color.LTGRAY);
+                    btn.setTextAppearance(view.getContext(),R.style.BlackFont);
+                    btn.setOnClickListener(
+                            new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    long astroMask = 0;
+                                    for (int c = 0; c < Sys.roidTypes.values().length; c++) {
+                                        if (cbl.get(c).isChecked())
+                                            astroMask += (int) Math.pow(2, c);
+                                    }
+                                    DummyContent.ITEMS.get(position).content.setRoidField(BitSet.valueOf(new long[]{astroMask}));
+                                    DummyContent.saveItems();
+                                    SystemListFragment.refreshList();
+                                    astroSelect.dismiss();
+                                }
+                            }
+                    );
+                    mlv.addView(btn);
+                    astroSelect.setContentView(mlv);
+                    astroSelect.setCancelable(true);
+                    astroSelect.create();
+                    astroSelect.show();
+                    return true;
+                }
+            }
+        );
     }
 
     @Override

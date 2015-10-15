@@ -88,7 +88,7 @@ public class SystemDetailFragment extends Fragment {
                     data.add("Asteroids present:");
                     for (int i =0; i<roids.length();i++){
                         if (roids.get(i)){
-                            data.add("");
+                            data.add(Sys.roidTypes.values()[i].name());
                         }
                     }
                     children.add(data);
