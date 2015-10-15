@@ -83,11 +83,15 @@ public class SystemDetailFragment extends Fragment {
             public void initAdapter() {
                 BitSet roids = mItem.content.getRoidField();
                 if (!roids.isEmpty()){
+                    List<String> data = new ArrayList<>();
+                    groups.add("Asteroid field");
+                    data.add("Asteroids present:");
                     for (int i =0; i<roids.length();i++){
-                        if (roids.get(i) & 1 == 1){
-
+                        if (roids.get(i)){
+                            data.add("");
                         }
                     }
+                    children.add(data);
                 }
                 for (int i=0; i < mItem.content.getPlanets().size();i++) {
                     Planet p = mItem.content.getPlanet(i);
