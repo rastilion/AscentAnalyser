@@ -14,6 +14,7 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -80,6 +81,14 @@ public class SystemDetailFragment extends Fragment {
             private List<List<String>> children = new ArrayList<>();
 
             public void initAdapter() {
+                BitSet roids = mItem.content.getRoidField();
+                if (!roids.isEmpty()){
+                    for (int i =0; i<roids.length();i++){
+                        if (roids.get(i) & 1 == 1){
+
+                        }
+                    }
+                }
                 for (int i=0; i < mItem.content.getPlanets().size();i++) {
                     Planet p = mItem.content.getPlanet(i);
                     List<String> data = new ArrayList<>();

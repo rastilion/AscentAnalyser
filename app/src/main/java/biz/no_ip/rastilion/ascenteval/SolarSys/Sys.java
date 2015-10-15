@@ -2,6 +2,7 @@ package biz.no_ip.rastilion.ascenteval.SolarSys;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.List;
 
 /**
@@ -11,6 +12,7 @@ import java.util.List;
 public class Sys implements Serializable{
     private String Name;
     private List<Planet> planets= new ArrayList<>();
+    private BitSet roidField = new BitSet(8);
 
     public Sys(String name) {
         Name = name;
@@ -46,5 +48,13 @@ public class Sys implements Serializable{
     }
     public int getPlanetCount(){
         return planets.size();
+    }
+
+    public BitSet getRoidField() {
+        return roidField;
+    }
+
+    public void setRoidField(BitSet roidField) {
+        this.roidField = roidField;
     }
 }
