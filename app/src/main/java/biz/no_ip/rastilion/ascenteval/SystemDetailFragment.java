@@ -82,6 +82,7 @@ public class SystemDetailFragment extends Fragment {
 
             public void initAdapter() {
                 BitSet roids = mItem.content.getRoidField();
+                List<BitSet> gg = mItem.content.getGgs();
                 if (!roids.isEmpty()){
                     List<String> data = new ArrayList<>();
                     groups.add("Asteroid field");
@@ -89,6 +90,20 @@ public class SystemDetailFragment extends Fragment {
                     for (int i =0; i<roids.length();i++){
                         if (roids.get(i)){
                             data.add(Sys.roidTypes.values()[i].name());
+                        }
+                    }
+                    children.add(data);
+                }
+                if (!gg.isEmpty()){
+                    List<String> data = new ArrayList<>();
+                    groups.add("Gas Giants");
+                    data.add("In order of adding:");
+                    for (int j=0;j<gg.size();j++) {
+                        groups.add("Gas Giant "+j);
+                        for (int i = 0; i < gg.get(j).size(); i++) {
+                            if (gg.get(i).get(i)) {
+                                data.add(Sys.gas.values()[i].name());
+                            }
                         }
                     }
                     children.add(data);

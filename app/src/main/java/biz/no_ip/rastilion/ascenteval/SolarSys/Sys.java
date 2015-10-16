@@ -12,8 +12,27 @@ import java.util.List;
 public class Sys implements Serializable{
     private String Name;
     private List<Planet> planets= new ArrayList<>();
+
+    public List<BitSet> getGgs() {
+        return ggs;
+    }
+
+    public void setGgs(List<BitSet> ggs) {
+        this.ggs = ggs;
+    }
+
+    public void addGgs(int gg){
+        ggs.add(BitSet.valueOf(new long[]{gg}));
+    }
+
+    public void delGgs(int pos){
+        ggs.remove(pos);
+    }
+
     public enum roidTypes {Angrite,Autunite,Chrondrite,Colombite,Kamacite,Neurocrystallite,Siderolite,Ureilite};
+    public enum gas {Hydrogen,Nitrogen,Oxygen,Tritium};
     private BitSet roidField = new BitSet(roidTypes.values().length);
+    private List<BitSet> ggs = new ArrayList<>();
 
     public Sys(String name) {
         Name = name;
