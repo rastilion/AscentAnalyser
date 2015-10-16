@@ -177,7 +177,7 @@ public class SystemListActivity extends FragmentActivity
         DummyContent.resetMap();
         Sys dummy = new Sys("Apollo");
         dummy.setRoidField(BitSet.valueOf(new long[]{255}));
-        dummy.addGgs(31);
+        dummy.addGgs(15);
         dummy.addPlanet(new Planet("Dummy Planet"));
         dummy.getPlanet(0).setComposition(new Composition(0, 0f, 0f, 0f, 0f, 0f, 0, 0, 0, 0, 0, 0, 0, 0));
         try {

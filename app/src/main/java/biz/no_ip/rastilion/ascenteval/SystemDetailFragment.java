@@ -96,17 +96,16 @@ public class SystemDetailFragment extends Fragment {
                 }
                 if (!gg.isEmpty()){
                     List<String> data = new ArrayList<>();
-                    groups.add("Gas Giants");
-                    data.add("In order of adding:");
                     for (int j=0;j<gg.size();j++) {
+                        data = new ArrayList<>();
                         groups.add("Gas Giant "+j);
                         for (int i = 0; i < gg.get(j).size(); i++) {
-                            if (gg.get(i).get(i)) {
+                            if (gg.get(j).get(i)) {
                                 data.add(Sys.gas.values()[i].name());
                             }
                         }
+                        children.add(data);
                     }
-                    children.add(data);
                 }
                 for (int i=0; i < mItem.content.getPlanets().size();i++) {
                     Planet p = mItem.content.getPlanet(i);

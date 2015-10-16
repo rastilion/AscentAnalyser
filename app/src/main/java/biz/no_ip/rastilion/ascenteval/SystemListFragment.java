@@ -121,50 +121,169 @@ public class SystemListFragment extends ListFragment {
         lv.setDivider(new ColorDrawable(Color.BLACK));
         lv.setDividerHeight(2);
         lv.setOnItemLongClickListener(
-            new AdapterView.OnItemLongClickListener() {
-                @Override
-                public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                    final Dialog astroSelect = new Dialog(view.getContext());
-                    LinearLayout mlv = new LinearLayout(view.getContext());
-                    mlv.setOrientation(LinearLayout.VERTICAL);
-                    final List<CheckBox> cbl = new ArrayList<CheckBox>();
-                    for (int i = 0; i < Sys.roidTypes.values().length; i++) {
-                        CheckBox cb = new CheckBox(view.getContext());
-                        cb.setText(Sys.roidTypes.values()[i].name());
-                        cbl.add(cb);
-                        mlv.addView(cb);
-                    }
-                    Button btn = new Button(view.getContext());
-                    btn.setTextSize(14);
-                    btn.setGravity(Gravity.CENTER);
-                    btn.setText("Add");
-                    btn.setBackgroundColor(Color.DKGRAY);
-                    btn.setTextColor(Color.LTGRAY);
-                    btn.setTextAppearance(view.getContext(),R.style.BlackFont);
-                    btn.setOnClickListener(
-                            new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    long astroMask = 0;
-                                    for (int c = 0; c < Sys.roidTypes.values().length; c++) {
-                                        if (cbl.get(c).isChecked())
-                                            astroMask += (int) Math.pow(2, c);
+                new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                        final Dialog astroSelect = new Dialog(view.getContext());
+                        LinearLayout mlv = new LinearLayout(view.getContext());
+                        LinearLayout hl = new LinearLayout(view.getContext());
+                        hl.setOrientation(LinearLayout.HORIZONTAL);
+                        mlv.setOrientation(LinearLayout.VERTICAL);
+                        final List<CheckBox> cbl = new ArrayList<CheckBox>();
+                        for (int i = 0; i < Sys.roidTypes.values().length; i++) {
+                            CheckBox cb = new CheckBox(view.getContext());
+                            cb.setText(Sys.roidTypes.values()[i].name());
+                            cbl.add(cb);
+                            mlv.addView(cb);
+                        }
+                        Button btn1 = new Button(view.getContext());
+                        btn1.setTextSize(14);
+                        btn1.setGravity(Gravity.CENTER);
+                        btn1.setText("Add");
+                        btn1.setBackgroundColor(Color.DKGRAY);
+                        btn1.setTextColor(Color.LTGRAY);
+                        btn1.setTextAppearance(view.getContext(), R.style.BlackFont);
+                        btn1.setOnClickListener(
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        long astroMask = 0;
+                                        for (int c = 0; c < Sys.roidTypes.values().length; c++) {
+                                            if (cbl.get(c).isChecked())
+                                                astroMask += (int) Math.pow(2, c);
+                                        }
+                                        DummyContent.ITEMS.get(position).content.setRoidField(BitSet.valueOf(new long[]{astroMask}));
+                                        DummyContent.saveItems();
+                                        SystemListFragment.refreshList();
+                                        astroSelect.dismiss();
                                     }
-                                    DummyContent.ITEMS.get(position).content.setRoidField(BitSet.valueOf(new long[]{astroMask}));
-                                    DummyContent.saveItems();
-                                    SystemListFragment.refreshList();
-                                    astroSelect.dismiss();
                                 }
-                            }
-                    );
-                    mlv.addView(btn);
-                    astroSelect.setContentView(mlv);
-                    astroSelect.setCancelable(true);
-                    astroSelect.create();
-                    astroSelect.show();
-                    return true;
+                        );
+                        Button btn2 = new Button(view.getContext());
+                        btn2.setTextSize(14);
+                        btn2.setGravity(Gravity.CENTER);
+                        btn2.setText("Cancel");
+                        btn2.setBackgroundColor(Color.DKGRAY);
+                        btn2.setTextColor(Color.LTGRAY);
+                        btn2.setTextAppearance(view.getContext(), R.style.BlackFont);
+                        btn2.setOnClickListener(
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        astroSelect.cancel();
+                                    }
+                                }
+                        );
+                        hl.addView(btn1);
+                        hl.addView(btn2);
+                        mlv.addView(hl);
+                        astroSelect.setContentView(mlv);
+                        astroSelect.setTitle("Asteroids: ");
+                        astroSelect.setCancelable(true);
+
+                        final Dialog ggSelect = new Dialog(view.getContext());
+                        LinearLayout gglv = new LinearLayout(view.getContext());
+                        LinearLayout gghl = new LinearLayout(view.getContext());
+                        hl.setOrientation(LinearLayout.HORIZONTAL);
+                        gglv.setOrientation(LinearLayout.VERTICAL);
+                        final List<CheckBox> ggcbl = new ArrayList<CheckBox>();
+                        for (int i = 0; i < Sys.gas.values().length; i++) {
+                            CheckBox cb = new CheckBox(view.getContext());
+                            cb.setText(Sys.gas.values()[i].name());
+                            ggcbl.add(cb);
+                            gglv.addView(cb);
+                        }
+                        Button ggbtn1 = new Button(view.getContext());
+                        ggbtn1.setTextSize(14);
+                        ggbtn1.setGravity(Gravity.CENTER);
+                        ggbtn1.setText("Add");
+                        ggbtn1.setBackgroundColor(Color.DKGRAY);
+                        ggbtn1.setTextColor(Color.LTGRAY);
+                        ggbtn1.setTextAppearance(view.getContext(), R.style.BlackFont);
+                        ggbtn1.setOnClickListener(
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        int ggMask = 0;
+                                        for (int c = 0; c < Sys.gas.values().length; c++) {
+                                            if (ggcbl.get(c).isChecked())
+                                                ggMask += (int) Math.pow(2, c);
+                                        }
+                                        DummyContent.ITEMS.get(position).content.addGgs(ggMask);
+                                        DummyContent.saveItems();
+                                        SystemListFragment.refreshList();
+                                        ggSelect.dismiss();
+                                    }
+                                }
+                        );
+                        Button ggbtn2 = new Button(view.getContext());
+                        ggbtn2.setTextSize(14);
+                        ggbtn2.setGravity(Gravity.CENTER);
+                        ggbtn2.setText("Cancel");
+                        ggbtn2.setBackgroundColor(Color.DKGRAY);
+                        ggbtn2.setTextColor(Color.LTGRAY);
+                        ggbtn2.setTextAppearance(view.getContext(), R.style.BlackFont);
+                        ggbtn2.setOnClickListener(
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        ggSelect.cancel();
+                                    }
+                                }
+                        );
+                        gghl.addView(ggbtn1);
+                        gghl.addView(ggbtn2);
+                        gglv.addView(gghl);
+                        ggSelect.setContentView(gglv);
+                        ggSelect.setTitle("Gasses: ");
+                        ggSelect.setCancelable(true);
+
+                        final Dialog menu =  new Dialog(view.getContext());
+                        menu.setTitle("Add what?");
+                        Button af = new Button(view.getContext());
+                        af.setTextSize(14);
+                        af.setGravity(Gravity.CENTER);
+                        af.setText("Asteroid Field");
+                        af.setBackgroundColor(Color.DKGRAY);
+                        af.setTextColor(Color.LTGRAY);
+                        af.setTextAppearance(view.getContext(), R.style.BlackFont);
+                        af.setOnClickListener(
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        menu.dismiss();
+                                        astroSelect.create();
+                                        astroSelect.show();
+                                    }
+                                }
+                        );
+                        Button gg = new Button(view.getContext());
+                        gg.setTextSize(14);
+                        gg.setGravity(Gravity.CENTER);
+                        gg.setText("Gas Giant");
+                        gg.setBackgroundColor(Color.DKGRAY);
+                        gg.setTextColor(Color.LTGRAY);
+                        gg.setTextAppearance(view.getContext(), R.style.BlackFont);
+                        gg.setOnClickListener(
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        menu.dismiss();
+                                        ggSelect.create();
+                                        ggSelect.show();
+                                    }
+                                }
+                        );
+                        LinearLayout ml = new LinearLayout(view.getContext());
+                        ml.setOrientation(LinearLayout.VERTICAL);
+                        ml.addView(af);
+                        ml.addView(gg);
+                        menu.setContentView(ml);
+                        menu.create();
+                        menu.show();
+                        return true;
+                    }
                 }
-            }
         );
     }
 
