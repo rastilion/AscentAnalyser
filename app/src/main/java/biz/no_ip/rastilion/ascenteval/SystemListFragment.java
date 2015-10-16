@@ -252,7 +252,6 @@ public class SystemListFragment extends ListFragment {
                                     @Override
                                     public void onClick(View v) {
                                         menu.dismiss();
-                                        astroSelect.create();
                                         astroSelect.show();
                                     }
                                 }
@@ -269,8 +268,22 @@ public class SystemListFragment extends ListFragment {
                                     @Override
                                     public void onClick(View v) {
                                         menu.dismiss();
-                                        ggSelect.create();
                                         ggSelect.show();
+                                    }
+                                }
+                        );
+                        Button cncl = new Button(view.getContext());
+                        cncl.setTextSize(14);
+                        cncl.setGravity(Gravity.CENTER);
+                        cncl.setText("Cancel");
+                        cncl.setBackgroundColor(Color.DKGRAY);
+                        cncl.setTextColor(Color.LTGRAY);
+                        cncl.setTextAppearance(view.getContext(), R.style.BlackFont);
+                        cncl.setOnClickListener(
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        menu.dismiss();
                                     }
                                 }
                         );
@@ -278,8 +291,8 @@ public class SystemListFragment extends ListFragment {
                         ml.setOrientation(LinearLayout.VERTICAL);
                         ml.addView(af);
                         ml.addView(gg);
+                        ml.addView(cncl);
                         menu.setContentView(ml);
-                        menu.create();
                         menu.show();
                         return true;
                     }
