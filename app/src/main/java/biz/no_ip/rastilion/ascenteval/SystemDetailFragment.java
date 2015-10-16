@@ -2,7 +2,6 @@ package biz.no_ip.rastilion.ascenteval;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.view.Gravity;
@@ -12,14 +11,9 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
 
 import biz.no_ip.rastilion.ascenteval.SolarSys.Planet;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;

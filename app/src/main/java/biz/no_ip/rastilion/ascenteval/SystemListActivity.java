@@ -4,23 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Toast;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-
 import biz.no_ip.rastilion.ascenteval.DumpImporter.DumpImport;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Composition;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Planet;

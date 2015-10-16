@@ -20,7 +20,7 @@ public class FileManipulator{
     // get a writing stream to the data directory
     public static ObjectOutputStream getWriteStream(Context ctx){
         try {
-            FileOutputStream fos = ctx.openFileOutput(FILENAME, ctx.MODE_PRIVATE);
+            FileOutputStream fos = ctx.openFileOutput(FILENAME, Context.MODE_PRIVATE);
             oos = new ObjectOutputStream(fos);
         }
         catch(Exception e){

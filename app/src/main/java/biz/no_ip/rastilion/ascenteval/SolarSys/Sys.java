@@ -13,8 +13,8 @@ public class Sys implements Serializable{
     private String Name;
     private List<Planet> planets= new ArrayList<>();
 
-    public enum roidTypes {Angrite,Autunite,Chrondrite,Colombite,Kamacite,Neurocrystallite,Siderolite,Ureilite};
-    public enum gas {Hydrogen,Nitrogen,Oxygen,Tritium};
+    public enum roidTypes {Angrite,Autunite,Chrondrite,Colombite,Kamacite,Neurocrystallite,Siderolite,Ureilite}
+    public enum gas {Hydrogen,Nitrogen,Oxygen,Tritium}
     private BitSet roidField = new BitSet(roidTypes.values().length);
     private List<BitSet> ggs = new ArrayList<>();
 

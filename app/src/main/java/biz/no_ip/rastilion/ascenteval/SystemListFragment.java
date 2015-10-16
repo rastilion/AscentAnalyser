@@ -1,18 +1,12 @@
 package biz.no_ip.rastilion.ascenteval;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.text.Layout;
-import android.text.TextPaint;
-import android.view.ContextMenu;
 import android.view.Gravity;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,11 +14,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
-
 import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
 import biz.no_ip.rastilion.ascenteval.dummy.DummyContent;
 

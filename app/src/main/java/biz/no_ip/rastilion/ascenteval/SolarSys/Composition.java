@@ -40,7 +40,7 @@ public class Composition implements Serializable {
         this.atmo = atmo;
     }
 
-    public Composition(){};
+    public Composition(){}
 
     public int getPlanetId() {
         return planetId;
