@@ -4,12 +4,14 @@ import android.widget.ListAdapter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import biz.no_ip.rastilion.ascenteval.Helper.FileManipulator;
 import biz.no_ip.rastilion.ascenteval.Helper.StaticContext;
+import biz.no_ip.rastilion.ascenteval.SolarSys.Composition;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Planet;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
 
@@ -36,7 +38,11 @@ public class DummyContent {
     static {
         // a sample item.
         Sys dummy = new Sys("Apollo");
-        dummy.addPlanet(new Planet("Dummy Planet"));
+        Planet dp =new Planet("Dummy Planet");
+        dp.setComposition(new Composition(0, 0f, 0f, 0f, 0f, 0f, 0, 0, 0, 0, 0, 0, 0, 0));
+        dummy.addPlanet(dp);
+        dummy.addGgs(15);
+        dummy.setRoidField(BitSet.valueOf(new long[]{255}));
         addItem(new DummyItem(dummy.getName(), dummy));
     }
 
