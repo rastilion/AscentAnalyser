@@ -8,7 +8,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 22
         versionCode 2
-        versionName "2.2.0"
+        versionName "3.0.0"
     }
     buildTypes {
         release {
@@ -24,4 +24,5 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.android.support:support-v4:22.2.1'
+    compile 'com.github.satyan:sugar:1.4'
 }

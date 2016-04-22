@@ -8,21 +8,16 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Toast;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import biz.no_ip.rastilion.ascenteval.DumpImporter.DumpImport;
-import biz.no_ip.rastilion.ascenteval.SolarSys.Composition;
+import biz.no_ip.rastilion.ascenteval.SolarSys.Giants;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Planet;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
-import biz.no_ip.rastilion.ascenteval.dummy.DummyContent;
 import biz.no_ip.rastilion.ascenteval.Helper.FileDialog;
-import biz.no_ip.rastilion.ascenteval.Helper.FileManipulator;
 import biz.no_ip.rastilion.ascenteval.Helper.SelectionMode;
-import biz.no_ip.rastilion.ascenteval.Helper.StaticContext;
 
 
 /**
@@ -51,31 +46,23 @@ public class SystemListActivity extends FragmentActivity
     private boolean mTwoPane;
     public final int REQUEST_LOAD=0;
     public File toImport=null;
-    List<Sys> systems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_list);
-        StaticContext.setContext(getApplicationContext());
-        List<Sys> sysImport = new ArrayList<>();
+        List<Planet> sysImport = new ArrayList<>();
         // load saved data at app start
         try{
-            sysImport = (ArrayList) FileManipulator.getReadStream(getApplicationContext()).readObject();
+            sysImport = Planet.listAll(Planet.class);
         }
         catch (Exception e){
             e.printStackTrace();
         }
-        if (sysImport.size()>0){
-            DummyContent.resetMap();
-            for (int i =0 ; i < sysImport.size();i++){
-                DummyContent.addItem(new DummyContent.DummyItem(sysImport.get(i).getName(),sysImport.get(i)));
-            }
-        }
-        Collections.sort(DummyContent.ITEMS, new Comparator<DummyContent.DummyItem>() {
+        Collections.sort(sysImport, new Comparator<Planet>() {
             @Override
-            public int compare(DummyContent.DummyItem lhs, DummyContent.DummyItem rhs) {
-                return lhs.content.getName().compareToIgnoreCase(rhs.content.getName());
+            public int compare(Planet lhs, Planet rhs) {
+                return lhs.name.compareToIgnoreCase(rhs.name);
             }
         });
         if (findViewById(R.id.system_detail_container) != null) {
@@ -130,18 +117,8 @@ public class SystemListActivity extends FragmentActivity
             if (requestCode == REQUEST_LOAD) {
                 String filePath = data.getStringExtra(FileDialog.RESULT_PATH);
                 toImport = new File(filePath);
-                systems = DumpImport.parseFile(toImport);
-                // Reset itemlist if dummyitem present
-                if (DummyContent.ITEMS.get(0).content.getName().equalsIgnoreCase("Apollo")) DummyContent.resetMap();
-                for (int i =0 ; i < systems.size();i++){
-                    DummyContent.addItem(new DummyContent.DummyItem(systems.get(i).getName(),systems.get(i)));
-                }
-                Collections.sort(DummyContent.ITEMS, new Comparator<DummyContent.DummyItem>() {
-                    @Override
-                    public int compare(DummyContent.DummyItem lhs, DummyContent.DummyItem rhs) {
-                        return lhs.content.getName().compareToIgnoreCase(rhs.content.getName());
-                    }
-                });
+                new DumpImport.ImportFilesTask().execute(toImport);
+                //DumpImport.parseFile(toImport);
                 SystemListFragment.refreshList();
             }
 
@@ -167,18 +144,9 @@ public class SystemListActivity extends FragmentActivity
 
     }
     public void clear(View v){
-        DummyContent.resetMap();
-        Sys dummy = new Sys("Apollo");
-        dummy.setRoidField(BitSet.valueOf(new long[]{255}));
-        dummy.addGgs(15);
-        dummy.addPlanet(new Planet("Dummy Planet"));
-        dummy.getPlanet(0).setComposition(new Composition(0, 0f, 0f, 0f, 0f, 0f, 0, 0, 0, 0, 0, 0, 0, 0));
-        try {
-            FileManipulator.getWriteStream(getApplicationContext()).writeObject("");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        DummyContent.addItem(new DummyContent.DummyItem(dummy.getName(),dummy));
+        Sys.deleteAll(Sys.class);
+        Planet.deleteAll(Planet.class);
+        Giants.deleteAll(Giants.class);
                 ((SystemListFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.system_list)).updateList();
     }

@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +16,10 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 
+import biz.no_ip.rastilion.ascenteval.Helper.Constants;
+import biz.no_ip.rastilion.ascenteval.SolarSys.Giants;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Planet;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
-import biz.no_ip.rastilion.ascenteval.dummy.DummyContent;
 
 /**
  * A fragment representing a single System detail screen.
@@ -30,12 +32,12 @@ public class SystemDetailFragment extends Fragment {
      * The fragment argument representing the item ID that this fragment
      * represents.
      */
-    public static final String ARG_ITEM_ID = "item_id";
+    public static String ARG_ITEM_ID = "item_id";
 
     /**
      * The dummy content this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    private Sys mItem;
 
 
     /**
@@ -53,7 +55,8 @@ public class SystemDetailFragment extends Fragment {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            List<Sys> items = Sys.find(Sys.class,"name = ?",getArguments().getString(ARG_ITEM_ID));
+            mItem = items.get(0);
         }
     }
 
@@ -75,54 +78,56 @@ public class SystemDetailFragment extends Fragment {
             private List<List<String>> children = new ArrayList<>();
 
             public void initAdapter() {
-                BitSet roids = mItem.content.getRoidField();
-                List<BitSet> gg = mItem.content.getGgs();
+                BitSet roids = BitSet.valueOf(new long[]{mItem.roidField});
+                List<Giants> gg = mItem.getGiants();
+
                 if (!roids.isEmpty()){
                     List<String> data = new ArrayList<>();
                     groups.add("Asteroid field");
                     data.add("Asteroids present:");
                     for (int i =0; i<roids.length();i++){
                         if (roids.get(i)){
-                            data.add(Sys.roidTypes.values()[i].name());
+                            data.add(Constants.roidTypes.values()[i].name());
                         }
                     }
                     children.add(data);
                 }
                 if (!gg.isEmpty()){
-                    List<String> data = new ArrayList<>();
+                    List<String> data;
                     for (int j=0;j<gg.size();j++) {
                         data = new ArrayList<>();
                         groups.add("Gas Giant "+j);
-                        for (int i = 0; i < gg.get(j).size(); i++) {
-                            if (gg.get(j).get(i)) {
-                                data.add(Sys.gas.values()[i].name());
+                        BitSet comp = BitSet.valueOf(new long[]{gg.get(j).gasses});
+                        for (int i = 0; i < comp.size(); i++) {
+                            if (comp.get(i)) {
+                                data.add(Constants.gas.values()[i].name());
                             }
                         }
                         children.add(data);
                     }
                 }
-                for (int i=0; i < mItem.content.getPlanets().size();i++) {
-                    Planet p = mItem.content.getPlanet(i);
+                for (int i=0; i < mItem.getPlanets().size();i++) {
+                    Planet p = mItem.getPlanets().get(i);
                     List<String> data = new ArrayList<>();
-                    groups.add(p.getName());
+                    groups.add(p.name);
                     data.add("Statistics: ");
-                    data.add("Geologic rating: "+(p.getComposition().getGeo()>3?"<font color='#00d600'>"+p.getComposition().getGeo()+"</font>":"<font color='#EE0000'>"+p.getComposition().getGeo()+"</font>"));
-                    data.add("Atmosphere: "+(p.getComposition().getAtmo()==1?getString(R.string.present):(p.getComposition().getAtmo()==0?getString(R.string.none):getString(R.string.unknown))));
-                    data.add("Gems: "+(p.getComposition().getGems()==1?getString(R.string.present):(p.getComposition().getGems()==0?getString(R.string.none):getString(R.string.unknown))));
+                    data.add("Geologic rating: "+(p.geo>3?"<font color='#00d600'>"+p.geo+"</font>":"<font color='#EE0000'>"+p.geo+"</font>"));
+                    data.add("Atmosphere: "+(p.atmo==1?getString(R.string.present):(p.atmo==0?getString(R.string.none):getString(R.string.unknown))));
+                    data.add("Gems: "+(p.gems==1?getString(R.string.present):(p.gems==0?getString(R.string.none):getString(R.string.unknown))));
                     data.add("");
                     data.add("Composition: ");
-                    data.add("Al: "+p.getComposition().getAl()* 100 + "%");
-                    data.add("C : "+p.getComposition().getCarb() *100 + "%");
-                    data.add("Fe: "+p.getComposition().getFe()*100 + "%");
-                    data.add("Si: "+((p.getComposition().getSi() *100>10)?"<font color='#EE0000'>"+p.getComposition().getSi() *100+"%</font>":((p.getComposition().getSi() *100>5)?"<font color='#ffcc00'>"+p.getComposition().getSi() *100+"%</font>":"<font color='#00d600'>"+p.getComposition().getSi() *100+"%</font>")));
-                    data.add("Ti: "+p.getComposition().getTi()*100 + "%");
+                    data.add("Al: "+p.al* 100 + "%");
+                    data.add("C : "+p.carb *100 + "%");
+                    data.add("Fe: "+p.fe*100 + "%");
+                    data.add("Si: "+((p.si *100>10)?"<font color='#EE0000'>"+p.si *100+"%</font>":((p.si *100>5)?"<font color='#ffcc00'>"+p.si *100+"%</font>":"<font color='#00d600'>"+p.si *100+"%</font>")));
+                    data.add("Ti: "+p.ti*100 + "%");
                     data.add("");
                     data.add("Fertilities:");
-                    data.add("Grain: "+(p.getComposition().getGrain()==0?getString(R.string.none):(p.getComposition().getGrain()==1?getString(R.string.poor):getString(R.string.fertile))));
-                    data.add("Fruit: "+(p.getComposition().getFruit()==0?getString(R.string.none):(p.getComposition().getFruit()==1?getString(R.string.poor):getString(R.string.fertile))));
-                    data.add("Vegetables: "+(p.getComposition().getVeg()==0?getString(R.string.none):(p.getComposition().getVeg()==1?getString(R.string.poor):getString(R.string.fertile))));
-                    data.add("Meat: "+(p.getComposition().getMeat()==0?getString(R.string.none):(p.getComposition().getMeat()==1?getString(R.string.poor):getString(R.string.fertile))));
-                    data.add("Tobacco: "+(p.getComposition().getTob()==0?getString(R.string.none):(p.getComposition().getTob()==1?getString(R.string.poor):(p.getComposition().getTob()==2?getString(R.string.fertile):getString(R.string.unknown)))));
+                    data.add("Grain: "+(p.grain==0?getString(R.string.none):(p.grain==1?getString(R.string.poor):getString(R.string.fertile))));
+                    data.add("Fruit: "+(p.fruit==0?getString(R.string.none):(p.fruit==1?getString(R.string.poor):getString(R.string.fertile))));
+                    data.add("Vegetables: "+(p.veg==0?getString(R.string.none):(p.veg==1?getString(R.string.poor):getString(R.string.fertile))));
+                    data.add("Meat: "+(p.meat==0?getString(R.string.none):(p.meat==1?getString(R.string.poor):getString(R.string.fertile))));
+                    data.add("Tobacco: "+(p.tob==0?getString(R.string.none):(p.tob==1?getString(R.string.poor):(p.tob==2?getString(R.string.fertile):getString(R.string.unknown)))));
                     //data.add(text);
                     children.add(data);
                 }

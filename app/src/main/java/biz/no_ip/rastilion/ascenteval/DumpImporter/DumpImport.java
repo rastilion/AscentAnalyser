@@ -1,42 +1,31 @@
 package biz.no_ip.rastilion.ascenteval.DumpImporter;
 
 import android.app.Application;
-import android.content.Context;
+import android.os.AsyncTask;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-
-import biz.no_ip.rastilion.ascenteval.Helper.FileManipulator;
-import biz.no_ip.rastilion.ascenteval.SolarSys.Composition;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Planet;
 import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
-import biz.no_ip.rastilion.ascenteval.Helper.StaticContext;
-import biz.no_ip.rastilion.ascenteval.dummy.DummyContent;
+import biz.no_ip.rastilion.ascenteval.SystemListFragment;
 
 /**
  * Created by tgruetzmacher on 03.08.15.
  * Import class for soilsampledump-<id>.txt files
  */
 public class DumpImport extends Application {
-    static Context ctx = StaticContext.getCustomAppContext();
 
     /**
      *
      * @param  inFile The file to parse
-     * @return List   A list of parsed systems
      */
-    public static List<Sys> parseFile(File inFile) {
-        ObjectOutputStream oos = FileManipulator.getWriteStream(ctx.getApplicationContext());
+    public static void parseFile(File inFile) {
         List<String> result = new ArrayList<>();
         List<String> planets = new ArrayList<>();
-        List<Sys> returnValue;
         ArrayList<ArrayList<String>> system = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(inFile));
@@ -134,129 +123,90 @@ public class DumpImport extends Application {
                 }
             }
         }
-        returnValue = BuildSys(system);
-        //Write parsed data to storage
-        try {
-            oos.writeObject(returnValue);
-            oos.flush();
-            oos.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return returnValue;
+        BuildSys(system);
     }
 
-    private static List<Sys> BuildSys(ArrayList<ArrayList<String>> sys) {
-        String oldSysName = "";
-        List<Sys> parsed = new ArrayList<>();
+    private static void BuildSys(ArrayList<ArrayList<String>> sys) {
         Sys s;
         Planet p;
-        // Load saved data
-        try {
-            parsed = DummyContent.getAllSystems();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         //Look for system in existing data
         for (ArrayList<String> l : sys) {
             String sysName = l.get(0);
-
+            List<Sys> systems = Sys.find(Sys.class,"name=?",sysName);
             s = new Sys(sysName);
-            for (int i=0;i<parsed.size();i++){
-                if (s.getName().equals(parsed.get(i).getName())){
-                    s = parsed.get(i);
-                    break;
+            List<Planet> found = new ArrayList<>();
+            if (systems.size()>0) {
+                s = systems.get(0);
+                found = Planet.find(Planet.class,"name = ?", l.get(1));
+            }
+            //Build new planet if system or planet not found
+            if(found.isEmpty()) {
+                p = new Planet(l.get(1));
+                // Preset the later added stats to "Unknown"
+                p.tob=3;
+                p.gems=2;
+                p.atmo=2;
+                switch (l.size()){
+                    case 21:
+                        //Set mats for new dumps
+                        p.gems=Integer.parseInt(l.get(19));
+                        p.atmo=Integer.parseInt(l.get(20));
+                    case 19:
+                        // Set mats for pre-gem dumps
+                        p.tob=Integer.parseInt(l.get(18));
+                    case 18:
+                        // Set default mats
+                        p.al=Float.parseFloat(l.get(3));
+                        p.si=Float.parseFloat(l.get(5));
+                        p.geo=Integer.parseInt(l.get(7));
+                        p.carb=Float.parseFloat(l.get(9));
+                        p.fe=Float.parseFloat(l.get(11));
+                        p.ti=Float.parseFloat(l.get(13));
+                        p.grain=Integer.parseInt(l.get(14));
+                        p.fruit=Integer.parseInt(l.get(15));
+                        p.veg=Integer.parseInt(l.get(16));
+                        p.meat=Integer.parseInt(l.get(17));
+                        break;
                 }
+                //Set System's planets
+                p.system=s;
+                s.save();
+                p.save();
             }
-            // Build new system if system not found
-            if (!oldSysName.equals(sysName)) {
-                oldSysName = sysName;
-            }
-            //Look for planet in existing data
-            if (s != null) {
-                boolean pfound = false;
-                int planet =0;
-                if (s.getPlanetCount() > 0) {
-                    for (int i = 0; i < s.getPlanetCount(); i++) {
-                        if (l.get(1).equals(s.getPlanet(i).getName())) {
-                            planet =i;
-                            pfound=true;
-                            break;
+            else {
+                Planet pl = found.get(0);
+                if(pl.atmo == 2){
+                    if (l.size() == 21){
+                        pl.gems=Integer.parseInt(l.get(19));
+                        pl.atmo=Integer.parseInt(l.get(20));
+                        if (pl.tob == 3){
+                            pl.tob=Integer.parseInt(l.get(18));
                         }
                     }
-                }
-                //Build new planet if system or planet not found
-                if(!pfound) {
-                    p = new Planet(l.get(1));
-                    Composition cmp = new Composition();
-                    // Preset the later added stats to "Unknown"
-                    cmp.setTob(3);
-                    cmp.setGems(2);
-                    cmp.setAtmo(2);
-                    switch (l.size()){
-                        case 21:
-                            //Set mats for new dumps
-                            cmp.setGems(Integer.parseInt(l.get(19)));
-                            cmp.setAtmo(Integer.parseInt(l.get(20)));
-                        case 19:
-                            // Set mats for pre-gem dumps
-                            cmp.setTob(Integer.parseInt(l.get(18)));
-                        case 18:
-                            // Set default mats
-                            cmp.setAl(Float.parseFloat(l.get(3)));
-                            cmp.setSi(Float.parseFloat(l.get(5)));
-                            cmp.setGeo(Integer.parseInt(l.get(7)));
-                            cmp.setCarb(Float.parseFloat(l.get(9)));
-                            cmp.setFe(Float.parseFloat(l.get(11)));
-                            cmp.setTi(Float.parseFloat(l.get(13)));
-                            cmp.setGrain(Integer.parseInt(l.get(14)));
-                            cmp.setFruit(Integer.parseInt(l.get(15)));
-                            cmp.setVeg(Integer.parseInt(l.get(16)));
-                            cmp.setMeat(Integer.parseInt(l.get(17)));
-                            break;
-                    }
-                    //Set planetary composition
-                    p.setComposition(cmp);
-                    //Set System's planets
-                    s.addPlanet(p);
-                    //Add systems to list
-                    parsed.add(s);
-                }
-                else {
-                    Planet pl = s.getPlanet(planet);
-                    if(pl.getComposition().getAtmo() == 2){
-                        if (l.size() == 21){
-                            pl.getComposition().setGems(Integer.parseInt(l.get(19)));
-                            pl.getComposition().setAtmo(Integer.parseInt(l.get(20)));
-                            if (pl.getComposition().getTob() == 3){
-                                pl.getComposition().setTob(Integer.parseInt(l.get(18)));
-                            }
-                        }
-                    }
+                    pl.save();
                 }
             }
-            //Sort Systems
-            Collections.sort(s.getPlanets(), new Comparator<Planet>() {
-                @Override
-                public int compare(Planet lhs, Planet rhs) {
-                    if (0==extractInt(lhs.getName())){
-                        return lhs.getName().compareToIgnoreCase(rhs.getName());
-                    }
-                    else {
-                        return extractInt(lhs.getName()) - extractInt(rhs.getName());
-                    }
-                }
-                // Get number in a string
-                int extractInt(String s) {
-                    String num = s.replaceAll("\\D", "");
-                    // return 0 if no digits found
-                    return num.isEmpty() ? 0 : Integer.parseInt(num);
-                }
-            });
+        }
+    }
+
+
+    public static class ImportFilesTask extends AsyncTask<File, String, String> {
+        protected String doInBackground(File... inFile) {
+            String retVal;
+            try {
+                parseFile(inFile[0]);
+                retVal = "OK";
+            }
+            catch (Exception e){
+
+                retVal = e.getMessage();
+            }
+            return retVal;
         }
 
-        return parsed;
+        protected void onPostExecute(String result) {
+            SystemListFragment.refreshList();
+        }
     }
 }
 
