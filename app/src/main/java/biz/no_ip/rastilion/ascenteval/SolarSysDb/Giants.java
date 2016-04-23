@@ -1,4 +1,4 @@
-package biz.no_ip.rastilion.ascenteval.SolarSys;
+package biz.no_ip.rastilion.ascenteval.SolarSysDb;
 
 import com.orm.SugarRecord;
 

@@ -9,8 +9,8 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import biz.no_ip.rastilion.ascenteval.SolarSys.Planet;
-import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
+import biz.no_ip.rastilion.ascenteval.SolarSysDb.Planet;
+import biz.no_ip.rastilion.ascenteval.SolarSysDb.Sys;
 import biz.no_ip.rastilion.ascenteval.SystemListFragment;
 
 /**

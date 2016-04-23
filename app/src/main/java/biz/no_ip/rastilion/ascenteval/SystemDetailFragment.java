@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +16,9 @@ import java.util.BitSet;
 import java.util.List;
 
 import biz.no_ip.rastilion.ascenteval.Helper.Constants;
-import biz.no_ip.rastilion.ascenteval.SolarSys.Giants;
-import biz.no_ip.rastilion.ascenteval.SolarSys.Planet;
-import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
+import biz.no_ip.rastilion.ascenteval.SolarSysDb.Giants;
+import biz.no_ip.rastilion.ascenteval.SolarSysDb.Planet;
+import biz.no_ip.rastilion.ascenteval.SolarSysDb.Sys;
 
 /**
  * A fragment representing a single System detail screen.

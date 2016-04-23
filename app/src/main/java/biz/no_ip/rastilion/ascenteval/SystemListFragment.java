@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,8 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import biz.no_ip.rastilion.ascenteval.Helper.Constants;
-import biz.no_ip.rastilion.ascenteval.SolarSys.Giants;
-import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
+import biz.no_ip.rastilion.ascenteval.SolarSysDb.Giants;
+import biz.no_ip.rastilion.ascenteval.SolarSysDb.Sys;
 
 /**
  * A list fragment representing a list of Systems. This fragment

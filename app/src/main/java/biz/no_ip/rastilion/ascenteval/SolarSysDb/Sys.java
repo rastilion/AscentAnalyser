@@ -1,13 +1,8 @@
-package biz.no_ip.rastilion.ascenteval.SolarSys;
+package biz.no_ip.rastilion.ascenteval.SolarSysDb;
 
 import com.orm.SugarRecord;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.List;
-
-import biz.no_ip.rastilion.ascenteval.Helper.Constants;
 
 /**
  * Created by tgruetzmacher on 13.08.15.

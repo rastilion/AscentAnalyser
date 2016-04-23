@@ -14,9 +14,9 @@ import java.util.Comparator;
 import java.util.List;
 import biz.no_ip.rastilion.ascenteval.DumpImporter.DumpImport;
 import biz.no_ip.rastilion.ascenteval.Helper.LegacyImport;
-import biz.no_ip.rastilion.ascenteval.SolarSys.Giants;
-import biz.no_ip.rastilion.ascenteval.SolarSys.Planet;
-import biz.no_ip.rastilion.ascenteval.SolarSys.Sys;
+import biz.no_ip.rastilion.ascenteval.SolarSysDb.Giants;
+import biz.no_ip.rastilion.ascenteval.SolarSysDb.Planet;
+import biz.no_ip.rastilion.ascenteval.SolarSysDb.Sys;
 import biz.no_ip.rastilion.ascenteval.Helper.FileDialog;
 import biz.no_ip.rastilion.ascenteval.Helper.SelectionMode;
 
