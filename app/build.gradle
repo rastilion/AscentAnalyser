@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            storeFile file('/home/rastilion/.keystore/android.jks')
+            keyAlias 'identifierrastilion'
+            keyPassword 'Xolgorim'
+            storePassword 'Sidewinder'
+        }
+    }
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
     defaultConfig {
@@ -14,6 +22,20 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    project.ext { appName = 'AscentAnalyser' }
+                    def newName = output.outputFile.name
+                    newName = newName.replace("app-", "$project.ext.appName-") //"MyAppName" -> I set my app variables in the root project
+                    newName = newName.replace("-release", "")
+                    //noinspection GroovyAssignabilityCheck
+                    output.outputFile = new File(output.outputFile.parent, newName)
+                }
+            }
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
     productFlavors {

@@ -2,6 +2,7 @@ package biz.no_ip.rastilion.ascenteval.DumpImporter;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -132,16 +133,17 @@ public class DumpImport extends Application {
         //Look for system in existing data
         for (ArrayList<String> l : sys) {
             String sysName = l.get(0);
+            String pName = l.get(1);
             List<Sys> systems = Sys.find(Sys.class,"name=?",sysName);
             s = new Sys(sysName);
             List<Planet> found = new ArrayList<>();
             if (systems.size()>0) {
                 s = systems.get(0);
-                found = Planet.find(Planet.class,"name = ?", l.get(1));
+                found = Planet.find(Planet.class,"name = ? AND system = ?", pName,systems.get(0).getId().toString());
             }
             //Build new planet if system or planet not found
             if(found.isEmpty()) {
-                p = new Planet(l.get(1));
+                p = new Planet(pName);
                 // Preset the later added stats to "Unknown"
                 p.tob=3;
                 p.gems=2;

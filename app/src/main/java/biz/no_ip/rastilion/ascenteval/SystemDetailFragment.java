@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,6 +80,7 @@ public class SystemDetailFragment extends Fragment {
             public void initAdapter() {
                 BitSet roids = BitSet.valueOf(new long[]{mItem.roidField});
                 List<Giants> gg = mItem.getGiants();
+                List<Planet> pl = mItem.getPlanets();
 
                 if (!roids.isEmpty()){
                     List<String> data = new ArrayList<>();
@@ -105,8 +107,8 @@ public class SystemDetailFragment extends Fragment {
                         children.add(data);
                     }
                 }
-                for (int i=0; i < mItem.getPlanets().size();i++) {
-                    Planet p = mItem.getPlanets().get(i);
+                for (int i=0; i < pl.size();i++) {
+                    Planet p = pl.get(i);
                     List<String> data = new ArrayList<>();
                     groups.add(p.name);
                     data.add("Statistics: ");
