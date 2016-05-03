@@ -2,8 +2,6 @@ package biz.no_ip.rastilion.ascenteval.DumpImporter;
 
 import android.app.Application;
 import android.os.AsyncTask;
-import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

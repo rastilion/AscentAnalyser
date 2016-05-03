@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.List;
 
 import biz.no_ip.rastilion.ascenteval.Helper.Constants;
@@ -78,16 +76,20 @@ public class SystemDetailFragment extends Fragment {
             private List<List<String>> children = new ArrayList<>();
 
             public void initAdapter() {
-                BitSet roids = BitSet.valueOf(new long[]{mItem.roidField});
+                int roidcount = Constants.roidTypes.values().length;
+                String roidStr = String.format("%0"+roidcount+"d",Integer.parseInt(Long.toBinaryString(mItem.roidField)));
+                boolean[] roids = new boolean[roidcount];
+                for (int i=0; i<roidStr.length(); i++) {
+                    roids[i] = (roidStr.charAt(i) == '1');
+                }
                 List<Giants> gg = mItem.getGiants();
                 List<Planet> pl = mItem.getPlanets();
-
-                if (!roids.isEmpty()){
+                if (roids.length>0){
                     List<String> data = new ArrayList<>();
                     groups.add("Asteroid field");
                     data.add("Asteroids present:");
-                    for (int i =0; i<roids.length();i++){
-                        if (roids.get(i)){
+                    for (int i=0; i<roidcount; i++){
+                        if (roids[roidcount-i-1]){
                             data.add(Constants.roidTypes.values()[i].name());
                         }
                     }
@@ -95,12 +97,16 @@ public class SystemDetailFragment extends Fragment {
                 }
                 if (!gg.isEmpty()){
                     List<String> data;
-                    for (int j=0;j<gg.size();j++) {
+                    for (int j=0; j<gg.size(); j++) {
                         data = new ArrayList<>();
                         groups.add("Gas Giant "+j);
-                        BitSet comp = BitSet.valueOf(new long[]{gg.get(j).gasses});
-                        for (int i = 0; i < comp.size(); i++) {
-                            if (comp.get(i)) {
+                        String compStr = String.format("%0"+Constants.gas.values().length+"d",Integer.parseInt(Long.toBinaryString(gg.get(j).gasses)));
+                        Boolean[] comp = new Boolean[compStr.length()];
+                        for (int i = 0; i < comp.length; ++i) {
+                            comp[i] = (compStr.charAt(i) == '1');
+                        }
+                        for (int i = 0; i < comp.length; i++) {
+                            if (comp[comp.length-i-1]) {
                                 data.add(Constants.gas.values()[i].name());
                             }
                         }

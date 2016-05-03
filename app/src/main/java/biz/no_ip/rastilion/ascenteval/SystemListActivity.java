@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import biz.no_ip.rastilion.ascenteval.DumpImporter.DumpImport;
-import biz.no_ip.rastilion.ascenteval.Helper.LegacyImport;
 import biz.no_ip.rastilion.ascenteval.SolarSysDb.Giants;
 import biz.no_ip.rastilion.ascenteval.SolarSysDb.Planet;
 import biz.no_ip.rastilion.ascenteval.SolarSysDb.Sys;
@@ -53,7 +52,6 @@ public class SystemListActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_list);
         List<Planet> sysImport = new ArrayList<>();
-        new LegacyImport(getApplicationContext());
         // load saved data at app start
         try{
             sysImport = Planet.listAll(Planet.class);
