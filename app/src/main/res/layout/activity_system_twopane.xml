@@ -20,13 +20,27 @@
         android:layout_width="match_parent"
                   android:layout_height="match_parent"
         android:layout_weight="0.6">
-        <fragment android:id="@+id/system_list"
-              android:name="biz.no_ip.rastilion.ascenteval.SystemListFragment"
-              android:layout_height="match_parent"
-              android:layout_width="match_parent"
-            tools:layout="@android:layout/list_content"
-            android:layout_gravity="top"
-            android:layout_weight=".07" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/searchInput"
+                android:hint="@string/search" />
+
+            <fragment android:id="@+id/system_list"
+                  android:name="biz.no_ip.rastilion.ascenteval.SystemListFragment"
+                  android:layout_height="match_parent"
+                  android:layout_width="match_parent"
+                tools:layout="@android:layout/list_content"
+                android:layout_gravity="top"
+                android:layout_weight=".07" />
+
+        </LinearLayout>
 
     </LinearLayout>
     <LinearLayout android:orientation="vertical"

@@ -5,7 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 import java.io.File;
 import java.util.ArrayList;
@@ -46,6 +50,7 @@ public class SystemListActivity extends FragmentActivity
     private boolean mTwoPane;
     public final int REQUEST_LOAD=0;
     public File toImport=null;
+    private static EditText sfield;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +68,31 @@ public class SystemListActivity extends FragmentActivity
             @Override
             public int compare(Planet lhs, Planet rhs) {
                 return lhs.name.compareToIgnoreCase(rhs.name);
+            }
+        });
+        try {
+            sfield = (EditText) findViewById(R.id.searchInput);
+        }
+        catch (Exception e){
+            Log.e("Crap","Fuck this shit!");
+        }
+
+        sfield.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2,
+                                      int arg3) {
+                SystemListFragment.searchList(cs.toString());
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int arg1, int arg2,
+                                          int arg3) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
             }
         });
         if (findViewById(R.id.system_detail_container) != null) {
@@ -118,7 +148,6 @@ public class SystemListActivity extends FragmentActivity
                 String filePath = data.getStringExtra(FileDialog.RESULT_PATH);
                 toImport = new File(filePath);
                 new DumpImport.ImportFilesTask().execute(toImport);
-                //DumpImport.parseFile(toImport);
                 SystemListFragment.refreshList();
             }
 
@@ -147,7 +176,6 @@ public class SystemListActivity extends FragmentActivity
         Sys.deleteAll(Sys.class);
         Planet.deleteAll(Planet.class);
         Giants.deleteAll(Giants.class);
-                ((SystemListFragment) getSupportFragmentManager()
-                        .findFragmentById(R.id.system_list)).updateList();
+        SystemListFragment.refreshList();
     }
 }

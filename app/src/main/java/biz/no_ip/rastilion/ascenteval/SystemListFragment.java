@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -81,8 +82,20 @@ public class SystemListFragment extends ListFragment {
     public SystemListFragment() {
     }
 
+    public static void searchList(String s) {
+        try {
+            systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys WHERE Name LIKE ? ORDER BY LOWER(substr(Name,1,3)) ASC,LENGTH(Name),Name ASC", "%"+s+"%");
+        }
+        catch (Exception e){
+            systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys ORDER BY LOWER(substr(Name,1,3)),LENGTH(Name),Name ASC");
+        }
+        adapt.clear();
+        adapt.addAll(systems);
+        adapt.notifyDataSetChanged();
+    }
+
     public static void refreshList() {
-        systems = Sys.find(Sys.class,null,null,null,"name ASC",null);
+        systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys ORDER BY LOWER(substr(Name,1,3)),LENGTH(Name),Name ASC");;
         adapt.clear();
         adapt.addAll(systems);
         adapt.notifyDataSetChanged();
@@ -91,7 +104,7 @@ public class SystemListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        systems = Sys.find(Sys.class,null,null,null,"name ASC",null);
+        systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys ORDER BY LOWER(substr(Name,1,3)),LENGTH(Name),Name ASC");
 
         adapt = new ArrayAdapter<>(
                 getActivity(),
@@ -102,8 +115,7 @@ public class SystemListFragment extends ListFragment {
 
         // TODO: replace with a real list adapter.
         setListAdapter(adapt);
-        updateList();
-
+        refreshList();
     }
 
     @Override
@@ -111,6 +123,7 @@ public class SystemListFragment extends ListFragment {
         super.onViewCreated(view, savedInstanceState);
 
         ListView lv = getListView();
+
 
         // Restore the previously serialized activated item position.
         if (savedInstanceState != null
@@ -299,7 +312,7 @@ public class SystemListFragment extends ListFragment {
                 }
             }
         );
-        updateList();
+        refreshList();
     }
 
     @Override
@@ -363,12 +376,5 @@ public class SystemListFragment extends ListFragment {
         }
 
         mActivatedPosition = position;
-    }
-
-    public void updateList() {
-        systems = Sys.find(Sys.class,null,null,null,"name ASC",null);
-        adapt.clear();
-        adapt.addAll(systems);
-        adapt.notifyDataSetChanged();
     }
 }

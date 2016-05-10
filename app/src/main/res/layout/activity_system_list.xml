@@ -8,6 +8,13 @@
     android:gravity="center"
     android:weightSum="1">
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchInput"
+        android:layout_gravity="center_horizontal"
+        android:hint="@string/search" />
+
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/system_list"

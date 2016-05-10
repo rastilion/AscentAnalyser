@@ -18,4 +18,5 @@
     <string name="fertile"><![CDATA[<font color=\'#00d600\'>Fertile</font>]]></string>
     <string name="present"><![CDATA[<font color=\'#00d600\'>Present</font>]]></string>
     <string name="unknown"><![CDATA[<font color=\'#ffcc00\'>Unknown</font>]]></string>
+    <string name="search">Search Systems</string>
 </resources>
