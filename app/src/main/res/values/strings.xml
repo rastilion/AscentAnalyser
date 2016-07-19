@@ -2,7 +2,7 @@
     <string name="app_name">Ascent System Evaluator</string>
     <string name="title_system_detail">System Detail</string>
     <string name="add_system">Add Systemdump</string>
-    <string name="search_system">Clear Items</string>
+    <string name="search_system">CLEAR ITEMS</string>
     <string name="location">Location</string>
     <string name="cant_read_folder">folder can\'t be read!</string>
     <string name="nnew">New</string>
@@ -13,10 +13,14 @@
     <string name="no_data">No Data</string>
     <color name="gray">#ffff0000</color>
     <string name="err">Error</string>
+    <string name="add">Add</string>
+    <string name="roids">Asteroids</string>
+    <string name="ggs">Gas Giants</string>
     <string name="none"><![CDATA[<font color=\'#EE0000\'>None</font>]]></string>
     <string name="poor"><![CDATA[<font color=\'#ffcc00\'>Poor</font>]]></string>
     <string name="fertile"><![CDATA[<font color=\'#00d600\'>Fertile</font>]]></string>
     <string name="present"><![CDATA[<font color=\'#00d600\'>Present</font>]]></string>
     <string name="unknown"><![CDATA[<font color=\'#ffcc00\'>Unknown</font>]]></string>
     <string name="search">Search Systems</string>
+    <string name="parse">Parsing Dump</string>
 </resources>

@@ -2,20 +2,32 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        <item name="android:textColor">#CCCCCC</item>
+        <item name="android:background">@drawable/button_border</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="BlackFont" parent ="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColor">#000000</item>
+        <item name="android:background">#ff444444</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="BlackList" parent ="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColor">#000000</item>
+        <item name="android:background">#000</item>
+    </style>
+
+    <style name="WhiteFont" parent ="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:textColor">#CCCCCC</item>
         <item name="android:background">#ff444444</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="ListView" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:textColor">#CCCCCC</item>
         <item name="android:background">#ff444444</item>
         <item name="android:textSize">24sp</item>
-        <item name="android:textAlignment">center</item>
         <item name="android:gravity">center</item>
     </style>
 </resources>

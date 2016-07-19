@@ -141,7 +141,7 @@ public class SystemListFragment extends ListFragment {
                     LinearLayout hl = new LinearLayout(view.getContext());
                     hl.setOrientation(LinearLayout.HORIZONTAL);
                     mlv.setOrientation(LinearLayout.VERTICAL);
-                    final List<CheckBox> cbl = new ArrayList<CheckBox>();
+                    final List<CheckBox> cbl = new ArrayList<>();
                     for (int i = 0; i < Constants.roidTypes.values().length; i++) {
                         CheckBox cb = new CheckBox(view.getContext());
                         cb.setText(Constants.roidTypes.values()[i].name());
@@ -151,10 +151,9 @@ public class SystemListFragment extends ListFragment {
                     Button btn1 = new Button(view.getContext());
                     btn1.setTextSize(14);
                     btn1.setGravity(Gravity.CENTER);
-                    btn1.setText("Add");
+                    btn1.setText(R.string.add);
                     btn1.setBackgroundColor(Color.DKGRAY);
                     btn1.setTextColor(Color.LTGRAY);
-                    btn1.setTextAppearance(view.getContext(), R.style.BlackFont);
                     btn1.setOnClickListener(
                         new View.OnClickListener() {
                             @Override
@@ -175,10 +174,9 @@ public class SystemListFragment extends ListFragment {
                     Button btn2 = new Button(view.getContext());
                     btn2.setTextSize(14);
                     btn2.setGravity(Gravity.CENTER);
-                    btn2.setText("Cancel");
+                    btn2.setText(R.string.cancel);
                     btn2.setBackgroundColor(Color.DKGRAY);
                     btn2.setTextColor(Color.LTGRAY);
-                    btn2.setTextAppearance(view.getContext(), R.style.BlackFont);
                     btn2.setOnClickListener(
                             new View.OnClickListener() {
                                 @Override
@@ -199,7 +197,7 @@ public class SystemListFragment extends ListFragment {
                     LinearLayout gghl = new LinearLayout(view.getContext());
                     hl.setOrientation(LinearLayout.HORIZONTAL);
                     gglv.setOrientation(LinearLayout.VERTICAL);
-                    final List<CheckBox> ggcbl = new ArrayList<CheckBox>();
+                    final List<CheckBox> ggcbl = new ArrayList<>();
                     for (int i = 0; i < Constants.gas.values().length; i++) {
                         CheckBox cb = new CheckBox(view.getContext());
                         cb.setText(Constants.gas.values()[i].name());
@@ -209,10 +207,9 @@ public class SystemListFragment extends ListFragment {
                     Button ggbtn1 = new Button(view.getContext());
                     ggbtn1.setTextSize(14);
                     ggbtn1.setGravity(Gravity.CENTER);
-                    ggbtn1.setText("Add");
+                    ggbtn1.setText(R.string.add);
                     ggbtn1.setBackgroundColor(Color.DKGRAY);
                     ggbtn1.setTextColor(Color.LTGRAY);
-                    ggbtn1.setTextAppearance(view.getContext(), R.style.BlackFont);
                     ggbtn1.setOnClickListener(
                         new View.OnClickListener() {
                             @Override
@@ -233,10 +230,9 @@ public class SystemListFragment extends ListFragment {
                     Button ggbtn2 = new Button(view.getContext());
                     ggbtn2.setTextSize(14);
                     ggbtn2.setGravity(Gravity.CENTER);
-                    ggbtn2.setText("Cancel");
+                    ggbtn2.setText(R.string.cancel);
                     ggbtn2.setBackgroundColor(Color.DKGRAY);
                     ggbtn2.setTextColor(Color.LTGRAY);
-                    ggbtn2.setTextAppearance(view.getContext(), R.style.BlackFont);
                     ggbtn2.setOnClickListener(
                             new View.OnClickListener() {
                                 @Override
@@ -257,10 +253,9 @@ public class SystemListFragment extends ListFragment {
                     Button af = new Button(view.getContext());
                     af.setTextSize(14);
                     af.setGravity(Gravity.CENTER);
-                    af.setText("Asteroid Field");
+                    af.setText(R.string.roids);
                     af.setBackgroundColor(Color.DKGRAY);
                     af.setTextColor(Color.LTGRAY);
-                    af.setTextAppearance(view.getContext(), R.style.BlackFont);
                     af.setOnClickListener(
                         new View.OnClickListener() {
                             @Override
@@ -273,10 +268,9 @@ public class SystemListFragment extends ListFragment {
                     Button gg = new Button(view.getContext());
                     gg.setTextSize(14);
                     gg.setGravity(Gravity.CENTER);
-                    gg.setText("Gas Giant");
+                    gg.setText(R.string.ggs);
                     gg.setBackgroundColor(Color.DKGRAY);
                     gg.setTextColor(Color.LTGRAY);
-                    gg.setTextAppearance(view.getContext(), R.style.BlackFont);
                     gg.setOnClickListener(
                         new View.OnClickListener() {
                             @Override
@@ -289,10 +283,9 @@ public class SystemListFragment extends ListFragment {
                     Button cncl = new Button(view.getContext());
                     cncl.setTextSize(14);
                     cncl.setGravity(Gravity.CENTER);
-                    cncl.setText("Cancel");
+                    cncl.setText(R.string.cancel);
                     cncl.setBackgroundColor(Color.DKGRAY);
                     cncl.setTextColor(Color.LTGRAY);
-                    cncl.setTextAppearance(view.getContext(), R.style.BlackFont);
                     cncl.setOnClickListener(
                         new View.OnClickListener() {
                                 @Override
@@ -313,18 +306,6 @@ public class SystemListFragment extends ListFragment {
             }
         );
         refreshList();
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        // Activities containing this fragment must implement its callbacks.
-        if (!(activity instanceof Callbacks)) {
-            throw new IllegalStateException("Activity must implement fragment's callbacks.");
-        }
-
-        mCallbacks = (Callbacks) activity;
     }
 
     @Override
