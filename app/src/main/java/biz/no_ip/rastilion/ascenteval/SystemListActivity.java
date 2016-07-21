@@ -1,6 +1,7 @@
 package biz.no_ip.rastilion.ascenteval;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -54,14 +55,16 @@ public class SystemListActivity extends FragmentActivity
     public final int REQUEST_LOAD=0;
     public File toImport=null;
     private static EditText sfield;
+    public static Context ctx;
     public static ActionProcessButton pBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_list);
-        List<Planet> sysImport = new ArrayList<>();
+        ctx = getApplicationContext();
         pBtn = (ActionProcessButton)findViewById(R.id.addSys);
+        List<Planet> sysImport = new ArrayList<>();
         // load saved data at app start
         try{
             sysImport = Planet.listAll(Planet.class);

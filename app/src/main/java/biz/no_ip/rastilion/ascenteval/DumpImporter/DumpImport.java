@@ -196,9 +196,11 @@ public class DumpImport extends Application {
 
 
     public static class ImportFilesTask extends AsyncTask<File, String, String> {
+        protected String name;
         protected String doInBackground(File... inFile) {
             String retVal;
             try {
+                name=inFile[0].getName();
                 parseFile(inFile[0]);
                 retVal = "OK";
             }
@@ -211,15 +213,16 @@ public class DumpImport extends Application {
 
         @Override
         protected void onPreExecute() {
-            SystemListActivity.pBtn.setProgress(1);
             SystemListActivity.pBtn.setMode(ActionProcessButton.Mode.ENDLESS);
+            SystemListActivity.pBtn.setProgress(1);
             SystemListActivity.pBtn.setEnabled(false);
         }
 
         protected void onPostExecute(String result) {
+            SystemListActivity.pBtn.setMode(ActionProcessButton.Mode.PROGRESS);
             SystemListActivity.pBtn.setProgress(100);
             SystemListActivity.pBtn.setEnabled(true);
-            Toast.makeText(SystemListActivity.pBtn.getContext(),"Parsing done",Toast.LENGTH_LONG).show();
+            Toast.makeText(SystemListActivity.ctx,"Parsed file: "+name, Toast.LENGTH_SHORT).show();
             SystemListFragment.refreshList();
         }
     }

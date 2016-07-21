@@ -3,6 +3,9 @@ package biz.no_ip.rastilion.ascenteval.SolarSysDb;
 
 import com.orm.SugarRecord;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by tgruetzmacher on 13.08.15.
  * Planets template
@@ -46,6 +49,27 @@ public class Planet extends SugarRecord {
         this.tob = tob;
         this.gems = gems;
         this.atmo = atmo;
+    }
+
+    public List<String> getComposition(){
+
+        List<String> composition = new ArrayList<>();
+
+        composition.add(String.valueOf(al));
+        composition.add(String.valueOf(carb));
+        composition.add(String.valueOf(fe));
+        composition.add(String.valueOf(si));
+        composition.add(String.valueOf(ti));
+        composition.add(String.valueOf(geo));
+        composition.add(String.valueOf(grain));
+        composition.add(String.valueOf(fruit));
+        composition.add(String.valueOf(veg));
+        composition.add(String.valueOf(meat));
+        composition.add(String.valueOf(tob));
+        composition.add(String.valueOf(gems));
+        composition.add(String.valueOf(atmo));
+
+        return composition;
     }
 
 }

@@ -12,7 +12,6 @@
         android:divider="#000000"
         android:dividerHeight="3dp"
         style="@style/ListView"
-        android:theme="@style/BlackFont"
         android:textAlignment="center" />
 
 </LinearLayout>
