@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:id="@+id/linearLayout"
     android:orientation="vertical"
     android:background="#0dffffff"
@@ -13,6 +14,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/searchInput"
         android:layout_gravity="center_horizontal"
+        android:textColorHint="#aaffffff"
         android:hint="@string/search" />
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -29,38 +31,44 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="1"
+        android:background="#aaffffff"
+        android:weightSum="2"
         android:layout_gravity="bottom">
 
-        <Button
-            android:layout_width="wrap_content"
+        <com.dd.processbutton.iml.ActionProcessButton
+            android:layout_width="match_parent"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="@string/add_system"
             android:id="@+id/addSys"
+            android:layout_margin="2dp"
             android:clickable="true"
             android:enabled="true"
             android:onClick="selectSystem"
-            android:textColor="#ffffff"
-            android:background="@drawable/button_border"
-            android:layout_margin="2dp"
-            android:layout_weight="0.5"
-            style="@style/AppTheme"
-            android:textSize="16sp" />
+            android:textColor="#aaffffff"
+            android:textSize="16sp"
+            custom:pb_colorComplete="#000"
+            custom:pb_colorNormal="#000"
+            custom:pb_colorPressed="#000"
+            custom:pb_colorProgress="@color/purple_progress"
+            custom:pb_textComplete="@string/add_system"
+            custom:pb_textProgress="Parsing File"
+            custom:pb_textError="Error"
+            custom:pb_colorError="@color/red_error" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="2dp"
             android:text="@string/search_system"
             android:id="@+id/searchSys"
+            android:layout_weight="1"
             android:clickable="true"
             android:enabled="true"
-            android:textColor="#ffffff"
-            android:background="@drawable/button_border"
+            android:textColor="#aaffffff"
             android:onClick="clear"
-            android:layout_margin="2dp"
-            android:layout_weight="0.5"
-            style="@style/AppTheme"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:background="#000" />
 
     </LinearLayout>
 

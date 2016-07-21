@@ -2,6 +2,10 @@ package biz.no_ip.rastilion.ascenteval.DumpImporter;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.widget.Toast;
+
+import com.dd.processbutton.iml.ActionProcessButton;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -10,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import biz.no_ip.rastilion.ascenteval.SolarSysDb.Planet;
 import biz.no_ip.rastilion.ascenteval.SolarSysDb.Sys;
+import biz.no_ip.rastilion.ascenteval.SystemListActivity;
 import biz.no_ip.rastilion.ascenteval.SystemListFragment;
 
 /**
@@ -204,7 +209,17 @@ public class DumpImport extends Application {
             return retVal;
         }
 
+        @Override
+        protected void onPreExecute() {
+            SystemListActivity.pBtn.setProgress(1);
+            SystemListActivity.pBtn.setMode(ActionProcessButton.Mode.ENDLESS);
+            SystemListActivity.pBtn.setEnabled(false);
+        }
+
         protected void onPostExecute(String result) {
+            SystemListActivity.pBtn.setProgress(100);
+            SystemListActivity.pBtn.setEnabled(true);
+            Toast.makeText(SystemListActivity.pBtn.getContext(),"Parsing done",Toast.LENGTH_LONG).show();
             SystemListFragment.refreshList();
         }
     }

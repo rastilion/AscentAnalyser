@@ -11,6 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.dd.processbutton.iml.ActionProcessButton;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,12 +54,14 @@ public class SystemListActivity extends FragmentActivity
     public final int REQUEST_LOAD=0;
     public File toImport=null;
     private static EditText sfield;
+    public static ActionProcessButton pBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_list);
         List<Planet> sysImport = new ArrayList<>();
+        pBtn = (ActionProcessButton)findViewById(R.id.addSys);
         // load saved data at app start
         try{
             sysImport = Planet.listAll(Planet.class);
