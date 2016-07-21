@@ -23,4 +23,39 @@
     <string name="unknown"><![CDATA[<font color=\'#ffcc00\'>Unknown</font>]]></string>
     <string name="search">Search Systems</string>
     <string name="parse">Parsing Dump</string>
+    <string name="misc">General Fields:</string>
+    <string name="atmo">Atmosphere</string>
+    <string name="gems">Gems</string>
+    <string name="fert">Fertility (at least)</string>
+    <string name="fruit">Fruit</string>
+    <string name="grain">Grain</string>
+    <string name="veg">Vegetables</string>
+    <string name="meat">Meat</string>
+    <string name="tob">Tobacco</string>
+    <string name="anyfood">Any Food</string>
+    <string name="mineral">Mineral Content</string>
+    <string name="al">Aluminium (Min)</string>
+    <string name="carb">Carbon (Min)</string>
+    <string name="fe">Iron (Min)</string>
+    <string name="ti">Titanium (Min)</string>
+    <string name="si">Silicon (Max)</string>
+    <string name="find">Find</string>
+    <string-array name="fertility">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="concentration">
+        <item>0%</item>
+        <item>10%</item>
+        <item>20%</item>
+        <item>30%</item>
+        <item>40%</item>
+        <item>50%</item>
+        <item>60%</item>
+        <item>70%</item>
+        <item>80%</item>
+        <item>90%</item>
+        <item>100%</item>
+    </string-array>
 </resources>

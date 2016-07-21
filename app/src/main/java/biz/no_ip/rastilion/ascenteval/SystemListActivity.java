@@ -1,6 +1,7 @@
 package biz.no_ip.rastilion.ascenteval;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -75,7 +77,7 @@ public class SystemListActivity extends FragmentActivity
         Collections.sort(sysImport, new Comparator<Planet>() {
             @Override
             public int compare(Planet lhs, Planet rhs) {
-                return lhs.name.compareToIgnoreCase(rhs.name);
+                return lhs.getName().compareToIgnoreCase(rhs.getName());
             }
         });
         try {
@@ -156,7 +158,7 @@ public class SystemListActivity extends FragmentActivity
                 String filePath = data.getStringExtra(FileDialog.RESULT_PATH);
                 toImport = new File(filePath);
                 new DumpImport.ImportFilesTask().execute(toImport);
-                SystemListFragment.refreshList();
+                SystemListFragment.updateList();
             }
 
         } else if (resultCode == Activity.RESULT_CANCELED) {
@@ -180,10 +182,34 @@ public class SystemListActivity extends FragmentActivity
         startActivityForResult(intent, REQUEST_LOAD);
 
     }
+
     public void clear(View v){
         Sys.deleteAll(Sys.class);
         Planet.deleteAll(Planet.class);
         Giants.deleteAll(Giants.class);
-        SystemListFragment.refreshList();
+        SystemListFragment.updateList();
+    }
+
+    public void advSearch(View v){
+
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.advanced_search);
+        dialog.setTitle("Search for Planets");
+        Button cancel = (Button) dialog.findViewById(R.id.cnclBtn);
+        Button find = (Button) dialog.findViewById(R.id.findBtn);
+        // if button is clicked, close the custom dialog
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        find.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }

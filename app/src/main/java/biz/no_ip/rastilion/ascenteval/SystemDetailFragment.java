@@ -12,6 +12,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import biz.no_ip.rastilion.ascenteval.Helper.Constants;
@@ -84,7 +85,7 @@ public class SystemDetailFragment extends Fragment {
                 }
                 List<Giants> gg = mItem.getGiants();
                 List<Planet> pl = mItem.getPlanets();
-                if (roids.length>0){
+                if (Arrays.asList(roids).contains(true)){
                     List<String> data = new ArrayList<>();
                     groups.add("Asteroid field");
                     data.add("Asteroids present:");
@@ -116,25 +117,25 @@ public class SystemDetailFragment extends Fragment {
                 for (int i=0; i < pl.size();i++) {
                     Planet p = pl.get(i);
                     List<String> data = new ArrayList<>();
-                    groups.add(p.name);
+                    groups.add(p.getName());
                     data.add("Statistics: ");
-                    data.add("Geologic rating: "+(p.geo>3?"<font color='#00d600'>"+p.geo+"</font>":"<font color='#EE0000'>"+p.geo+"</font>"));
-                    data.add("Atmosphere: "+(p.atmo==1?getString(R.string.present):(p.atmo==0?getString(R.string.none):getString(R.string.unknown))));
-                    data.add("Gems: "+(p.gems==1?getString(R.string.present):(p.gems==0?getString(R.string.none):getString(R.string.unknown))));
+                    data.add("Geologic rating: "+(p.getGeo() >3?"<font color='#00d600'>"+ p.getGeo() +"</font>":"<font color='#EE0000'>"+ p.getGeo() +"</font>"));
+                    data.add("Atmosphere: "+(p.getAtmo() ==1?getString(R.string.present):(p.getAtmo() ==0?getString(R.string.none):getString(R.string.unknown))));
+                    data.add("Gems: "+(p.getGems() ==1?getString(R.string.present):(p.getGems() ==0?getString(R.string.none):getString(R.string.unknown))));
                     data.add("");
                     data.add("Composition: ");
-                    data.add("Al: "+p.al* 100 + "%");
-                    data.add("C : "+p.carb *100 + "%");
-                    data.add("Fe: "+p.fe*100 + "%");
-                    data.add("Si: "+((p.si *100>10)?"<font color='#EE0000'>"+p.si *100+"%</font>":((p.si *100>5)?"<font color='#ffcc00'>"+p.si *100+"%</font>":"<font color='#00d600'>"+p.si *100+"%</font>")));
-                    data.add("Ti: "+p.ti*100 + "%");
+                    data.add("Al: "+ p.getAl() * 100 + "%");
+                    data.add("C : "+ p.getCarb() *100 + "%");
+                    data.add("Fe: "+ p.getFe() *100 + "%");
+                    data.add("Si: "+((p.getSi() *100>10)?"<font color='#EE0000'>"+ p.getSi() *100+"%</font>":((p.getSi() *100>5)?"<font color='#ffcc00'>"+ p.getSi() *100+"%</font>":"<font color='#00d600'>"+ p.getSi() *100+"%</font>")));
+                    data.add("Ti: "+ p.getTi() *100 + "%");
                     data.add("");
                     data.add("Fertilities:");
-                    data.add("Grain: "+(p.grain==0?getString(R.string.none):(p.grain==1?getString(R.string.poor):getString(R.string.fertile))));
-                    data.add("Fruit: "+(p.fruit==0?getString(R.string.none):(p.fruit==1?getString(R.string.poor):getString(R.string.fertile))));
-                    data.add("Vegetables: "+(p.veg==0?getString(R.string.none):(p.veg==1?getString(R.string.poor):getString(R.string.fertile))));
-                    data.add("Meat: "+(p.meat==0?getString(R.string.none):(p.meat==1?getString(R.string.poor):getString(R.string.fertile))));
-                    data.add("Tobacco: "+(p.tob==0?getString(R.string.none):(p.tob==1?getString(R.string.poor):(p.tob==2?getString(R.string.fertile):getString(R.string.unknown)))));
+                    data.add("Grain: "+(p.getGrain() ==0?getString(R.string.none):(p.getGrain() ==1?getString(R.string.poor):getString(R.string.fertile))));
+                    data.add("Fruit: "+(p.getFruit() ==0?getString(R.string.none):(p.getFruit() ==1?getString(R.string.poor):getString(R.string.fertile))));
+                    data.add("Vegetables: "+(p.getVeg() ==0?getString(R.string.none):(p.getVeg() ==1?getString(R.string.poor):getString(R.string.fertile))));
+                    data.add("Meat: "+(p.getMeat() ==0?getString(R.string.none):(p.getMeat() ==1?getString(R.string.poor):getString(R.string.fertile))));
+                    data.add("Tobacco: "+(p.getTob() ==0?getString(R.string.none):(p.getTob() ==1?getString(R.string.poor):(p.getTob() ==2?getString(R.string.fertile):getString(R.string.unknown)))));
                     //data.add(text);
                     children.add(data);
                 }

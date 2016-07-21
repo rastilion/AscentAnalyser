@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -51,7 +50,7 @@ public class SystemListFragment extends ListFragment {
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
     private static ArrayAdapter adapt;
-    private static List<Sys> systems;
+    public static List<Sys> systems;
 
     /**
      * A callback interface that all activities containing this fragment must
@@ -95,8 +94,14 @@ public class SystemListFragment extends ListFragment {
     }
 
     public static void refreshList() {
-        systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys ORDER BY LOWER(substr(Name,1,3)),LENGTH(Name),Name ASC");;
         adapt.clear();
+        adapt.addAll(systems);
+        adapt.notifyDataSetChanged();
+    }
+
+    public static void updateList() {
+        adapt.clear();
+        systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys ORDER BY LOWER(substr(Name,1,3)),LENGTH(Name),Name ASC");
         adapt.addAll(systems);
         adapt.notifyDataSetChanged();
     }
@@ -115,7 +120,7 @@ public class SystemListFragment extends ListFragment {
 
         // TODO: replace with a real list adapter.
         setListAdapter(adapt);
-        refreshList();
+        updateList();
     }
 
     @Override
@@ -306,6 +311,18 @@ public class SystemListFragment extends ListFragment {
             }
         );
         refreshList();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // Activities containing this fragment must implement its callbacks.
+        if (!(activity instanceof Callbacks)) {
+            throw new IllegalStateException("Activity must implement fragment's callbacks.");
+        }
+
+        mCallbacks = (Callbacks) activity;
     }
 
     @Override

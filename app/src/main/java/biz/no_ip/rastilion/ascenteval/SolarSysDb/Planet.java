@@ -32,44 +32,155 @@ public class Planet extends SugarRecord {
     }
 
     public Planet(String name) {
-        this.name = name;
+        this.setName(name);
     }
 
     public void setComposition(float al, float carb, float fe, float si, float ti, int geo, int grain, int fruit, int veg, int meat, int tob, int gems, int atmo) {
-        this.al = al;
-        this.carb = carb;
-        this.fe = fe;
-        this.si = si;
-        this.ti = ti;
-        this.geo = geo;
-        this.grain = grain;
-        this.fruit = fruit;
-        this.veg = veg;
-        this.meat = meat;
-        this.tob = tob;
-        this.gems = gems;
-        this.atmo = atmo;
+        this.setAl(al);
+        this.setCarb(carb);
+        this.setFe(fe);
+        this.setSi(si);
+        this.setTi(ti);
+        this.setGeo(geo);
+        this.setGrain(grain);
+        this.setFruit(fruit);
+        this.setVeg(veg);
+        this.setMeat(meat);
+        this.setTob(tob);
+        this.setGems(gems);
+        this.setAtmo(atmo);
     }
 
     public List<String> getComposition(){
 
         List<String> composition = new ArrayList<>();
 
-        composition.add(String.valueOf(al));
-        composition.add(String.valueOf(carb));
-        composition.add(String.valueOf(fe));
-        composition.add(String.valueOf(si));
-        composition.add(String.valueOf(ti));
-        composition.add(String.valueOf(geo));
-        composition.add(String.valueOf(grain));
-        composition.add(String.valueOf(fruit));
-        composition.add(String.valueOf(veg));
-        composition.add(String.valueOf(meat));
-        composition.add(String.valueOf(tob));
-        composition.add(String.valueOf(gems));
-        composition.add(String.valueOf(atmo));
+        composition.add(String.valueOf(getAl()));
+        composition.add(String.valueOf(getCarb()));
+        composition.add(String.valueOf(getFe()));
+        composition.add(String.valueOf(getSi()));
+        composition.add(String.valueOf(getTi()));
+        composition.add(String.valueOf(getGeo()));
+        composition.add(String.valueOf(getGrain()));
+        composition.add(String.valueOf(getFruit()));
+        composition.add(String.valueOf(getVeg()));
+        composition.add(String.valueOf(getMeat()));
+        composition.add(String.valueOf(getTob()));
+        composition.add(String.valueOf(getGems()));
+        composition.add(String.valueOf(getAtmo()));
 
         return composition;
     }
 
+    public int getVeg() {
+        return veg;
+    }
+
+    public void setVeg(int veg) {
+        this.veg = veg;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public float getAl() {
+        return al;
+    }
+
+    public void setAl(float al) {
+        this.al = al;
+    }
+
+    public float getCarb() {
+        return carb;
+    }
+
+    public void setCarb(float carb) {
+        this.carb = carb;
+    }
+
+    public float getFe() {
+        return fe;
+    }
+
+    public void setFe(float fe) {
+        this.fe = fe;
+    }
+
+    public float getSi() {
+        return si;
+    }
+
+    public void setSi(float si) {
+        this.si = si;
+    }
+
+    public float getTi() {
+        return ti;
+    }
+
+    public void setTi(float ti) {
+        this.ti = ti;
+    }
+
+    public int getGeo() {
+        return geo;
+    }
+
+    public void setGeo(int geo) {
+        this.geo = geo;
+    }
+
+    public int getGrain() {
+        return grain;
+    }
+
+    public void setGrain(int grain) {
+        this.grain = grain;
+    }
+
+    public int getFruit() {
+        return fruit;
+    }
+
+    public void setFruit(int fruit) {
+        this.fruit = fruit;
+    }
+
+    public int getMeat() {
+        return meat;
+    }
+
+    public void setMeat(int meat) {
+        this.meat = meat;
+    }
+
+    public int getTob() {
+        return tob;
+    }
+
+    public void setTob(int tob) {
+        this.tob = tob;
+    }
+
+    public int getGems() {
+        return gems;
+    }
+
+    public void setGems(int gems) {
+        this.gems = gems;
+    }
+
+    public int getAtmo() {
+        return atmo;
+    }
+
+    public void setAtmo(int atmo) {
+        this.atmo = atmo;
+    }
 }

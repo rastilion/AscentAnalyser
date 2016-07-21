@@ -148,29 +148,29 @@ public class DumpImport extends Application {
             if(found.isEmpty()) {
                 p = new Planet(pName);
                 // Preset the later added stats to "Unknown"
-                p.tob=3;
-                p.gems=2;
-                p.atmo=2;
+                p.setTob(3);
+                p.setGems(2);
+                p.setAtmo(2);
                 switch (l.size()){
                     case 21:
                         //Set mats for new dumps
-                        p.gems=Integer.parseInt(l.get(19));
-                        p.atmo=Integer.parseInt(l.get(20));
+                        p.setGems(Integer.parseInt(l.get(19)));
+                        p.setAtmo(Integer.parseInt(l.get(20)));
                     case 19:
                         // Set mats for pre-gem dumps
-                        p.tob=Integer.parseInt(l.get(18));
+                        p.setTob(Integer.parseInt(l.get(18)));
                     case 18:
                         // Set default mats
-                        p.al=Float.parseFloat(l.get(3));
-                        p.si=Float.parseFloat(l.get(5));
-                        p.geo=Integer.parseInt(l.get(7));
-                        p.carb=Float.parseFloat(l.get(9));
-                        p.fe=Float.parseFloat(l.get(11));
-                        p.ti=Float.parseFloat(l.get(13));
-                        p.grain=Integer.parseInt(l.get(14));
-                        p.fruit=Integer.parseInt(l.get(15));
-                        p.veg=Integer.parseInt(l.get(16));
-                        p.meat=Integer.parseInt(l.get(17));
+                        p.setAl(Float.parseFloat(l.get(3)));
+                        p.setSi(Float.parseFloat(l.get(5)));
+                        p.setGeo(Integer.parseInt(l.get(7)));
+                        p.setCarb(Float.parseFloat(l.get(9)));
+                        p.setFe(Float.parseFloat(l.get(11)));
+                        p.setTi(Float.parseFloat(l.get(13)));
+                        p.setGrain(Integer.parseInt(l.get(14)));
+                        p.setFruit(Integer.parseInt(l.get(15)));
+                        p.setVeg(Integer.parseInt(l.get(16)));
+                        p.setMeat(Integer.parseInt(l.get(17)));
                         break;
                 }
                 //Set System's planets
@@ -180,12 +180,12 @@ public class DumpImport extends Application {
             }
             else {
                 Planet pl = found.get(0);
-                if(pl.atmo == 2){
+                if(pl.getAtmo() == 2){
                     if (l.size() == 21){
-                        pl.gems=Integer.parseInt(l.get(19));
-                        pl.atmo=Integer.parseInt(l.get(20));
-                        if (pl.tob == 3){
-                            pl.tob=Integer.parseInt(l.get(18));
+                        pl.setGems(Integer.parseInt(l.get(19)));
+                        pl.setAtmo(Integer.parseInt(l.get(20)));
+                        if (pl.getTob() == 3){
+                            pl.setTob(Integer.parseInt(l.get(18)));
                         }
                     }
                     pl.save();
@@ -223,7 +223,7 @@ public class DumpImport extends Application {
             SystemListActivity.pBtn.setProgress(100);
             SystemListActivity.pBtn.setEnabled(true);
             Toast.makeText(SystemListActivity.ctx,"Parsed file: "+name, Toast.LENGTH_SHORT).show();
-            SystemListFragment.refreshList();
+            SystemListFragment.updateList();
         }
     }
 }

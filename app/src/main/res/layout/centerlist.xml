@@ -4,4 +4,4 @@
     android:layout_height="35sp"
     android:layout_width="fill_parent"
     android:textSize="24sp"
-    android:gravity="center" />
+    android:gravity="center"/>
