@@ -16,7 +16,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import biz.no_ip.rastilion.ascenteval.Helper.Constants;
 import biz.no_ip.rastilion.ascenteval.SolarSysDb.Giants;
@@ -50,7 +54,7 @@ public class SystemListFragment extends ListFragment {
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
     private static ArrayAdapter adapt;
-    public static List<Sys> systems;
+    public static List<Sys> systems = null;
 
     /**
      * A callback interface that all activities containing this fragment must
@@ -95,6 +99,12 @@ public class SystemListFragment extends ListFragment {
 
     public static void refreshList() {
         adapt.clear();
+        Collections.sort(systems,new Comparator<Sys>() {
+            @Override
+            public int compare(Sys lhs, Sys rhs) {
+                return lhs.Name.compareToIgnoreCase(rhs.Name);
+            }
+        });
         adapt.addAll(systems);
         adapt.notifyDataSetChanged();
     }
@@ -120,7 +130,8 @@ public class SystemListFragment extends ListFragment {
 
         // TODO: replace with a real list adapter.
         setListAdapter(adapt);
-        updateList();
+        if (!systems.isEmpty()) refreshList();
+        else updateList();
     }
 
     @Override
@@ -128,6 +139,9 @@ public class SystemListFragment extends ListFragment {
         super.onViewCreated(view, savedInstanceState);
 
         ListView lv = getListView();
+
+        if (systems==null) updateList();
+        else refreshList();
 
 
         // Restore the previously serialized activated item position.

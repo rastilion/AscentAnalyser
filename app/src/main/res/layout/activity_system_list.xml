@@ -18,6 +18,17 @@
         android:focusable="false"
         style="@style/BlackList">
 
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="1px"
+            android:layout_weight="0.15"
+            android:focusable="false"
+            android:scaleType="centerInside"
+            android:id="@+id/advSearch"
+            android:src="@drawable/magni"
+            android:onClick="advSearch"/>
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,18 +37,18 @@
             android:hint="@string/search"
             android:textColorHint="#ffffff"
             android:gravity="center"
-            android:layout_weight="0.85"/>
+            android:layout_weight="0.7"/>
 
         <ImageButton
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:id="@+id/advSearch"
-            android:src="@drawable/magni"
             android:padding="1px"
             android:layout_weight="0.15"
             android:focusable="false"
             android:scaleType="centerInside"
-            android:onClick="advSearch"/>
+            android:id="@+id/resetSearch"
+            android:src="@drawable/nomagni"
+            android:onClick="resetSearch" />
 
     </LinearLayout>
 

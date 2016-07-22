@@ -1,7 +1,6 @@
 package biz.no_ip.rastilion.ascenteval;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,18 +10,16 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.dd.processbutton.iml.ActionProcessButton;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import biz.no_ip.rastilion.ascenteval.DumpImporter.DumpImport;
+import biz.no_ip.rastilion.ascenteval.Helper.SearchDialog;
 import biz.no_ip.rastilion.ascenteval.SolarSysDb.Giants;
 import biz.no_ip.rastilion.ascenteval.SolarSysDb.Planet;
 import biz.no_ip.rastilion.ascenteval.SolarSysDb.Sys;
@@ -191,25 +188,10 @@ public class SystemListActivity extends FragmentActivity
     }
 
     public void advSearch(View v){
+        new SearchDialog(this).show();
+    }
 
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.advanced_search);
-        dialog.setTitle("Search for Planets");
-        Button cancel = (Button) dialog.findViewById(R.id.cnclBtn);
-        Button find = (Button) dialog.findViewById(R.id.findBtn);
-        // if button is clicked, close the custom dialog
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        find.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
+    public void resetSearch(View v){
+        SystemListFragment.updateList();
     }
 }
