@@ -29,6 +29,12 @@
             android:src="@drawable/magni"
             android:onClick="advSearch"/>
 
+        <LinearLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_width="0px"
+            android:layout_height="0px"/>
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -97,8 +103,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/search_system"
-            android:id="@+id/searchSys"
+            android:text="@string/clear"
+            android:id="@+id/clear"
             android:clickable="true"
             android:enabled="true"
             android:textColor="#ffffff"

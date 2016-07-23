@@ -57,7 +57,7 @@ public class SystemListActivity extends FragmentActivity
     private boolean mTwoPane;
     public final int REQUEST_LOAD=0;
     public File toImport=null;
-    private static EditText sfield;
+    public static EditText sfield;
     public static Context ctx;
     public static ActionProcessButton pBtn;
 

@@ -3,6 +3,7 @@ package biz.no_ip.rastilion.ascenteval.Helper;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -67,7 +68,8 @@ public class SearchDialog extends Dialog {
                 " AND carb >="+((float)((Spinner)findViewById(R.id.carbSelect)).getSelectedItemPosition()/10)+
                 " AND fe >="+((float)((Spinner)findViewById(R.id.feSelect)).getSelectedItemPosition()/10)+
                 " AND ti >="+((float)((Spinner)findViewById(R.id.tiSelect)).getSelectedItemPosition()/10)+
-                " AND si <="+(10f-(float)(((Spinner)findViewById(R.id.siSelect)).getSelectedItemPosition())/10);
+                " AND si <="+((10f-(float)(((Spinner)findViewById(R.id.siSelect)).getSelectedItemPosition()))/10);
+        Log.e("query",query);
         planets = Planet.findWithQuery(Planet.class,query);
         for (int i=0;i<planets.size();i++) {
             boolean found = false;

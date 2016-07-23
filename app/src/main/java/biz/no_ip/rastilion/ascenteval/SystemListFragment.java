@@ -99,6 +99,7 @@ public class SystemListFragment extends ListFragment {
     }
 
     public static void refreshList() {
+        SystemListActivity.sfield.setText("");
         adapt.clear();
         systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys ORDER BY LOWER(substr(Name,1,3)),LENGTH(Name),Name ASC");
         adapt.addAll(systems);
