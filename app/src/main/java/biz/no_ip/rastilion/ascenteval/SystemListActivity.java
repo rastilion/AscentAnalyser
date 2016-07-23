@@ -1,6 +1,7 @@
 package biz.no_ip.rastilion.ascenteval;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +11,12 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.dd.processbutton.iml.ActionProcessButton;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,20 +67,6 @@ public class SystemListActivity extends FragmentActivity
         setContentView(R.layout.activity_system_list);
         ctx = getApplicationContext();
         pBtn = (ActionProcessButton)findViewById(R.id.addSys);
-        List<Planet> sysImport = new ArrayList<>();
-        // load saved data at app start
-        try{
-            sysImport = Planet.listAll(Planet.class);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        Collections.sort(sysImport, new Comparator<Planet>() {
-            @Override
-            public int compare(Planet lhs, Planet rhs) {
-                return lhs.getName().compareToIgnoreCase(rhs.getName());
-            }
-        });
         try {
             sfield = (EditText) findViewById(R.id.searchInput);
         }
@@ -155,7 +145,6 @@ public class SystemListActivity extends FragmentActivity
                 String filePath = data.getStringExtra(FileDialog.RESULT_PATH);
                 toImport = new File(filePath);
                 new DumpImport.ImportFilesTask().execute(toImport);
-                SystemListFragment.updateList();
             }
 
         } else if (resultCode == Activity.RESULT_CANCELED) {
@@ -184,7 +173,7 @@ public class SystemListActivity extends FragmentActivity
         Sys.deleteAll(Sys.class);
         Planet.deleteAll(Planet.class);
         Giants.deleteAll(Giants.class);
-        SystemListFragment.updateList();
+        SystemListFragment.refreshList();
     }
 
     public void advSearch(View v){
@@ -192,6 +181,6 @@ public class SystemListActivity extends FragmentActivity
     }
 
     public void resetSearch(View v){
-        SystemListFragment.updateList();
+        SystemListFragment.refreshList();
     }
 }

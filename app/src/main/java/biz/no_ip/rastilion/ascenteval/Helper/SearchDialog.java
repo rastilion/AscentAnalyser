@@ -30,27 +30,24 @@ public class SearchDialog extends Dialog {
         setTitle("Search for Planets");
         Button cancel = (Button) findViewById(R.id.cnclBtn);
         Button find = (Button) findViewById(R.id.findBtn);
-        // if button is clicked, close the custom dialog
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SystemListFragment.updateList();
+                SystemListFragment.refreshList();
                 dismiss();
             }
         });
         find.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SystemListFragment.systems.clear();
-                querySystems();
-                SystemListFragment.refreshList();
+                SystemListFragment.updateList(querySystems());
                 dismiss();
             }
         });
 
     }
 
-    private void querySystems() {
+    private List<Sys> querySystems() {
         List<Planet> planets;
         List<Sys> systemList = new ArrayList<>();
         String query;
@@ -70,7 +67,7 @@ public class SearchDialog extends Dialog {
                 " AND carb >="+((float)((Spinner)findViewById(R.id.carbSelect)).getSelectedItemPosition()/10)+
                 " AND fe >="+((float)((Spinner)findViewById(R.id.feSelect)).getSelectedItemPosition()/10)+
                 " AND ti >="+((float)((Spinner)findViewById(R.id.tiSelect)).getSelectedItemPosition()/10)+
-                " AND si <="+((float)(((Spinner)findViewById(R.id.siSelect)).getSelectedItemPosition())/10);
+                " AND si <="+(10f-(float)(((Spinner)findViewById(R.id.siSelect)).getSelectedItemPosition())/10);
         planets = Planet.findWithQuery(Planet.class,query);
         for (int i=0;i<planets.size();i++) {
             boolean found = false;
@@ -85,6 +82,6 @@ public class SearchDialog extends Dialog {
                 systemList.add(syst);
             }
         }
-        SystemListFragment.systems = systemList;
+        return systemList;
     }
 }

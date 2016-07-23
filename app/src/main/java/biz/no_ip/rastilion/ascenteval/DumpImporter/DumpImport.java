@@ -223,7 +223,7 @@ public class DumpImport extends Application {
             SystemListActivity.pBtn.setProgress(100);
             SystemListActivity.pBtn.setEnabled(true);
             Toast.makeText(SystemListActivity.ctx,"Parsed file: "+name, Toast.LENGTH_SHORT).show();
-            SystemListFragment.updateList();
+            SystemListFragment.refreshList();
         }
     }
 }

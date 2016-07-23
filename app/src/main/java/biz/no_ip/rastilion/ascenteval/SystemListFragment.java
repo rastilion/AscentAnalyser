@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,6 +22,7 @@ import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import biz.no_ip.rastilion.ascenteval.Helper.Constants;
 import biz.no_ip.rastilion.ascenteval.SolarSysDb.Giants;
@@ -55,6 +57,7 @@ public class SystemListFragment extends ListFragment {
     private int mActivatedPosition = ListView.INVALID_POSITION;
     private static ArrayAdapter adapt;
     public static List<Sys> systems = null;
+    public static List<Sys> buffer = null;
 
     /**
      * A callback interface that all activities containing this fragment must
@@ -92,26 +95,20 @@ public class SystemListFragment extends ListFragment {
         catch (Exception e){
             systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys ORDER BY LOWER(substr(Name,1,3)),LENGTH(Name),Name ASC");
         }
-        adapt.clear();
-        adapt.addAll(systems);
-        adapt.notifyDataSetChanged();
+        updateList(systems);
     }
 
     public static void refreshList() {
         adapt.clear();
-        Collections.sort(systems,new Comparator<Sys>() {
-            @Override
-            public int compare(Sys lhs, Sys rhs) {
-                return lhs.Name.compareToIgnoreCase(rhs.Name);
-            }
-        });
+        systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys ORDER BY LOWER(substr(Name,1,3)),LENGTH(Name),Name ASC");
         adapt.addAll(systems);
         adapt.notifyDataSetChanged();
     }
 
-    public static void updateList() {
+    public static void updateList(List<Sys> ls) {
         adapt.clear();
-        systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys ORDER BY LOWER(substr(Name,1,3)),LENGTH(Name),Name ASC");
+        systems=ls;
+        buffer=ls;
         adapt.addAll(systems);
         adapt.notifyDataSetChanged();
     }
@@ -119,7 +116,15 @@ public class SystemListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys ORDER BY LOWER(substr(Name,1,3)),LENGTH(Name),Name ASC");
+
+        mCallbacks = (Callbacks) getActivity();
+        if (buffer!=null){
+            systems=buffer;
+        }
+        else {
+            systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys ORDER BY LOWER(substr(Name,1,3)),LENGTH(Name),Name ASC");
+            buffer=systems;
+        }
 
         adapt = new ArrayAdapter<>(
                 getActivity(),
@@ -127,11 +132,12 @@ public class SystemListFragment extends ListFragment {
                 android.R.id.text1,
                 systems);
         adapt.setNotifyOnChange(true);
-
-        // TODO: replace with a real list adapter.
         setListAdapter(adapt);
-        if (!systems.isEmpty()) refreshList();
-        else updateList();
+
+        if (systems==null) {
+            refreshList();
+        }
+
     }
 
     @Override
@@ -139,9 +145,6 @@ public class SystemListFragment extends ListFragment {
         super.onViewCreated(view, savedInstanceState);
 
         ListView lv = getListView();
-
-        if (systems==null) updateList();
-        else refreshList();
 
 
         // Restore the previously serialized activated item position.
@@ -324,19 +327,8 @@ public class SystemListFragment extends ListFragment {
                 }
             }
         );
-        refreshList();
-    }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
 
-        // Activities containing this fragment must implement its callbacks.
-        if (!(activity instanceof Callbacks)) {
-            throw new IllegalStateException("Activity must implement fragment's callbacks.");
-        }
-
-        mCallbacks = (Callbacks) activity;
     }
 
     @Override
