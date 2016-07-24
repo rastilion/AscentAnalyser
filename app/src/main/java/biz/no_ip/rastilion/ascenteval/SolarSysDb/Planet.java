@@ -3,9 +3,6 @@ package biz.no_ip.rastilion.ascenteval.SolarSysDb;
 
 import com.orm.SugarRecord;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by tgruetzmacher on 13.08.15.
  * Planets template
@@ -33,43 +30,6 @@ public class Planet extends SugarRecord {
 
     public Planet(String name) {
         this.setName(name);
-    }
-
-    public void setComposition(float al, float carb, float fe, float si, float ti, int geo, int grain, int fruit, int veg, int meat, int tob, int gems, int atmo) {
-        this.setAl(al);
-        this.setCarb(carb);
-        this.setFe(fe);
-        this.setSi(si);
-        this.setTi(ti);
-        this.setGeo(geo);
-        this.setGrain(grain);
-        this.setFruit(fruit);
-        this.setVeg(veg);
-        this.setMeat(meat);
-        this.setTob(tob);
-        this.setGems(gems);
-        this.setAtmo(atmo);
-    }
-
-    public List<String> getComposition(){
-
-        List<String> composition = new ArrayList<>();
-
-        composition.add(String.valueOf(getAl()));
-        composition.add(String.valueOf(getCarb()));
-        composition.add(String.valueOf(getFe()));
-        composition.add(String.valueOf(getSi()));
-        composition.add(String.valueOf(getTi()));
-        composition.add(String.valueOf(getGeo()));
-        composition.add(String.valueOf(getGrain()));
-        composition.add(String.valueOf(getFruit()));
-        composition.add(String.valueOf(getVeg()));
-        composition.add(String.valueOf(getMeat()));
-        composition.add(String.valueOf(getTob()));
-        composition.add(String.valueOf(getGems()));
-        composition.add(String.valueOf(getAtmo()));
-
-        return composition;
     }
 
     public int getVeg() {

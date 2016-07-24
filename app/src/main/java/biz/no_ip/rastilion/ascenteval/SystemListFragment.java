@@ -1,12 +1,10 @@
 package biz.no_ip.rastilion.ascenteval;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,12 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.StringTokenizer;
 
 import biz.no_ip.rastilion.ascenteval.Helper.Constants;
 import biz.no_ip.rastilion.ascenteval.SolarSysDb.Giants;
@@ -55,7 +48,7 @@ public class SystemListFragment extends ListFragment {
      * The current activated item position. Only used on tablets.
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
-    private static ArrayAdapter adapt;
+    private static ArrayAdapter<Sys> adapt;
     public static List<Sys> systems = null;
     public static List<Sys> buffer = null;
     private static final String orderBy = "ORDER BY LOWER(substr(Name,1,3)),LENGTH(Name),Name ASC";
@@ -69,7 +62,7 @@ public class SystemListFragment extends ListFragment {
         /**
          * Callback for when an item has been selected.
          */
-        public void onItemSelected(String id);
+        void onItemSelected(String id);
     }
 
     /**

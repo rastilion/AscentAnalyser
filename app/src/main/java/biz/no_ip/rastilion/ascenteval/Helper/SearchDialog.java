@@ -3,7 +3,6 @@ package biz.no_ip.rastilion.ascenteval.Helper;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,6 +18,7 @@ import biz.no_ip.rastilion.ascenteval.SystemListFragment;
 
 /**
  * Created by rastilion on 22.07.16.
+ * Sets up searching of planets, returns their systems
  */
 public class SearchDialog extends Dialog {
 

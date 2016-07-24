@@ -96,7 +96,7 @@ public class FileDialog extends ListActivity {
 	private boolean canSelectDir = false;
 
 	private File selectedFile;
-	private HashMap<String, Integer> lastPositions = new HashMap<String, Integer>();
+	private HashMap<String, Integer> lastPositions = new HashMap<>();
 
 	/**
 	 * Called when the activity is first created. Configura todos os parametros
@@ -209,9 +209,9 @@ public class FileDialog extends ListActivity {
 
 		currentPath = dirPath;
 
-		final List<String> item = new ArrayList<String>();
-		path = new ArrayList<String>();
-		mList = new ArrayList<HashMap<String, Object>>();
+		final List<String> item = new ArrayList<>();
+		path = new ArrayList<>();
+		mList = new ArrayList<>();
 
 		File f = new File(currentPath);
 		File[] files = f.listFiles();
@@ -235,10 +235,10 @@ public class FileDialog extends ListActivity {
 
 		}
 
-		TreeMap<String, String> dirsMap = new TreeMap<String, String>();
-		TreeMap<String, String> dirsPathMap = new TreeMap<String, String>();
-		TreeMap<String, String> filesMap = new TreeMap<String, String>();
-		TreeMap<String, String> filesPathMap = new TreeMap<String, String>();
+		TreeMap<String, String> dirsMap = new TreeMap<>();
+		TreeMap<String, String> dirsPathMap = new TreeMap<>();
+		TreeMap<String, String> filesMap = new TreeMap<>();
+		TreeMap<String, String> filesPathMap = new TreeMap<>();
 		for (File file : files) {
 			if (file.isDirectory()) {
 				String dirName = file.getName();
@@ -291,7 +291,7 @@ public class FileDialog extends ListActivity {
 	}
 
 	private void addItem(String fileName, int imageId) {
-		HashMap<String, Object> item = new HashMap<String, Object>();
+		HashMap<String, Object> item = new HashMap<>();
 		item.put(ITEM_KEY, fileName);
 		item.put(ITEM_IMAGE, imageId);
 		mList.add(item);
@@ -363,7 +363,7 @@ public class FileDialog extends ListActivity {
 	/**
 	 * Define se o botao de CREATE e visivel.
 	 * 
-	 * @param v
+	 * @param v view
 	 */
 	private void setCreateVisible(View v) {
 		layoutCreate.setVisibility(View.VISIBLE);
@@ -376,7 +376,7 @@ public class FileDialog extends ListActivity {
 	/**
 	 * Define se o botao de SELECT e visivel.
 	 * 
-	 * @param v
+	 * @param v view
 	 */
 	private void setSelectVisible(View v) {
 		layoutCreate.setVisibility(View.GONE);
