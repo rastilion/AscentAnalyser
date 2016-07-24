@@ -58,6 +58,7 @@ public class SystemListFragment extends ListFragment {
     private static ArrayAdapter adapt;
     public static List<Sys> systems = null;
     public static List<Sys> buffer = null;
+    private static final String orderBy = "ORDER BY LOWER(substr(Name,1,3)),LENGTH(Name),Name ASC";
 
     /**
      * A callback interface that all activities containing this fragment must
@@ -90,10 +91,10 @@ public class SystemListFragment extends ListFragment {
 
     public static void searchList(String s) {
         try {
-            systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys WHERE Name LIKE ? ORDER BY LOWER(substr(Name,1,3)) ASC,LENGTH(Name),Name ASC", "%"+s+"%");
+            systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys WHERE Name LIKE ? "+orderBy, "%"+s+"%");
         }
         catch (Exception e){
-            systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys ORDER BY LOWER(substr(Name,1,3)),LENGTH(Name),Name ASC");
+            systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys "+orderBy);
         }
         updateList(systems);
     }
@@ -101,7 +102,7 @@ public class SystemListFragment extends ListFragment {
     public static void refreshList() {
         SystemListActivity.sfield.setText("");
         adapt.clear();
-        systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys ORDER BY LOWER(substr(Name,1,3)),LENGTH(Name),Name ASC");
+        systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys "+orderBy);
         adapt.addAll(systems);
         adapt.notifyDataSetChanged();
     }
@@ -123,7 +124,7 @@ public class SystemListFragment extends ListFragment {
             systems=buffer;
         }
         else {
-            systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys ORDER BY LOWER(substr(Name,1,3)),LENGTH(Name),Name ASC");
+            systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys "+orderBy);
             buffer=systems;
         }
 
