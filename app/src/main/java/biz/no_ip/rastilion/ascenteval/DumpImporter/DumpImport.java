@@ -27,7 +27,7 @@ public class DumpImport extends Application {
      *
      * @param  inFile The file to parse
      */
-    public static void parseFile(File inFile) {
+    private static void parseFile(File inFile) {
         List<String> result = new ArrayList<>();
         List<String> planets = new ArrayList<>();
         ArrayList<ArrayList<String>> system = new ArrayList<>();
@@ -200,7 +200,7 @@ public class DumpImport extends Application {
 
 
     public static class ImportFilesTask extends AsyncTask<File, String, String> {
-        protected String name;
+        String name;
         protected String doInBackground(File... inFile) {
             String retVal;
             try {

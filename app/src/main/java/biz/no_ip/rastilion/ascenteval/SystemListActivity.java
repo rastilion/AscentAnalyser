@@ -50,8 +50,8 @@ public class SystemListActivity extends FragmentActivity
      * device.
      */
     private boolean mTwoPane;
-    public final int REQUEST_LOAD=0;
-    public File toImport=null;
+    private final int REQUEST_LOAD=0;
+    private File toImport=null;
     public static EditText sfield;
     public static Context ctx;
     public static ActionProcessButton pBtn;

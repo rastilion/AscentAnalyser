@@ -31,7 +31,7 @@ public class SystemDetailFragment extends Fragment {
      * The fragment argument representing the item ID that this fragment
      * represents.
      */
-    public static String ARG_ITEM_ID = "item_id";
+    public final static String ARG_ITEM_ID = "item_id";
 
     /**
      * The dummy content this fragment is presenting.

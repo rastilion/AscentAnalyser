@@ -49,8 +49,8 @@ public class SystemListFragment extends ListFragment {
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
     private static ArrayAdapter<Sys> adapt;
-    public static List<Sys> systems = null;
-    public static List<Sys> buffer = null;
+    private static List<Sys> systems = null;
+    private static List<Sys> buffer = null;
     private static final String orderBy = "ORDER BY LOWER(substr(Name,1,3)),LENGTH(Name),Name ASC";
 
     /**

@@ -362,15 +362,15 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/find"
-            android:id="@+id/findBtn"
+            android:text="@string/cancel"
+            android:id="@+id/cnclBtn"
             style="@style/AppTheme" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cancel"
-            android:id="@+id/cnclBtn"
+            android:text="@string/find"
+            android:id="@+id/findBtn"
             style="@style/AppTheme" />
     </TableRow>
 

@@ -178,8 +178,7 @@ public class FileDialog extends ListActivity {
 		String startPath = getIntent().getStringExtra(START_PATH);
 		startPath = startPath != null ? startPath : ROOT;
 		if (canSelectDir) {
-			File file = new File(startPath);
-			selectedFile = file;
+			selectedFile = new File(startPath);
 			selectButton.setEnabled(true);
 		}
 		getDir(startPath);

@@ -8,20 +8,20 @@ import com.orm.SugarRecord;
  * Planets template
  */
 public class Planet extends SugarRecord {
-    public String name;
-    public float al;
-    public float carb;
-    public float fe;
-    public float si;
-    public float ti;
-    public int geo=0;
-    public int grain=0;
-    public int fruit=0;
-    public int veg=0;
-    public int meat=0;
-    public int tob=0;
-    public int gems=0;
-    public int atmo=0;
+    private String name;
+    private float al;
+    private float carb;
+    private float fe;
+    private float si;
+    private float ti;
+    private int geo=0;
+    private int grain=0;
+    private int fruit=0;
+    private int veg=0;
+    private int meat=0;
+    private int tob=0;
+    private int gems=0;
+    private int atmo=0;
 
     public Sys system;
 
