@@ -137,15 +137,19 @@ public class DumpImport extends Application {
         for (ArrayList<String> l : sys) {
             String sysName = l.get(0);
             String pName = l.get(1);
+            boolean pfound = false;
             List<Sys> systems = Sys.find(Sys.class,"name=?",sysName);
             s = new Sys(sysName);
             List<Planet> found = new ArrayList<>();
             if (systems.size()>0) {
                 s = systems.get(0);
                 found = Planet.find(Planet.class,"name = ? AND system = ?", pName,systems.get(0).getId().toString());
+                if (found.size()>0) {
+                    pfound = true;
+                }
             }
             //Build new planet if system or planet not found
-            if(found.isEmpty()) {
+            if(!pfound) {
                 p = new Planet(pName);
                 // Preset the later added stats to "Unknown"
                 p.setTob(3);
@@ -187,8 +191,8 @@ public class DumpImport extends Application {
                         if (pl.getTob() == 3){
                             pl.setTob(Integer.parseInt(l.get(18)));
                         }
+                        pl.save();
                     }
-                    pl.save();
                 }
             }
         }

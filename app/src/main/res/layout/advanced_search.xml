@@ -348,17 +348,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/buttonSpacer" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/find"
-            android:id="@+id/findBtn" />
+            android:id="@+id/findBtn"
+            style="@style/AppTheme" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cancel"
-            android:id="@+id/cnclBtn" />
+            android:id="@+id/cnclBtn"
+            style="@style/AppTheme" />
     </TableRow>
 
 </TableLayout>
