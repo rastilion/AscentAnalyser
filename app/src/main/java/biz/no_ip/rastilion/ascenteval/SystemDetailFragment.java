@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,7 +86,7 @@ public class SystemDetailFragment extends Fragment {
                 }
                 List<Giants> gg = mItem.getGiants();
                 List<Planet> pl = mItem.getPlanets();
-                if (Arrays.asList(roids).contains(true)){
+                if (!roidStr.equals("000000000")){
                     List<String> data = new ArrayList<>();
                     groups.add("Asteroid field");
                     data.add("Asteroids present:");
