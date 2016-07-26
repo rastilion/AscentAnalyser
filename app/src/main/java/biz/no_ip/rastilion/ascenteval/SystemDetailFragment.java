@@ -39,7 +39,6 @@ public class SystemDetailFragment extends Fragment {
      */
     private Sys mItem;
 
-    private TextView sName;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -66,7 +65,6 @@ public class SystemDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_system_detail_expandable, null);
         ExpandableListView tv = (ExpandableListView) rootView.findViewById(R.id.list);
-        sName = (TextView) rootView.findViewById(R.id.sysName);
         sysInfoAdapter adapt = new sysInfoAdapter();
         adapt.initAdapter();
         tv.setAdapter(adapt);
@@ -80,7 +78,7 @@ public class SystemDetailFragment extends Fragment {
             private List<List<String>> children = new ArrayList<>();
 
             public void initAdapter() {
-                sName.setText(mItem.Name);
+                getActivity().setTitle(mItem.Name);
                 int roidcount = Constants.roidTypes.values().length;
                 String roidStr = String.format("%0"+roidcount+"d",Integer.parseInt(Long.toBinaryString(mItem.roidField)));
                 boolean[] roids = new boolean[roidcount];

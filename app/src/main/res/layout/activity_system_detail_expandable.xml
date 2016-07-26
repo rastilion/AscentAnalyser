@@ -6,14 +6,6 @@
     android:focusable="false"
     android:textAlignment="center">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/sysName"
-        android:textSize="20dp"
-        android:textAlignment="center"
-        android:gravity="center" />
-
     <ExpandableListView android:id="@+id/list"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
