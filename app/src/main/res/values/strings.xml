@@ -32,7 +32,7 @@
     <string name="veg">Vegetables</string>
     <string name="meat">Meat</string>
     <string name="tob">Tobacco</string>
-    <string name="anyfood">Any Food</string>
+    <string name="anyfood">Has at least this many foods:</string>
     <string name="mineral">Mineral Content</string>
     <string name="al">Aluminium (Min)</string>
     <string name="carb">Carbon (Min)</string>
@@ -44,6 +44,13 @@
         <item>0</item>
         <item>1</item>
         <item>2</item>
+    </string-array>
+    <string-array name="foodCount">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
     </string-array>
     <string-array name="concentration">
         <item>0%</item>

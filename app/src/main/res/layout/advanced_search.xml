@@ -176,7 +176,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/anySelect"
-            android:entries="@array/fertility"
+            android:entries="@array/foodCount"
             android:layout_weight="0.27"
             android:gravity="center"
             android:layout_gravity="center"

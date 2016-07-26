@@ -54,6 +54,24 @@ public class SearchDialog extends Dialog {
         List<Planet> planets;
         List<Sys> systemList = new ArrayList<>();
         String query;
+        int foodCount = ((Spinner)findViewById(R.id.anySelect)).getSelectedItemPosition();
+        String foodSelect="";
+        switch (foodCount){
+            case 1:
+                foodSelect = " AND (grain>=1 OR fruit>=1 OR veg>=1 OR meat>=1)";
+                break;
+            case 2:
+                foodSelect = " AND ((grain>=1 AND fruit>=1) OR (grain>=1 AND veg>=1) OR (grain>=1 AND meat>=1) OR (fruit>=1 AND veg>=1) OR (fruit>=1 AND meat>=1) OR (veg>=1 AND meat>=1))";
+                break;
+            case 3:
+                foodSelect = " AND ((grain>=1 AND fruit>=1 AND veg>=1) OR (grain>=1 AND fruit>=1 AND meat>=1) OR (grain>=1 AND veg>=1 AND meat>=1) OR (fruit>=1 AND veg>=1 AND meat>=1))";
+                break;
+            case 4:
+                foodSelect = " AND (grain>=1 AND fruit>=1 AND veg>=1 AND meat>=1)";
+                break;
+            default:
+                foodSelect="";
+        }
         query = "SELECT * FROM Planet WHERE "+
                 "atmo>="+(((CheckBox)findViewById(R.id.hasAtmo)).isChecked()?1:0)+
                 " AND gems>="+(((CheckBox)findViewById(R.id.hasGems)).isChecked()?1:0)+
@@ -61,10 +79,7 @@ public class SearchDialog extends Dialog {
                 " AND fruit >="+(((Spinner)findViewById(R.id.fruitSelect)).getSelectedItemPosition())+
                 " AND veg >="+(((Spinner)findViewById(R.id.vegSelect)).getSelectedItemPosition())+
                 " AND meat >="+(((Spinner)findViewById(R.id.meatSelect)).getSelectedItemPosition())+
-                " AND (fruit >="+(((Spinner)findViewById(R.id.anySelect)).getSelectedItemPosition())+
-                " OR grain >="+(((Spinner)findViewById(R.id.anySelect)).getSelectedItemPosition())+
-                " OR veg >="+(((Spinner)findViewById(R.id.anySelect)).getSelectedItemPosition())+
-                " OR meat >="+(((Spinner)findViewById(R.id.anySelect)).getSelectedItemPosition())+")"+
+                foodSelect+
                 " AND tob >="+(((Spinner)findViewById(R.id.tobSelect)).getSelectedItemPosition())+
                 " AND al >="+((float)((Spinner)findViewById(R.id.alSelect)).getSelectedItemPosition()/10)+
                 " AND carb >="+((float)((Spinner)findViewById(R.id.carbSelect)).getSelectedItemPosition()/10)+
