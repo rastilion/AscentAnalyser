@@ -2,6 +2,7 @@ package biz.no_ip.rastilion.ascenteval.DumpImporter;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.dd.processbutton.iml.ActionProcessButton;
@@ -56,11 +57,15 @@ public class DumpImport extends Application {
                 String sysName;
                 String sysComp;
                 // Try to find the system name by planet
-                if (result.get(i).contains("Rocky Planet")){
+                // Ignore "Gas Giant" and "Star Parent" Bug of ATSG
+                if (result.get(i).contains("Gas Giant") || result.get(i).contains("Star Parent")){
+                    continue;
+                }
+                else if (result.get(i).contains(" Rocky Planet")){
                     name = result.get(i).indexOf(" Rocky Planet");
                     sysinfo = result.get(i).indexOf(" Rocky Planet")+1;
                 }
-                else if (result.get(i).contains("Moon")){
+                else if (result.get(i).contains(" Moon ")){
                     name = result.get(i).indexOf(" Moon");
                     sysinfo = result.get(i).indexOf(" Moon")+1;
                 }

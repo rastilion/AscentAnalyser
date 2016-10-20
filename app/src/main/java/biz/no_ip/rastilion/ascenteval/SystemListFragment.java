@@ -19,6 +19,7 @@ import java.util.List;
 
 import biz.no_ip.rastilion.ascenteval.Helper.Constants;
 import biz.no_ip.rastilion.ascenteval.SolarSysDb.Giants;
+import biz.no_ip.rastilion.ascenteval.SolarSysDb.Planet;
 import biz.no_ip.rastilion.ascenteval.SolarSysDb.Sys;
 
 /**
@@ -26,7 +27,7 @@ import biz.no_ip.rastilion.ascenteval.SolarSysDb.Sys;
  * also supports tablet devices by allowing list items to be given an
  * 'activated' state upon selection. This helps indicate which item is
  * currently being viewed in a {@link SystemDetailFragment}.
- * <p/>
+ * <p>
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
@@ -84,10 +85,9 @@ public class SystemListFragment extends ListFragment {
 
     public static void searchList(String s) {
         try {
-            systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys WHERE Name LIKE ? "+orderBy, "%"+s+"%");
-        }
-        catch (Exception e){
-            systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys "+orderBy);
+            systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys WHERE Name LIKE ? " + orderBy, "%" + s + "%");
+        } catch (Exception e) {
+            systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys " + orderBy);
         }
         updateList(systems);
     }
@@ -95,15 +95,15 @@ public class SystemListFragment extends ListFragment {
     public static void refreshList() {
         SystemListActivity.sfield.setText("");
         adapt.clear();
-        systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys "+orderBy);
+        systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys " + orderBy);
         adapt.addAll(systems);
         adapt.notifyDataSetChanged();
     }
 
     public static void updateList(List<Sys> ls) {
         adapt.clear();
-        systems=ls;
-        buffer=ls;
+        systems = ls;
+        buffer = ls;
         adapt.addAll(systems);
         adapt.notifyDataSetChanged();
     }
@@ -113,12 +113,11 @@ public class SystemListFragment extends ListFragment {
         super.onCreate(savedInstanceState);
 
         mCallbacks = (Callbacks) getActivity();
-        if (buffer!=null){
-            systems=buffer;
-        }
-        else {
-            systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys "+orderBy);
-            buffer=systems;
+        if (buffer != null) {
+            systems = buffer;
+        } else {
+            systems = Sys.findWithQuery(Sys.class, "SELECT * FROM Sys " + orderBy);
+            buffer = systems;
         }
 
         adapt = new ArrayAdapter<>(
@@ -129,7 +128,7 @@ public class SystemListFragment extends ListFragment {
         adapt.setNotifyOnChange(true);
         setListAdapter(adapt);
 
-        if (systems==null) {
+        if (systems == null) {
             refreshList();
         }
 
@@ -150,177 +149,198 @@ public class SystemListFragment extends ListFragment {
         lv.setDivider(new ColorDrawable(Color.BLACK));
         lv.setDividerHeight(2);
         lv.setOnItemLongClickListener(
-            new AdapterView.OnItemLongClickListener() {
-                @Override
-                public boolean onItemLongClick(final AdapterView<?> parent, View view, final int position, long id) {
-                    final Dialog astroSelect = new Dialog(view.getContext());
-                    LinearLayout mlv = new LinearLayout(view.getContext());
-                    LinearLayout hl = new LinearLayout(view.getContext());
-                    hl.setOrientation(LinearLayout.HORIZONTAL);
-                    mlv.setOrientation(LinearLayout.VERTICAL);
-                    final List<CheckBox> cbl = new ArrayList<>();
-                    for (int i = 0; i < Constants.roidTypes.values().length; i++) {
-                        CheckBox cb = new CheckBox(view.getContext());
-                        cb.setText(Constants.roidTypes.values()[i].name());
-                        cbl.add(cb);
-                        mlv.addView(cb);
-                    }
-                    Button btn1 = new Button(view.getContext());
-                    btn1.setTextSize(14);
-                    btn1.setGravity(Gravity.CENTER);
-                    btn1.setText(R.string.add);
-                    btn1.setBackgroundColor(Color.DKGRAY);
-                    btn1.setTextColor(Color.LTGRAY);
-                    btn1.setOnClickListener(
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                long astroMask = 0;
-                                for (int c = 0; c < Constants.roidTypes.values().length; c++) {
-                                    if (cbl.get(c).isChecked())
-                                        astroMask += (int) Math.pow(2, c);
-                                }
-                                Sys s = Sys.find(Sys.class, "name = ?",parent.getItemAtPosition(position).toString()).get(0);
-                                s.roidField = astroMask;
-                                s.save();
-                                SystemListFragment.refreshList();
-                                astroSelect.dismiss();
-                            }
+                new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(final AdapterView<?> parent, View view, final int position, long id) {
+                        final Dialog astroSelect = new Dialog(view.getContext());
+                        LinearLayout mlv = new LinearLayout(view.getContext());
+                        LinearLayout hl = new LinearLayout(view.getContext());
+                        hl.setOrientation(LinearLayout.HORIZONTAL);
+                        mlv.setOrientation(LinearLayout.VERTICAL);
+                        final List<CheckBox> cbl = new ArrayList<>();
+                        for (int i = 0; i < Constants.roidTypes.values().length; i++) {
+                            CheckBox cb = new CheckBox(view.getContext());
+                            cb.setText(Constants.roidTypes.values()[i].name());
+                            cbl.add(cb);
+                            mlv.addView(cb);
                         }
-                    );
-                    Button btn2 = new Button(view.getContext());
-                    btn2.setTextSize(14);
-                    btn2.setGravity(Gravity.CENTER);
-                    btn2.setText(R.string.cancel);
-                    btn2.setBackgroundColor(Color.DKGRAY);
-                    btn2.setTextColor(Color.LTGRAY);
-                    btn2.setOnClickListener(
-                            new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    astroSelect.cancel();
+                        Button btn1 = new Button(view.getContext());
+                        btn1.setTextSize(14);
+                        btn1.setGravity(Gravity.CENTER);
+                        btn1.setText(R.string.add);
+                        btn1.setBackgroundColor(Color.DKGRAY);
+                        btn1.setTextColor(Color.LTGRAY);
+                        btn1.setOnClickListener(
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        long astroMask = 0;
+                                        for (int c = 0; c < Constants.roidTypes.values().length; c++) {
+                                            if (cbl.get(c).isChecked())
+                                                astroMask += (int) Math.pow(2, c);
+                                        }
+                                        Sys s = Sys.find(Sys.class, "name = ?", parent.getItemAtPosition(position).toString()).get(0);
+                                        s.roidField = astroMask;
+                                        s.save();
+                                        SystemListFragment.refreshList();
+                                        astroSelect.dismiss();
+                                    }
                                 }
-                            }
-                    );
-                    hl.addView(btn1);
-                    hl.addView(btn2);
-                    mlv.addView(hl);
-                    astroSelect.setContentView(mlv);
-                    astroSelect.setTitle("Asteroids: ");
-                    astroSelect.setCancelable(true);
+                        );
+                        Button btn2 = new Button(view.getContext());
+                        btn2.setTextSize(14);
+                        btn2.setGravity(Gravity.CENTER);
+                        btn2.setText(R.string.cancel);
+                        btn2.setBackgroundColor(Color.DKGRAY);
+                        btn2.setTextColor(Color.LTGRAY);
+                        btn2.setOnClickListener(
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        astroSelect.cancel();
+                                    }
+                                }
+                        );
+                        hl.addView(btn1);
+                        hl.addView(btn2);
+                        mlv.addView(hl);
+                        astroSelect.setContentView(mlv);
+                        astroSelect.setTitle("Asteroids: ");
+                        astroSelect.setCancelable(true);
 
-                    final Dialog ggSelect = new Dialog(view.getContext());
-                    LinearLayout gglv = new LinearLayout(view.getContext());
-                    LinearLayout gghl = new LinearLayout(view.getContext());
-                    hl.setOrientation(LinearLayout.HORIZONTAL);
-                    gglv.setOrientation(LinearLayout.VERTICAL);
-                    final List<CheckBox> ggcbl = new ArrayList<>();
-                    for (int i = 0; i < Constants.gas.values().length; i++) {
-                        CheckBox cb = new CheckBox(view.getContext());
-                        cb.setText(Constants.gas.values()[i].name());
-                        ggcbl.add(cb);
-                        gglv.addView(cb);
-                    }
-                    Button ggbtn1 = new Button(view.getContext());
-                    ggbtn1.setTextSize(14);
-                    ggbtn1.setGravity(Gravity.CENTER);
-                    ggbtn1.setText(R.string.add);
-                    ggbtn1.setBackgroundColor(Color.DKGRAY);
-                    ggbtn1.setTextColor(Color.LTGRAY);
-                    ggbtn1.setOnClickListener(
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                int ggMask = 0;
-                                for (int c = 0; c < Constants.gas.values().length; c++) {
-                                    if (ggcbl.get(c).isChecked())
-                                        ggMask += (int) Math.pow(2, c);
-                                }
-                                Giants gg = new Giants(ggMask);
-                                gg.system = Sys.find(Sys.class, "name=?",parent.getItemAtPosition(position).toString()).get(0);
-                                gg.save();
-                                SystemListFragment.refreshList();
-                                ggSelect.dismiss();
-                            }
+                        final Dialog ggSelect = new Dialog(view.getContext());
+                        LinearLayout gglv = new LinearLayout(view.getContext());
+                        LinearLayout gghl = new LinearLayout(view.getContext());
+                        hl.setOrientation(LinearLayout.HORIZONTAL);
+                        gglv.setOrientation(LinearLayout.VERTICAL);
+                        final List<CheckBox> ggcbl = new ArrayList<>();
+                        for (int i = 0; i < Constants.gas.values().length; i++) {
+                            CheckBox cb = new CheckBox(view.getContext());
+                            cb.setText(Constants.gas.values()[i].name());
+                            ggcbl.add(cb);
+                            gglv.addView(cb);
                         }
-                    );
-                    Button ggbtn2 = new Button(view.getContext());
-                    ggbtn2.setTextSize(14);
-                    ggbtn2.setGravity(Gravity.CENTER);
-                    ggbtn2.setText(R.string.cancel);
-                    ggbtn2.setBackgroundColor(Color.DKGRAY);
-                    ggbtn2.setTextColor(Color.LTGRAY);
-                    ggbtn2.setOnClickListener(
-                            new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    ggSelect.cancel();
+                        Button ggbtn1 = new Button(view.getContext());
+                        ggbtn1.setTextSize(14);
+                        ggbtn1.setGravity(Gravity.CENTER);
+                        ggbtn1.setText(R.string.add);
+                        ggbtn1.setBackgroundColor(Color.DKGRAY);
+                        ggbtn1.setTextColor(Color.LTGRAY);
+                        ggbtn1.setOnClickListener(
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        int ggMask = 0;
+                                        for (int c = 0; c < Constants.gas.values().length; c++) {
+                                            if (ggcbl.get(c).isChecked())
+                                                ggMask += (int) Math.pow(2, c);
+                                        }
+                                        Giants gg = new Giants(ggMask);
+                                        gg.system = Sys.find(Sys.class, "name=?", parent.getItemAtPosition(position).toString()).get(0);
+                                        gg.save();
+                                        SystemListFragment.refreshList();
+                                        ggSelect.dismiss();
+                                    }
                                 }
-                            }
-                    );
-                    gghl.addView(ggbtn1);
-                    gghl.addView(ggbtn2);
-                    gglv.addView(gghl);
-                    ggSelect.setContentView(gglv);
-                    ggSelect.setTitle("Gasses: ");
-                    ggSelect.setCancelable(true);
+                        );
+                        Button ggbtn2 = new Button(view.getContext());
+                        ggbtn2.setTextSize(14);
+                        ggbtn2.setGravity(Gravity.CENTER);
+                        ggbtn2.setText(R.string.cancel);
+                        ggbtn2.setBackgroundColor(Color.DKGRAY);
+                        ggbtn2.setTextColor(Color.LTGRAY);
+                        ggbtn2.setOnClickListener(
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        ggSelect.cancel();
+                                    }
+                                }
+                        );
+                        gghl.addView(ggbtn1);
+                        gghl.addView(ggbtn2);
+                        gglv.addView(gghl);
+                        ggSelect.setContentView(gglv);
+                        ggSelect.setTitle("Gasses: ");
+                        ggSelect.setCancelable(true);
 
-                    final Dialog menu = new Dialog(view.getContext());
-                    menu.setTitle("Add what?");
-                    Button af = new Button(view.getContext());
-                    af.setTextSize(14);
-                    af.setGravity(Gravity.CENTER);
-                    af.setText(R.string.roids);
-                    af.setBackgroundColor(Color.DKGRAY);
-                    af.setTextColor(Color.LTGRAY);
-                    af.setOnClickListener(
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                menu.dismiss();
-                                astroSelect.show();
-                            }
-                        }
-                    );
-                    Button gg = new Button(view.getContext());
-                    gg.setTextSize(14);
-                    gg.setGravity(Gravity.CENTER);
-                    gg.setText(R.string.ggs);
-                    gg.setBackgroundColor(Color.DKGRAY);
-                    gg.setTextColor(Color.LTGRAY);
-                    gg.setOnClickListener(
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                menu.dismiss();
-                                ggSelect.show();
-                            }
-                        }
-                    );
-                    Button cncl = new Button(view.getContext());
-                    cncl.setTextSize(14);
-                    cncl.setGravity(Gravity.CENTER);
-                    cncl.setText(R.string.cancel);
-                    cncl.setBackgroundColor(Color.DKGRAY);
-                    cncl.setTextColor(Color.LTGRAY);
-                    cncl.setOnClickListener(
-                        new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    menu.dismiss();
+                        final Dialog menu = new Dialog(view.getContext());
+                        menu.setTitle("Do what?");
+                        Button af = new Button(view.getContext());
+                        af.setTextSize(14);
+                        af.setGravity(Gravity.CENTER);
+                        af.setText(R.string.roids);
+                        af.setBackgroundColor(Color.DKGRAY);
+                        af.setTextColor(Color.LTGRAY);
+                        af.setOnClickListener(
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        menu.dismiss();
+                                        astroSelect.show();
+                                    }
                                 }
-                            }
-                    );
-                    LinearLayout ml = new LinearLayout(view.getContext());
-                    ml.setOrientation(LinearLayout.VERTICAL);
-                    ml.addView(af);
-                    ml.addView(gg);
-                    ml.addView(cncl);
-                    menu.setContentView(ml);
-                    menu.show();
-                    return true;
+                        );
+                        Button gg = new Button(view.getContext());
+                        gg.setTextSize(14);
+                        gg.setGravity(Gravity.CENTER);
+                        gg.setText(R.string.ggs);
+                        gg.setBackgroundColor(Color.DKGRAY);
+                        gg.setTextColor(Color.LTGRAY);
+                        gg.setOnClickListener(
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        menu.dismiss();
+                                        ggSelect.show();
+                                    }
+                                }
+                        );
+                        Button del = new Button(view.getContext());
+                        del.setTextSize(14);
+                        del.setGravity(Gravity.CENTER);
+                        del.setText(R.string.delSys);
+                        del.setBackgroundColor(Color.DKGRAY);
+                        del.setTextColor(Color.LTGRAY);
+                        del.setOnClickListener(
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        String s = Sys.find(Sys.class, "name = ?", parent.getItemAtPosition(position).toString()).get(0).getId().toString();
+                                        menu.dismiss();
+                                        Planet.executeQuery("DELETE FROM Planet where system = ?", s);
+                                        Giants.executeQuery("DELETE FROM Giants WHERE system = ?", s);
+                                        Sys.executeQuery("DELETE FROM Sys WHERE id = ?", s);
+                                        SystemListFragment.refreshList();
+
+                                    }
+                                }
+                        );
+                        Button cncl = new Button(view.getContext());
+                        cncl.setTextSize(14);
+                        cncl.setGravity(Gravity.CENTER);
+                        cncl.setText(R.string.cancel);
+                        cncl.setBackgroundColor(Color.DKGRAY);
+                        cncl.setTextColor(Color.LTGRAY);
+                        cncl.setOnClickListener(
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        menu.dismiss();
+                                    }
+                                }
+                        );
+                        LinearLayout ml = new LinearLayout(view.getContext());
+                        ml.setOrientation(LinearLayout.VERTICAL);
+                        ml.addView(af);
+                        ml.addView(gg);
+                        ml.addView(del);
+                        ml.addView(cncl);
+                        menu.setContentView(ml);
+                        menu.show();
+                        return true;
+                    }
                 }
-            }
         );
 
 
@@ -361,9 +381,9 @@ public class SystemListFragment extends ListFragment {
         // When setting CHOICE_MODE_SINGLE, ListView will automatically
         // give items the 'activated' state when touched.
         getListView().setChoiceMode(
-            activateOnItemClick
-                ? ListView.CHOICE_MODE_SINGLE
-                : ListView.CHOICE_MODE_NONE
+                activateOnItemClick
+                        ? ListView.CHOICE_MODE_SINGLE
+                        : ListView.CHOICE_MODE_NONE
         );
     }
 

@@ -14,8 +14,8 @@
     <color name="gray">#ffff0000</color>
     <string name="err">Error</string>
     <string name="add">Add</string>
-    <string name="roids">Asteroids</string>
-    <string name="ggs">Gas Giants</string>
+    <string name="roids">Add Asteroids</string>
+    <string name="ggs">Add Gas Giants</string>
     <string name="none"><![CDATA[<font color=\'#EE0000\'>None</font>]]></string>
     <string name="poor"><![CDATA[<font color=\'#ffcc00\'>Poor</font>]]></string>
     <string name="fertile"><![CDATA[<font color=\'#00d600\'>Fertile</font>]]></string>
@@ -40,6 +40,7 @@
     <string name="ti">Titanium (Min)</string>
     <string name="si">Silicon (Max)</string>
     <string name="find">Find</string>
+    <string name="delSys">Delete System</string>
     <string-array name="fertility">
         <item>0</item>
         <item>1</item>
